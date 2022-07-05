@@ -19,6 +19,8 @@
   },
   "homepage": "https://github.com/rab2807/Home-Rental-System#readme",
   "dependencies": {
+    "axios": "^0.27.2",
+    "cors": "^2.8.5",
     "express": "^4.18.1",
     "express-handlebars": "^6.0.6"
   },
