@@ -1,0 +1,47 @@
+<div class="card" style="width: 35rem;">
+    <div class="card-body">
+        <form action="/owner/regi" method="get" id="commentForm">
+            <div>
+                <table>
+                    <td>
+                        <img src="/images/dumb.jpg" height="20px" width="20px" style="border-radius: 50%;">
+                    </td>
+                    <td>
+                        {{name}}
+                    </td>
+                </table>
+            </div>
+            <div>
+                {{>starRatingButton}}
+            </div>
+            <textarea cols="50" rows="2" name="comment"></textarea><br>
+            <input type="submit" value="Submit">
+        </form>
+    </div>
+</div>
+<div style="width: 37rem; height: 300px; overflow-y:scroll;">
+    {{#each comments as |cmnt|}}
+        <div class="card" style="width: 35rem;">
+            <div class="card-body">
+                <div>
+                    <table>
+                        <td>
+                            <img src="/images/dumb.jpg" height="20px" width="20px" style="border-radius: 50%;">
+                        </td>
+                        <td>
+                            {{cmnt.name}}<br>
+                            {{cmnt.post_date}}
+                        </td>
+                        <td>
+                            {{cmnt.star}}
+                        </td>
+                    </table>
+                </div>
+                <hr>
+                <p>
+                    {{cmnt.comment}}
+                </p>
+            </div>
+        </div>
+    {{/each}}
+</div>

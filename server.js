@@ -8,7 +8,8 @@ const PORT = process.env.PORT || 3000;
 
 // Routers
 const startRouter = require('./routes/Start/start.router');
-const ownerRegiRouter = require('./routes/OwnerRegi/ownerRegi.router');
+const regiRouter = require('./routes/Registration/regi.router');
+const ownerRouter = require('./routes/Owner/owner.main.router');
 
 // view engine setup
 app.engine('hbs', engine({
@@ -21,11 +22,13 @@ app.set('view engine', 'hbs');
 
 // middleware setup
 app.use(cors())
-app.use(express.static('public'));
+app.use(express.static(path.join(__dirname, '/public')));
+app.use(express.urlencoded());
 app.use(express.json());
 
+app.use(regiRouter);
 app.use(startRouter);
-app.use(ownerRegiRouter);
+app.use(ownerRouter);
 
 // app.get('/', function(req, res) {
 //     res.render('home', { pre: 'Shit!!', title: 'Cool, huh!', name: "rakib", condition: true, anyArray: [1,2,3] });

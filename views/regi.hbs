@@ -1,0 +1,64 @@
+<div>
+    <h2>{{type}}</h2>
+    <form action="/regi/owner" method="POST">
+        <table>
+            <tr>
+                <td>Username :</td>
+                <td><input type="text" name="username" value="rab"></td>
+            </tr>
+            <tr>
+                <td>Password :</td>
+                <td><input type="password" name="password"></td>
+            </tr>
+            <tr>
+                <td>Full Name :</td>
+                <td><input type="text" name="fullName"></td>
+            </tr>
+            <tr>
+                <td>Phone no. :</td>
+                <td><input type="tel" pattern="01[0-9]{9}" name="phone"></td>
+            </tr>
+            <tr>
+                <td>Email :</td>
+                <td><input type="email" name="email"></td>
+            </tr>
+            <tr>
+                <td>Photo :</td>
+                <td><input type="file" accept=".jpg,.png" name="photo"></td>
+            </tr>
+            <tr>
+                <td>Location :</td>
+                <td><input type="text" name="location"></td>
+            </tr>
+
+            {{#if cndtn}}
+            <tr>
+                <td>Catagory :</td>
+                <td>
+                    <input list="catagory" name="catagory">
+                    <datalist id="catagory">
+                        <option value="Individual owner">
+                        <option value="Real Estate Agency">
+                        <option value="Hostel Provider">
+                    </datalist>
+                </td>
+            </tr>
+            {{else}}
+            <tr>
+                <td>Job :</td>
+                <td><input type="text" name="job"></td>
+            </tr>
+            <tr>
+                <td>Family Members :</td>
+                <td><input type="number" name="members"></td>
+            </tr>
+            {{/if}}
+            <tr>
+                <td>
+                    <input type="reset" value="Reset">
+                    <input type="submit" value="Submit">
+                </td>
+            </tr>
+        </table>
+    </form>
+</div>
