@@ -4,6 +4,7 @@ let ratingArr = [10, 9, 3, 4, 1];    // count of people per star [e.g. 6 people 
 // comments array
 let commentArr = [
     {
+        // picture link should be added
         name: "Rakib",
         post_date: "21 July 2020",
         star: "⭐⭐⭐",
@@ -31,7 +32,7 @@ const total = ratingArr.reduce((curr, elem) => curr + elem, 0);
 
 
 function renderPage(req, res) {
-    return res.render('owner-main', {
+    return res.render('owner-profile', {
         pre: 'OwnerMain',
         type: "Home-owner",
         name: "rakib",

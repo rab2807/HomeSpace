@@ -1,0 +1,37 @@
+<div class="sidebar">
+    <a href="#">About</a>
+    <a href="#">Services</a>
+    <a href="#">Clients</a>
+    <a href="#">Contact</a>
+</div>
+<div class="navbar">
+</div>
+<div class="container main">
+    <div class="row p-5 justify-content-center">
+        {{#each house}}
+            <div class="col p-2">
+                <div class="card" style="width: 18rem;">
+                    <img src="/images/dumb.jpg" class="card-img-top">
+                    <div class="card-body">
+                        <h5 class="card-title">{{house.name}}</h5>
+                        <p class="card-text">
+                            {{house.type}}<br>
+                            {{house.bedroom}} bedrooms<br>
+                            {{house.floor}} floor<br>
+                            <b>Price: {{house.price}}</b>
+                        </p>
+                        <a href="#" class="btn btn-primary">Details</a>
+                    </div>
+                </div>
+            </div>
+        {{/each}}
+        <div class="col p-2">
+            <div class="card" style="width: 18rem;">
+                <div class="card-body mx-auto">
+                    <input type="image" src="/images/plus-sign.png" href="">
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>

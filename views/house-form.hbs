@@ -1,0 +1,74 @@
+<div class="sidebar">
+    <a href="#">About</a>
+    <a href="#">Services</a>
+    <a href="#">Clients</a>
+    <a href="#">Contact</a>
+</div>
+<div class="navbar">
+</div>
+<div class="container main">
+    <div class="row p-5 justify-content-center">
+        <div class="card" style="width: 40rem;">
+            <div class="card-body">
+                <form action="/house/form/" method="post">
+
+                    <div>Name of apartment(if any) :</div>
+                    <div><input type="text" name="name"></div>
+
+                    <div>Number of bedrooms :</div>
+                    <div><input type="number" name="bedroom"></div>
+
+                    <div>Number of bathrooms :</div>
+                    <div><input type="number" name="bathroom"></div>
+
+                    <div>Space (sq ft):</div>
+                    <div><input type="number" name="space"></div>
+
+                    <div>Floor level :</div>
+                    <div><input type="number" name="floor"></div>
+
+                    <div>Expected members :</div>
+                    <div><input type="number" name="members"></div>
+
+                    <div>Garage :
+                        <input type="radio" id="gYes" name="garage" value="yes">
+                        <label for="gYes">Yes</label>
+                        <input type="radio" id="gNo" name="garage" value="no">
+                        <label for="gNo">No</label>
+                    </div>
+
+
+                    <div>Lift :
+                        <input type="radio" id="lYes" name="lift" value="yes">
+                        <label for="lYes">Yes</label>
+                        <input type="radio" id="lNo" name="lift" value="no">
+                        <label for="lNo">No</label>
+                    </div>
+                    <div>Location :</div>
+                    <div><input type="text" name="location"></div>
+
+
+                    <div>Bedroom photo 1:</div>
+                    <div><input type="file" accept=".jpg,.png" name="pBedroom1"></div>
+                    <div>Bedroom photo 2:</div>
+                    <div><input type="file" accept=".jpg,.png" name="pBedroom2"></div>
+                    <div>Dining room photo :</div>
+                    <div><input type="file" accept=".jpg,.png" name="pDining"></div>
+                    <div>Kitchen photo :</div>
+                    <div><input type="file" accept=".jpg,.png" name="pKitchen"></div>
+                    <div>Bathroom photo :</div>
+                    <div><input type="file" accept=".jpg,.png" name="pBathroom"></div>
+                    <div>Apartment exterior photo :</div>
+                    <div><input type="file" accept=".jpg,.png" name="pExterior"></div>
+                    <div>Rooftop photo :</div>
+                    <div><input type="file" accept=".jpg,.png" name="pRooftop"></div>
+                    <div>
+                        <input type="reset" value="Reset">
+                        <input type="submit" value="Submit">
+                    </div>
+
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
