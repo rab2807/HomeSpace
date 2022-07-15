@@ -1,3 +1,53 @@
+* {
+    font-family: 'ubuntu', sans-serif;
+    font-weight: normal;
+}
+
+button, input[type=submit], input[type=reset] {
+    border-radius: 8px;
+    border: 1px solid rebeccapurple;
+    padding: 0.2em 1.2em;
+    font-size: 100%;
+    font-weight: 500;
+    font-family: inherit;
+    background-color: white;
+    cursor: pointer;
+}
+
+button:hover, input[type=submit]:hover, input[type=reset]:hover {
+    background-color: rebeccapurple;
+    color: floralwhite;
+    border-color: #68686c;
+}
+
+input, textarea {
+    border-radius: 20px;
+}
+
+.wide-button {
+    padding: 0.3em 5em;
+}
+
+select {
+    background-color: white;
+    color: rebeccapurple;
+    font-weight: bold;
+    padding: 0.3em 1.2em;
+}
+
+a {
+    color: rebeccapurple;
+}
+
+a:hover {
+    color: purple;
+}
+
+.profile-pic {
+    border-radius: 50%;
+    border: 2px solid rebeccapurple;
+}
+
 .sidebar {
     height: 100%;
     width: 200px;
@@ -56,7 +106,6 @@
     height: calc(100% - 50px);
     margin-left: 200px;
     margin-top: 50px;
-    top: 100px;
 }
 
 .main-search {

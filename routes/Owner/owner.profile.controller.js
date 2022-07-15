@@ -7,15 +7,14 @@ let commentArr = [
         // picture link should be added
         name: "Rakib",
         post_date: "21 July 2020",
-        star: "⭐⭐⭐",
+        star: 3,
         comment: "bal sal",
     },
     {
         name: "Ahsan",
         post_date: "21 Feb 2020",
-        star: "⭐⭐⭐⭐",
+        star: 4,
         comment: "bal sal",
-
     }
 ]
 const house_num = 3;
@@ -32,7 +31,7 @@ const total = ratingArr.reduce((curr, elem) => curr + elem, 0);
 
 
 function renderPage(req, res) {
-    return res.render('owner-profile', {
+    return res.render('profile', {
         pre: 'OwnerMain',
         type: "Home-owner",
         name: "rakib",
@@ -41,7 +40,6 @@ function renderPage(req, res) {
         email: "123@gmail.com",
         phone: "123455",
         house_num: house_num,
-        s: (house_num > 1) ? "s" : "",
         rating: () => {
             let sum = 0;
             for (let i = 0; i < 5; i++)

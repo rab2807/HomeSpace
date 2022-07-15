@@ -1,42 +1,80 @@
 <div class="container main">
-    <div class="row mt-1">
-        <div class="col px-4">
-            <div>
-                <img src="/images/dumb.jpg" class="rounded float-left" style="height: 200px; width: 200px;">
-            </div>
-            <div>
-                <div>{{type}}</div>
-                <div>
-                    <h2>{{name}}</h2>
-                </div>
-                <div>
-                    {{catagory}} <br>
-                    currently lives in {{location}} <br>
-                    Contact via: <br>
-                    &emsp; Email: {{email}} <br>
-                    &emsp; Phone: {{phone}} <br>
-                </div>
-                <div>
-                    <label for="house-menu">
-                        owns {{house_num}} house
-                    </label>
-                    <a href="#">
-                        <button>See the houses</button>
-                    </a>
-                </div>
-                <div>successfully rented {{tenant_num}} tenants</div>
-            </div>
-        </div>
+    <div class="row pt-5 px-5">
         <div class="col">
             <div>
-                {{>ratingCard}}
-            </div>
-            <div>
-                {{>post-comment}}
-                <div style="width: 37rem; height: 300px; overflow-y:scroll;">
-                    {{>read-comment}}
+                <img class="profile-pic" src="/images/dumb.jpg" style="float: left;height: 200px; width: 200px;"/>
+                <div style="float: right">
+                    {{>ratingCard}}
                 </div>
+                <div class="center"><h1 style="font-size: 350%">{{name}}</h1></div>
+                <div class="center"><small>{{type}}</small></div>
+                <hr>
             </div>
         </div>
     </div>
+    <div class="row">
+        <div class="col px-5">
+            <div style="padding: 5px">
+                <i class="fa-solid fa-user"></i>&emsp;{{catagory}}
+            </div>
+            <div style="padding: 5px">
+                <i class="fas fa-home"></i>&emsp;currently lives in {{location}}
+            </div>
+            <div style="padding: 5px">
+                <i class="fa-regular fa-envelope"></i>&emsp;{{email}}
+            </div>
+            <div style="padding: 5px">
+                <i class="fas fa-phone-alt"></i>&emsp;{{phone}}
+            </div>
+            <div style="padding: 5px">
+                <i class="fas fa-city"></i>&emsp;House owned: {{house_num}}
+            </div>
+            <div style="padding: 5px">
+                <i class="fas fa-users"></i>&emsp;successfully rented tenants: {{tenant_num}}
+            </div>
+            <div style="padding: 8px">
+                <a href="#">
+                    <button class="wide-button">See the houses</button>
+                </a>
+            </div>
+            {{#if isOwner}}
+                <div style="padding: 8px">
+                    <a href="#">
+                        <button class="wide-button">Edit Profile</button>
+                    </a>
+                </div>
+            {{/if}}
+        </div>
+    </div>
+    {{#unless isOwner}}
+        <div style="padding-left: 20px;padding-top: 20px;"><h1>Reviews</h1></div>
+        <hr>
+    <div class="row">
+        <div class="col-3"></div>
+        <div class="col-6">
+            {{>post-comment}}
+        </div>
+    </div>
+        <div class="row">
+            <div class="col-3"></div>
+            <div class="col-6">
+                {{>read-comment}}
+            </div>
+        </div>
+
+    {{/unless}}
+
 </div>
+<!--<div class="col">-->
+<!--    <div>-->
+<!--        {{>ratingCard}}-->
+<!--    </div>-->
+<!--    <div>-->
+<!--        {{>post-comment}}-->
+<!--        <div style="width: 37rem; height: 300px; overflow-y:scroll;">-->
+<!--            {{>read-comment}}-->
+<!--        </div>-->
+<!--    </div>-->
+<!--</div>-->
+<!--</div>-->
+<!--</div>-->

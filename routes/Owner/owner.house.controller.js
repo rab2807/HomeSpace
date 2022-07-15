@@ -1,30 +1,23 @@
 let houseArr = [
     {
         name: "XE23523",
-        type: "family home",
-        bedroom: 2,
-        floor: 3,
-        garage: true,
+        location: "Dhaka, Bangladesh",
+        rating: "3.7",
         price: 15000
     },
     {
         name: "DE92837",
-        type: "family home",
-        bedroom: 2,
-        floor: 3,
-        garage: true,
+        location: "Dhaka, Bangladesh",
+        rating: "3.1",
         price: 15000
     },
     {
         name: "XE23523",
-        type: "family home",
-        bedroom: 2,
-        floor: 3,
-        garage: true,
+        location: "Dhaka, Bangladesh",
+        rating: "4.7",
         price: 15000
     },
 ]
-
 
 
 function renderPage(req, res) {

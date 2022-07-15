@@ -1,10 +1,27 @@
 <div class="container main">
-    <div class="row p-5 justify-content-center">
+    <div class="row px-5 pt-2">
+        <div class="col-3">
+            <form action="#" method="post">
+                <select name="sort">
+                    <option value="Rating">Rating</option>
+                    <option value="Price">Price</option>
+                    <option value="Location">Location</option>
+                </select>
+                <input type="submit" value="Sort">
+            </form>
+        </div>
+    </div>
+    <hr>
+    <div class="row px-5 pb-5 pt-2 justify-content-center">
         {{>houseCards}}
         <div class="col p-2">
-            <div class="card" style="width: 18rem;">
-                <div class="card-body mx-auto">
-                    <input type="image" src="/images/plus-sign.png" href="">
+            <div class="card" style="width: 18rem; height: inherit">
+                <div class="card-body">
+                    <div class="row p-5"></div>
+                    <div class="row p-5" style="text-align: center">
+                        <a href="#"><i class="far fa-plus-square fa-10x"></i></a>
+                    </div>
+                    <div class="row p-5"></div>
                 </div>
             </div>
         </div>

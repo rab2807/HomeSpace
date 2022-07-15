@@ -9,7 +9,7 @@ const PORT = process.env.PORT || 3000;
 // Routers
 const startRouter = require('./routes/Start/start.router');
 const regiRouter = require('./routes/Registration/regi.router');
-const ownerRouter = require('./routes/Owner/owner.main.router');
+const ownerRouter = require('./routes/Owner/owner.router');
 const tenantRouter = require('./routes/Tenant/tenant.main.router');
 const houseRouter = require('./routes/House/house.router');
 
@@ -17,7 +17,26 @@ const houseRouter = require('./routes/House/house.router');
 app.engine('hbs', engine({
     extname: 'hbs',
     defaultLayout: 'layout',
-    layoutsDir: __dirname + '/views/layouts'
+    layoutsDir: __dirname + '/views/layouts',
+
+    helpers: {
+        starString: (value) => {
+            let str = "";
+            for (let i = 0; i < value; i++)
+                str = str.concat("<i class=\"fas fa-star\"></i>");
+            for (let i = 0; i < 5 - value; i++)
+                str = str.concat("<i class=\"far fa-star\"></i>");
+            return str;
+        },
+        concat: (val1, val2) => {
+            return val1.concat(val2);
+        },
+        compare: (val1, val2, comp) => {
+            if (comp === '=') return val1 === val2;
+            else if (comp === '>') return val1 > val2;
+            else return val1 < val2;
+        },
+    }
 }));
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'hbs');

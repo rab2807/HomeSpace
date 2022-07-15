@@ -4,8 +4,8 @@ const houseController = require('./owner.house.controller')
 
 const router = express.Router();
 
-router.get('/owner/main/:viewer?', profileController.renderPage);
-router.post('/owner/main', profileController.postComment);
+router.get('/owner/profile/:viewer?', profileController.renderPage);
+router.post('/owner/profile', profileController.postComment);
 
 router.get('/owner/house/:viewer?', houseController.renderPage);
 

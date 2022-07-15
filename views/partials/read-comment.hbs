@@ -1,26 +1,26 @@
 {{#each comments as |cmnt|}}
-    <div class="row p-3 justify-content-center">
-        <div class="card">
-            <div class="card-body">
-                <div>
-                    <table>
-                        <td>
-                            <img src="/images/dumb.jpg" height="20px" width="20px" style="border-radius: 50%;">
-                        </td>
-                        <td>
-                            {{cmnt.name}}<br>
-                            {{cmnt.post_date}}
-                        </td>
-                        <td>
-                            {{cmnt.star}}
-                        </td>
-                    </table>
-                </div>
-                <hr>
-                <p>
-                    {{cmnt.comment}}
-                </p>
+    <div class="card">
+        <div class="card-body">
+            <div>
+                <table style="width: 100%">
+                    <td style="width: 10%">
+                        <img src="/images/dumb.jpg" height="40px" width="40px" style="border-radius: 50%;">
+                    </td>
+                    <td style="width: 20%; font-size: 20px">
+                        <label>{{name}}</label><br>
+                        <small style="font-size: 15px">{{post_date}}</small>
+                    </td>
+                    <td style="width: 70%;">
+                        <div style="float: right">
+                            {{starString star}}
+                        </div>
+                    </td>
+                </table>
             </div>
+            <hr>
+            <p>
+                {{cmnt.comment}}
+            </p>
         </div>
     </div>
 {{/each}}

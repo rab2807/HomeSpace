@@ -1,16 +1,17 @@
 {{#each house}}
-    <div class="col p-2">
-        <div class="card" style="width: 18rem;">
+    <div class="col p-3">
+        <div class="card" style="width: auto;">
             <img src="/images/dumb.jpg" class="card-img-top">
             <div class="card-body">
-                <h5 class="card-title">{{name}}</h5>
-                <p class="card-text">
-                    {{type}}<br>
-                    {{bedroom}} bedrooms<br>
-                    {{floor}} floor<br>
-                    <b>Price: {{price}}</b>
-                </p>
-                <a href="#" class="btn btn-primary">Details</a>
+                <h4 class="card-title">{{concat "House-" name}}</h4>
+                <div class="card-subtitle">
+                    {{location}}<br>
+                    <b style="font-size: large">Price: {{price}}</b>
+                </div>
+                <progress value={{rating}} max=5 style="width: 100%"></progress>
+                <div style="padding: 5px"><a href="#">
+                    <button>Details</button>
+                </a></div>
             </div>
         </div>
     </div>

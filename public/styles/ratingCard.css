@@ -1,0 +1,23 @@
+.main-rating {
+    text-align: center;
+    font-size: 450%;
+}
+
+progress {
+    background: mediumpurple;
+    height: 7px;
+    vertical-align: center;
+    box-sizing: content-box;
+}
+
+progress::-webkit-progress-value {
+    background: rebeccapurple;
+    height: 7px;
+    vertical-align: center;
+}
+
+progress::-webkit-progress-bar{
+    background-color: #baafd0;
+    vertical-align: center;
+    height: 7px;
+}
