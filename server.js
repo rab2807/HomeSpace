@@ -10,6 +10,7 @@ const PORT = process.env.PORT || 3000;
 const startRouter = require('./routes/Start/start.router');
 const regiRouter = require('./routes/Registration/regi.router');
 const ownerRouter = require('./routes/Owner/owner.main.router');
+const tenantRouter = require('./routes/Tenant/tenant.main.router');
 const houseRouter = require('./routes/House/house.router');
 
 // view engine setup
@@ -30,6 +31,7 @@ app.use(express.json());
 app.use(regiRouter);
 app.use(startRouter);
 app.use(ownerRouter);
+app.use(tenantRouter);
 app.use(houseRouter);
 
 // app.get('/', function(req, res) {

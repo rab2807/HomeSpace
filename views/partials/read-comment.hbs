@@ -1,0 +1,26 @@
+{{#each comments as |cmnt|}}
+    <div class="row p-3 justify-content-center">
+        <div class="card">
+            <div class="card-body">
+                <div>
+                    <table>
+                        <td>
+                            <img src="/images/dumb.jpg" height="20px" width="20px" style="border-radius: 50%;">
+                        </td>
+                        <td>
+                            {{cmnt.name}}<br>
+                            {{cmnt.post_date}}
+                        </td>
+                        <td>
+                            {{cmnt.star}}
+                        </td>
+                    </table>
+                </div>
+                <hr>
+                <p>
+                    {{cmnt.comment}}
+                </p>
+            </div>
+        </div>
+    </div>
+{{/each}}

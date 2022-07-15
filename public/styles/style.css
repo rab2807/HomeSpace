@@ -34,11 +34,43 @@
     padding-top: 20px;
 }
 
+.sidebar-right {
+    height: 100%;
+    width: 300px;
+    position: fixed;
+    z-index: 1;
+    top: 0;
+    left: calc(100% - 300px);
+    background-color: aquamarine;
+    overflow-x: hidden;
+    padding-top: 20px;
+}
+
+.center {
+    display: flex;
+    justify-content: center;
+}
+
 .main {
     width: calc(100% - 200px);
     height: calc(100% - 50px);
     margin-left: 200px;
     margin-top: 50px;
     top: 100px;
-    /* padding: 10px 10px; */
+}
+
+.main-search {
+    width: calc(100% - 200px - 300px);
+    height: calc(100% - 50px);
+    background-color: beige;
+    margin-left: 200px;
+    margin-right: 300px;
+    margin-top: 50px;
+    top: 100px;
+}
+
+#house-description {
+    display: grid;
+    grid-template-columns: 50% 50%;
+    grid-row-gap: 5px;
 }

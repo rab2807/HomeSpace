@@ -1,0 +1,50 @@
+<div class="container main">
+    <div class="row p-3 justify-content-center">
+        <div class="col">
+            <div><h1>HOUSE - {{house.name}}</h1></div>
+            <div>Price: {{house.price}}</div>
+            <div>
+                <button>Request</button>
+            </div>
+        </div>
+        <div class="col">
+            {{>ratingCard}}
+        </div>
+    </div>
+
+    <div class="row p-3 justify-content-center">
+        <div id="cont">
+            <div class="photobanner">
+                {{#each images as |image|}}
+                    <img src="/images/dumb.jpg" width="200px" height="'200px">
+                {{/each}}
+            </div>
+        </div>
+    </div>
+
+    <div class="row p-3 justify-content-center">
+        <div class="card" style="width: 70%;">
+            <div class="card-body">
+                <h3>Description </h3>
+                <hr>
+                <div>House Name: {{house.name}}</div>
+                <div>House alt. Name: {{house.altName}}</div>
+                <div>Owned by: <a href={{house.ownerID}}>{{house.ownerName}}</a></div>
+                <div>Location: {{house.location}}</div>
+                <div>Bedrooms: {{house.bedroom}}</div>
+                <div>Bathrooms: {{house.bathroom}}</div>
+                <div>Space (sq ft): {{house.space}}</div>
+                <div>Floor level: {{house.floor}}</div>
+                <div>Expected members: {{house.members}}</div>
+                <div>Garage: {{house.garage}}</div>
+                <div>Lift: {{house.lift}}</div>
+                <div>Additional notes: <br>{{house.note}}</div>
+            </div>
+        </div>
+    </div>
+    <div class="row p-3 justify-content-center">
+        {{>post-comment}}
+    </div>
+        {{>read-comment}}
+    </div>
+</div>

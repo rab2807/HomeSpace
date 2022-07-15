@@ -1,0 +1,17 @@
+{{#each house}}
+    <div class="col p-2">
+        <div class="card" style="width: 18rem;">
+            <img src="/images/dumb.jpg" class="card-img-top">
+            <div class="card-body">
+                <h5 class="card-title">{{name}}</h5>
+                <p class="card-text">
+                    {{type}}<br>
+                    {{bedroom}} bedrooms<br>
+                    {{floor}} floor<br>
+                    <b>Price: {{price}}</b>
+                </p>
+                <a href="#" class="btn btn-primary">Details</a>
+            </div>
+        </div>
+    </div>
+{{/each}}
