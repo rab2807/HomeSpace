@@ -1,61 +1,89 @@
 <div class="container main">
     <div class="row p-5 justify-content-center">
-        <div class="card" style="width: auto;">
+        <div class="card p-0" style="width: auto;">
+            <div class="card-title center p-1 pt-3">
+                <h2>House Registration</h2>
+                <hr style="border-style: double">
+            </div>
+
             <div class="card-body">
                 <form action="/house/form/" method="post">
+                    <h3>Basics</h3>
+                    <hr>
 
-                    <div>Name of apartment(if any) :</div>
+                    <div style="padding-bottom: 7px; padding-top: 10px; font-size: large">Name of apartment (if any) :</div>
                     <div><input style="width: 100%;" type="text" name="name"></div>
 
-                    <div>Number of bedrooms :</div>
+                    <div style="padding-bottom: 7px; padding-top: 10px; font-size: large">Creation date:</div>
+                    <div><input style="width: 100%;" type="date" name="created"></div>
+
+                    <div style="padding-bottom: 7px; padding-top: 10px; font-size: large">Number of bedrooms :</div>
                     <div><input style="width: 100%;" type="number" name="bedroom"></div>
 
-                    <div>Number of bathrooms :</div>
+                    <div style="padding-bottom: 7px; padding-top: 10px; font-size: large">Number of bathrooms :</div>
                     <div><input style="width: 100%;" type="number" name="bathroom"></div>
 
-                    <div>Space (sq ft):</div>
+                    <div style="padding-bottom: 7px; padding-top: 10px; font-size: large">Space (sq ft):</div>
                     <div><input style="width: 100%;" type="number" name="space"></div>
 
-                    <div>Floor level :</div>
+                    <div style="padding-bottom: 7px; padding-top: 10px; font-size: large">Floor level :</div>
                     <div><input style="width: 100%;" type="number" name="floor"></div>
 
-                    <div>Expected members :</div>
+                    <div style="padding-bottom: 7px; padding-top: 10px; font-size: large">Expected members :</div>
                     <div><input style="width: 100%;" type="number" name="members"></div>
 
-                    <div>Garage :
+                    <div style="padding-bottom: 7px; padding-top: 10px; font-size: large">Garage :
                         <input type="radio" id="gYes" name="garage" value="yes">
                         <label for="gYes">Yes</label>
                         <input type="radio" id="gNo" name="garage" value="no">
                         <label for="gNo">No</label>
                     </div>
 
-                    <div>Lift :
-                        <input type="radio" id="lYes" name="lift" value="yes">
+                    <div style="padding-bottom: 7px; padding-top: 10px; font-size: large">Elevator :
+                        <input type="radio" id="lYes" name="elevator" value="yes">
                         <label for="lYes">Yes</label>
-                        <input type="radio" id="lNo" name="lift" value="no">
+                        <input type="radio" id="lNo" name="elevator" value="no">
                         <label for="lNo">No</label>
                     </div>
-                    <div>Location :</div>
+
+                    <div style="padding-bottom: 7px; padding-top: 10px; font-size: large">Location :</div>
                     <div><input style="width: 100%;" type="text" name="location"></div>
+                    <br>
 
-                    <div>Bedroom photo 1:</div>
+                    <h3>Photos</h3>
+                    <hr>
+                    <div style="padding-bottom: 7px; padding-top: 10px; font-size: large">Bedroom photo 1:</div>
                     <div><input style="width: 100%;" type="file" accept=".jpg,.png" name="pBedroom1"></div>
-                    <div>Bedroom photo 2:</div>
+                    <div style="padding-bottom: 7px; padding-top: 10px; font-size: large">Bedroom photo 2:</div>
                     <div><input style="width: 100%;" type="file" accept=".jpg,.png" name="pBedroom2"></div>
-                    <div>Dining room photo :</div>
+                    <div style="padding-bottom: 7px; padding-top: 10px; font-size: large">Dining room photo :</div>
                     <div><input style="width: 100%;" type="file" accept=".jpg,.png" name="pDining"></div>
-                    <div>Kitchen photo :</div>
+                    <div style="padding-bottom: 7px; padding-top: 10px; font-size: large">Kitchen photo :</div>
                     <div><input style="width: 100%;" type="file" accept=".jpg,.png" name="pKitchen"></div>
-                    <div>Bathroom photo :</div>
+                    <div style="padding-bottom: 7px; padding-top: 10px; font-size: large">Bathroom photo :</div>
                     <div><input style="width: 100%;" type="file" accept=".jpg,.png" name="pBathroom"></div>
-                    <div>Apartment exterior photo :</div>
+                    <div style="padding-bottom: 7px; padding-top: 10px; font-size: large">Apartment exterior photo :
+                    </div>
                     <div><input style="width: 100%;" type="file" accept=".jpg,.png" name="pExterior"></div>
-                    <div>Rooftop photo :</div>
+                    <div style="padding-bottom: 7px; padding-top: 10px; font-size: large">Rooftop photo :</div>
                     <div><input style="width: 100%;" type="file" accept=".jpg,.png" name="pRooftop"></div>
+                    <div style="padding-bottom: 7px; padding-top: 10px; font-size: large">Miscellaneous 1 :</div>
+                    <div><input style="width: 100%;" type="file" accept=".jpg,.png" name="pRooftop"></div>
+                    <div style="padding-bottom: 7px; padding-top: 10px; font-size: large">Miscellaneous 2 :</div>
+                    <div><input style="width: 100%;" type="file" accept=".jpg,.png" name="pRooftop"></div>
+                    <br>
 
-                    <div>Additional notes :</div>
+                    <h3>Pricing</h3>
+                    <hr>
+                    <div style="padding-bottom: 7px; padding-top: 10px; font-size: large">Price :</div>
+                    <div><input style="width: 100%;" type="number" name="price"></div>
+
+                    <div style="padding-bottom: 7px; padding-top: 10px; font-size: large">Minimum stay period:</div>
+                    <div><input style="width: 100%;" type="number" name="period"></div>
+
+                    <div style="padding-bottom: 7px; padding-top: 10px; font-size: large">Additional notes :</div>
                     <div><textarea name="note" rows="3" cols="50"></textarea></div>
-                    <div>
+                    <div style="padding-bottom: 7px; padding-top: 10px;">
                         <input type="reset" value="Reset">
                         <input type="submit" value="Submit">
                     </div>

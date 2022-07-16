@@ -1,6 +1,6 @@
 * {
     font-family: 'ubuntu', sans-serif;
-    font-weight: normal;
+    font-weight: lighter;
 }
 
 button, input[type=submit], input[type=reset] {
@@ -22,6 +22,12 @@ button:hover, input[type=submit]:hover, input[type=reset]:hover {
 
 input, textarea {
     border-radius: 20px;
+    padding-left: 17px;
+    padding-right: 17px;
+}
+
+input[type=file] {
+    border-radius: 0;
 }
 
 .wide-button {
@@ -36,11 +42,16 @@ select {
 }
 
 a {
+    font-weight: normal;
     color: rebeccapurple;
+    text-decoration: none;
 }
 
 a:hover {
     color: purple;
+    text-decoration: underline;
+    text-underline: purple;
+
 }
 
 .profile-pic {
@@ -85,15 +96,17 @@ a:hover {
 }
 
 .sidebar-right {
-    height: 100%;
     width: 300px;
+    height: calc(100% - 50px);
+    margin-top: 50px;
     position: fixed;
     z-index: 1;
     top: 0;
     left: calc(100% - 300px);
-    background-color: aquamarine;
+    background-color: white;
     overflow-x: hidden;
     padding-top: 20px;
+    padding-bottom: 20px;
 }
 
 .center {
@@ -111,7 +124,6 @@ a:hover {
 .main-search {
     width: calc(100% - 200px - 300px);
     height: calc(100% - 50px);
-    background-color: beige;
     margin-left: 200px;
     margin-right: 300px;
     margin-top: 50px;

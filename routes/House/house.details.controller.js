@@ -3,6 +3,7 @@ const house = {
     name: "XE3654",
     altName: "Nuhash Polli",
     ownerName: "Kuddus",
+    rating: [34, 43, 12, 8, 20],
     ownerID: 12412523124,
     location: "Dhaka, Bangladesh",
     bedroom: 2,
@@ -11,7 +12,7 @@ const house = {
     floor: 5,
     members: 3,
     garage: true,
-    lift: false,
+    elevator: false,
     note: "Load shedding occurs very much"
 }
 
@@ -37,7 +38,13 @@ function renderPage(req, res) {
         house: house,
         // action: '/'
         comments: commentArr,
-        commentCardWidth: "width: 70%",
+        ratingArr: house.rating,
+        rating: () => {
+            let sum = 0;
+            for (let i = 0; i < 5; i++)
+                sum += (5 - i) * house.rating[i];
+            return (sum / house.rating.reduce((t, n) => t += n, 0)).toFixed(2);
+        }
     });
 }
 

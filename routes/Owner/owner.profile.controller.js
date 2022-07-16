@@ -46,12 +46,7 @@ function renderPage(req, res) {
                 sum += (5 - i) * ratingArr[i];
             return (sum / total).toFixed(2);
         },
-        maxVal: total,
-        count_5: ratingArr[0],
-        count_4: ratingArr[1],
-        count_3: ratingArr[2],
-        count_2: ratingArr[3],
-        count_1: ratingArr[4],
+        ratingArr: ratingArr,
         comments: commentArr
     });
 }

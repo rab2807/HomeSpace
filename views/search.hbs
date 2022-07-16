@@ -1,68 +1,83 @@
 <div class="sidebar-right">
     <form action="/tenant/search" method="post">
-        <div class="row p-1"><h3>PLACES</h3></div>
-        <div class="row p-1">
+        <div class="row px-2">
+            <h3>Place</h3>
+            <hr>
+        </div>
+        <div class="row px-2">
             <div class="col">
-                <label for="suburb">Suburb </label>
+                <label style="padding: 4px" for="suburb">Suburb </label>
                 <input type="text" name="suburb">
             </div>
         </div>
-        <div class="row p-1">
+
+        <div class="row px-2">
             <div class="col">
-                <label for="district">District </label>
+                <label style="padding: 4px" for="district">District </label>
                 <input type="text" name="district">
             </div>
         </div>
 
-        <div class="row p-1"><h3>HOUSE TYPE</h3></div>
-        <div class="row p-1">
+        <div class="row px-2 pt-2">
+            <h3>House</h3>
+            <hr>
+        </div>
+        <div class="row px-2">
             <div class="col">
-                <label for="rating">Rating </label><br>
+                <label style="padding: 4px" for="vacant">Show only vacant</label>
+                <input type="checkbox" checked id="vacant" name="vacant" value="yes">&nbsp;&nbsp;
+            </div>
+        </div>
+        <div class="row px-2">
+            <div class="col">
+                <label style="padding: 4px" for="rating">Rating </label><br>
                 <input type="number" min="0" max="5" name="rating_low" placeholder="min">
                 <label> - </label>
                 <input type="number" min="0" max="5" name="rating_high" placeholder="max">
             </div>
         </div>
-        <div class="row p-1">
-            <label for="price">Price Range </label>
-            <div class="col"><input type="number" min="0" name="price_low" placeholder="min"></div>
-            <div class="col"><input type="number" min="0" name="price_high" placeholder="max"></div>
-        </div>
-        <div class="row p-1">
+        <div class="row px-2">
             <div class="col">
-                <label for="space">Space </label>
+                <label style="padding: 4px" for="price">Price Range </label>
+                <div class="col"><input type="number" min="0" name="price_low" placeholder="min"></div>
+                <div class="col"><input type="number" min="0" name="price_high" placeholder="max"></div>
+            </div>
+        </div>
+        <div class="row px-2">
+            <div class="col">
+                <label style="padding: 4px" for="space">Space </label>
                 <input type="number" min="0" name="space" placeholder="in sq ft">
             </div>
         </div>
-        <div class="row p-1">
+        <div class="row px-2">
             <div class="col">
-                <label for="floor">Floor level </label>
+                <label style="padding: 4px" for="floor">Floor level </label>
                 <input type="number" min="0" name="floor">
             </div>
         </div>
 
-        <div class="row p-1">
+        <div class="row px-2">
             <div class="col">
-                <label for="bedroom">Number of Bedrooms </label>
+                <label style="padding: 4px" for="bedroom">Number of Bedrooms </label>
                 <input type="number" min="0" name="bedroom">
             </div>
         </div>
-        <div class="row p-1">
+        <div class="row px-2">
             <div class="col">
-                <label for="bathroom">Number of Bathrooms </label>
+                <label style="padding: 4px" for="bathroom">Number of Bathrooms </label>
                 <input type="number" min="0" name="bathroom">
             </div>
         </div>
-        <div class="row p-1">
+        <div class="row px-2">
             <div class="col">
-                <label for="garage">Garage</label>
+                <label style="padding: 4px" for="garage">Garage</label>
                 <input type="checkbox" id="garage" name="garage" value="yes">&nbsp;&nbsp;
-                <label for="lift">Lift</label>
-                <input type="checkbox" id="lift" name="lift" value="yes">
-
+                <label style="padding: 4px" for="elevator">Elevator</label>
+                <input type="checkbox" id="elevator" name="elevator" value="yes">
             </div>
         </div>
-        <div class="row p-1">
+
+        <div class="row px-2">
             <div class="col">
                 <input type="submit" value="Search">
                 <input type="reset" value="Clear All">
@@ -72,13 +87,21 @@
     </form>
 </div>
 
+
 <div class="container main-search">
-    <div class="row p-2" style="text-align: right">
-        <div>
-            <button class="btn btn-danger">Sort by</button>
+    <div class="row px-3 pt-3">
+        <div class="col-3">
+            <form action="#" method="post">
+                <select name="sort">
+                    <option value="Rating">Rating</option>
+                    <option value="Price">Price</option>
+                    <option value="Location">Location</option>
+                </select>
+                <input type="submit" value="Sort">
+            </form>
         </div>
     </div>
-    <div class="row p-2 justify-content-center">
+    <div class="row px-2 justify-content-center">
         {{>houseCards}}
     </div>
 </div>

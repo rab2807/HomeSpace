@@ -1,52 +1,9 @@
 <div class="card" style="width: auto;">
     <h1 class="main-rating">{{rating}}</h1>
     <div class="card-body">
-        <div class="container">
-            <div>
-                <table>
-                    <tr>
-                        <td>
-                            <label for="rating">5<i class="fas fa-star"></i> ({{count_5}})</label>
-                        </td>
-                        <td style="padding-left: 10px">
-                            <progress value={{count_5}} max={{maxVal}}></progress>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <label for="rating">4<i class="fas fa-star"></i> ({{count_4}})</label>
-                        </td>
-                        <td style="padding-left: 10px">
-                            <progress value={{count_4}} max={{maxVal}}></progress>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <label for="rating">3<i class="fas fa-star"></i> ({{count_3}})</label>
-                        </td>
-                        <td style="padding-left: 10px">
-                            <progress value={{count_3}} max={{maxVal}}></progress>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <label for="rating">2<i class="fas fa-star"></i> ({{count_2}})</label>
-                        </td>
-                        <td style="padding-left: 10px">
-                            <progress value={{count_2}} max={{maxVal}}></progress>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <label for="rating">1<i class="fas fa-star"></i> ({{count_1}})</label>
-                        </td>
-                        <td style="padding-left: 10px">
-                            <progress value={{count_1}} max={{maxVal}}></progress>
-                        </td>
-                    </tr>
-                </table>
-            </div>
-        </div>
+        <table>
+            {{{ratingBarHelper ratingArr}}}
+        </table>
     </div>
 </div>
 
