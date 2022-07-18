@@ -3,7 +3,7 @@ async function checkConnection(){
     try{
         const connection = await oracledb.getConnection({
             user:'system',
-            password:'lIght299792458#',
+            password:'***********',
             connectString:'127.0.0.1/orcl'
         });
         const result = await connection.execute('Select count(*) from employees');
