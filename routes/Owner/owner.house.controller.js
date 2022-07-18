@@ -26,6 +26,10 @@ function renderPage(req, res) {
     });
 }
 
+function postHandler(req, res) {
+
+}
+
 module.exports = {
-    renderPage,
+    renderPage, postHandler
 }

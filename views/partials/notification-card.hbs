@@ -1,0 +1,24 @@
+{{#each notification}}
+    <div class="row py-0 px-5">
+        <div class="card p-0">
+            <div class="card-body p-1">
+                <div>
+                    <small style="font-size: 13px">{{time}} &nbsp;&nbsp;|&nbsp;&nbsp;{{type}}</small>
+                </div>
+                <p>
+                    <a href="#">{{name}}</a> has
+                    {{#compare type 'request'}}
+                        requested
+                    {{/compare}}
+                    {{#compare type 'leave'}}
+                        decided to leave
+                    {{/compare}}
+                    {{#compare type 'accept'}}
+                        accepted your request to rent in
+                    {{/compare}}
+                    <a href="#">House - {{house}}</a>
+                </p>
+            </div>
+        </div>
+    </div>
+{{/each}}
