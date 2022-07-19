@@ -4,7 +4,6 @@ const cors = require('cors');
 const {engine} = require('express-handlebars');
 
 const app = express();
-const PORT = process.env.PORT || 3000;
 
 // Routers
 const startRouter = require('./routes/Start/start.router');
@@ -24,7 +23,6 @@ app.engine('hbs', engine({
         ratingBarHelper: helper.ratingBarHelper,
         concat: helper.concat,
         compare: helper.compare,
-        notiCardHelper: helper.notiCardHelper,
     }
 }));
 app.set('views', path.join(__dirname, 'views'));
@@ -41,11 +39,5 @@ app.use(startRouter);
 app.use(ownerRouter);
 app.use(tenantRouter);
 app.use(houseRouter);
-
-// app.get('/', function(req, res) {
-//     res.render('home', { pre: 'Shit!!', title: 'Cool, huh!', name: "rakib", condition: true, anyArray: [1,2,3] });
-// });
-
-app.listen(PORT, () => console.log(`server is listening at ${PORT}`));
 
 module.exports = app; //added 
