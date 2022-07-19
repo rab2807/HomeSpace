@@ -78,3 +78,5 @@ app.use(houseRouter);
 // });
 
 app.listen(PORT, () => console.log(`server is listening at ${PORT}`));
+
+module.exports = app; //added 
