@@ -19,12 +19,6 @@ let commentArr = [
 ]
 const house_num = 3;
 
-function postComment(req, res)
-{
-    // save in database
-
-    res.send(req.body);
-}
 //-------------------
 
 const total = ratingArr.reduce((curr, elem) => curr + elem, 0);
@@ -51,6 +45,12 @@ function renderPage(req, res) {
     });
 }
 
+function postHandler(req, res) {
+    // save in database
+
+    res.send(req.body);
+}
+
 module.exports = {
-    renderPage, postComment
+    renderPage, postHandler
 }

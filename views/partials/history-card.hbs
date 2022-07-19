@@ -1,0 +1,15 @@
+{{#each history}}
+    <div class="row py-0 px-5">
+        <div class="card p-0">
+            <div class="card-body p-1">
+                <p>
+                    <a href="#">House - {{name}}</a>&nbsp;&nbsp;|&nbsp;&nbsp;
+                    <a href="#">Tenant: {{tenant}}</a>&nbsp;&nbsp;|&nbsp;&nbsp;
+                    joined {{join_date}}&nbsp;&nbsp;|&nbsp;&nbsp;
+                    left {{leave_date}}&nbsp;&nbsp;|&nbsp;&nbsp;
+                    Duration: {{duration}}
+                </p>
+            </div>
+        </div>
+    </div>
+{{/each}}
