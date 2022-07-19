@@ -2,7 +2,7 @@
   "name": "home-rental-system",
   "version": "1.0.0",
   "description": "",
-  "main": "server.js",
+  "main": "app.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "server": "nodemon server.js"
@@ -21,8 +21,10 @@
   "dependencies": {
     "bootstrap": "^5.2.0-beta1",
     "cors": "^2.8.5",
+    "dotenv": "^16.0.1",
     "express": "^4.18.1",
-    "express-handlebars": "^6.0.6"
+    "express-handlebars": "^6.0.6",
+    "oracledb": "^5.4.0"
   },
   "devDependencies": {
     "morgan": "^1.10.0",
