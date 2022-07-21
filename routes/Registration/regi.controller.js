@@ -8,10 +8,8 @@ function renderPage(req, res) {
 }
 
 function registerUser(req, res) {
-    // check for errors, if no error found save in database and go to profile
-    // if error found reload the page
-
-
+    // a procedure to add in user, then owner table : returns owner id;
+    // for error returns errorCode;
     res.send(req.body);
 }
 

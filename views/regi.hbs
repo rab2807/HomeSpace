@@ -1,3 +1,22 @@
+<script>
+    function getLocation() {
+        if (navigator.geolocation) {
+            navigator.geolocation.getCurrentPosition(position => {
+                let x = position.coords.latitude;
+                let y = position.coords.longitude;
+
+                fetch(`https://nominatim.openstreetmap.org/reverse?format=jsonv2&lat=${x}&lon=${y}&zoom=16&addressdetails=1`)
+                        .then(response => response.json())
+                        .then(data => {
+                            document.getElementById("loc").value = data['place_id'];
+                            document.getElementById("lat").value = x;
+                            document.getElementById("lon").value = y;
+                        });
+            });
+        }
+    }
+</script>
+
 <div class="container">
     <div class="row p-5 justify-content-center">
         <div class="card p-0" style="width: auto;">
@@ -23,12 +42,26 @@
 
                     <div style="padding-bottom: 7px; padding-top: 10px; font-size: large">Email :</div>
                     <div><input style="width: 100%;" type="email" name="email"></div>
-
-                    <div style="padding-bottom: 7px; padding-top: 10px; font-size: large">Photo :</div>
-                    <div><input style="width: 100%;" type="file" accept=".jpg,.png" name="photo"></div>
-
-                    <div style="padding-bottom: 7px; padding-top: 10px; font-size: large">Location :</div>
-                    <div><input style="width: 100%;" type="text" name="location"></div>
+                    <!--
+                                        <div style="padding-bottom: 7px; padding-top: 10px; font-size: large">Photo :</div>
+                                        <div><input style="width: 100%;" type="file" accept=".jpg,.png" name="photo"></div>
+                    -->
+                    <div style="padding-bottom: 7px; padding-top: 10px; font-size: large">
+                        Location :
+                        <button type="button" style="font-size: small; float: right" onclick="getLocation()">
+                            get location from IP address
+                        </button>
+                    </div>
+                    <div>
+                        <label>Latitude: </label>
+                        <input style="width: auto" id="lat" type="number" name="lat"><br>
+                        <label>Longitude: </label>
+                        <input style="width: auto" id="lon" type="number" name="lon">
+                    </div>
+                    <div>
+                        <label>Address: </label>
+                        <input id="loc" type="text">
+                    </div>
 
                     {{#if cndtn}}
                         <div style="padding-bottom: 7px; padding-top: 10px; font-size: large">Catagory :</div>

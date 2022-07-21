@@ -1,0 +1,27 @@
+--- Create user:
+[login: system as sysdba]
+alter session set “_oracle_script”=true;
+CREATE USER homerental IDENTIFIED BY database;
+GRANT CONNECT TO homerental;
+GRANT ALL PRIVILEGES TO homerental;
+GRANT UNLIMITED TABLESPACE TO homerental;
+
+--- Drop user
+[login: system as sysdba]
+alter session set “_oracle_script”=true;
+drop user homerental;
+
+--- To add new column use alter
+alter table table_name add column_name datatype
+ 
+--- Alter a Relational table to add a column
+ALTER TABLE TABLE1 ADD
+(
+  Column4 VARCHAR2(40)
+);
+ 
+--- To delete a column use drop
+alter table table_name drop column column_name
+ 
+--- drop constraint
+alter table table_name drop constraint constraint_name
