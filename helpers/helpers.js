@@ -25,9 +25,11 @@ const ratingBarHelper = (arr) => {
     }
     return str;
 };
+
 const concat = (val1, val2) => {
     return val1.concat(val2);
 };
+
 const compare = (a, b, opts) => {
     if (a === b) {
         return opts.fn(this);

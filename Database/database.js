@@ -6,7 +6,7 @@ async function startup() {
     console.log('starting up database.');
     await oracledb.createPool({
         user: process.env.DB_USER || 'system',
-        password: process.env.DB_PASS || '*************', //pass de tor database er mama *************** er jaygay 
+        password: process.env.DB_PASS || '*************',
         connectstring: process.env.DB_CONNECTSTRING || 'localhost/XEPDB1',
         poolMin: 4,
         poolMax: 10,
@@ -28,13 +28,13 @@ async function shutdown() {
 }
 
 //code to execute sql
-async function executeSql(sql, binds, options) {
+async function execute(sql, binds, options) {
     let connection, results;
     try {
         connection = await oracledb.getConnection();
-        results = await connection.executeSql(sql, binds, options);
+        results = await connection.execute(sql, binds, options = {outFormat: oracledb.OUT_FORMAT_OBJECT});
     } catch (err) {
-        console.log("Error executing sql: " + err.message);
+        throw err;
     } finally {
         if (connection) {
             try {
@@ -48,11 +48,11 @@ async function executeSql(sql, binds, options) {
 }
 
 //code to execute many sql
-async function executeManySql(sql, binds, options) {
+async function executeMany(sql, binds, options) {
     let connection;
     try {
         connection = await oracledb.getConnection();
-        results = await connection.executeManySql(sql, binds, options);
+        results = await connection.executeMany(sql, binds, options = {outFormat: oracledb.OUT_FORMAT_OBJECT});
     } catch (err) {
         console.log("Error executing sql: " + err.message);
     } finally {
@@ -68,14 +68,12 @@ async function executeManySql(sql, binds, options) {
 }
 
 //output for execution of sql
-const options = {
-    outFormat: oracledb.OUT_FORMAT_OBJECT
-}
+const options = {}
 
 module.exports = {
     startup,
     shutdown,
-    executeSql,
-    executeManySql,
+    execute,
+    executeMany,
     options
 };

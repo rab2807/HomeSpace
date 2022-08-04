@@ -1,10 +1,14 @@
 --- Create user:
 [login: system as sysdba]
+system as sysdba
+database
 alter session set “_oracle_script”=true;
 CREATE USER homerental IDENTIFIED BY database;
 GRANT CONNECT TO homerental;
 GRANT ALL PRIVILEGES TO homerental;
 GRANT UNLIMITED TABLESPACE TO homerental;
+
+sqlplus homerental/database @CREATE_TABLE
 
 --- Drop user
 [login: system as sysdba]
