@@ -2,7 +2,7 @@ oracledb = require('oracledb')
 oracledb.autoCommit = true;
 
 //create connection pool for oracledb
-async function startup(){
+async function startup() {
     console.log('starting up database.');
     await oracledb.createPool({
         user: process.env.DB_USER || 'system',
@@ -16,31 +16,31 @@ async function startup(){
 }
 
 //close connection pool for oracledb
-async function shutdown(){
+async function shutdown() {
     console.log('Shutting down database.');
-    try{
+    try {
         //If this hangs, I may need DISABLE_OOB=ON in a sqlnet.ora file.
         await oracledb.getPool().close(10);
         console.log('Pool closed');
-    }catch(err){
-        console.log("Error shutting down database: "+err.message);
+    } catch (err) {
+        console.log("Error shutting down database: " + err.message);
     }
 }
 
 //code to execute sql
-async function executeSql(sql, binds, options){
+async function executeSql(sql, binds, options) {
     let connection, results;
-    try{
+    try {
         connection = await oracledb.getConnection();
         results = await connection.executeSql(sql, binds, options);
-    }catch(err){
+    } catch (err) {
         console.log("Error executing sql: " + err.message);
-    }finally{
-        if(connection){
-            try{
+    } finally {
+        if (connection) {
+            try {
                 await connection.close();
-            }catch(err){
-                console.log("Error closing connection: " + err); 
+            } catch (err) {
+                console.log("Error closing connection: " + err);
             }
         }
     }
@@ -48,19 +48,19 @@ async function executeSql(sql, binds, options){
 }
 
 //code to execute many sql
-async function executeManySql(sql, binds, options){
+async function executeManySql(sql, binds, options) {
     let connection;
-    try{
+    try {
         connection = await oracledb.getConnection();
         results = await connection.executeManySql(sql, binds, options);
-    }catch(err){
+    } catch (err) {
         console.log("Error executing sql: " + err.message);
-    }finally{
-        if(connection){
-            try{
+    } finally {
+        if (connection) {
+            try {
                 await connection.close();
-            }catch(err){
-                console.log("Error closing connection: " + err); 
+            } catch (err) {
+                console.log("Error closing connection: " + err);
             }
         }
     }

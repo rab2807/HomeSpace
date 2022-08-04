@@ -1,51 +1,30 @@
-const express = require('express');
-const path = require('path');
-const cors = require('cors');
-const {engine} = require('express-handlebars');
+//configuring .env variables
+require('dotenv').config();
 
-const app = express();
-const PORT = process.env.PORT || 3000;
+const app = require('./app');
+const database = require('./Database/database');
 
-// Routers
-const startRouter = require('./routes/Start/start.router');
-const regiRouter = require('./routes/Registration/regi.router');
-const ownerRouter = require('./routes/Owner/owner.router');
-const tenantRouter = require('./routes/Tenant/tenant.router');
-const houseRouter = require('./routes/House/house.router');
 
-// view engine setup
-const helper = require('./helpers/helpers');
-app.engine('hbs', engine({
-    extname: 'hbs',
-    defaultLayout: 'layout',
-    layoutsDir: __dirname + '/views/layouts',
-    helpers: {
-        starString: helper.starString,
-        ratingBarHelper: helper.ratingBarHelper,
-        concat: helper.concat,
-        compare: helper.compare,
-        notiCardHelper: helper.notiCardHelper,
+//need to set this for oracledb connection pool
+process.env.UV_THREADPOOL_SIZE = 10;
+
+const port = process.env.PORT || 3000; //is it 3000?
+
+app.listen(port, async () => {
+    try {
+        //create database connection pool
+        await database.startup();
+        console.log('listening on http://loacalhost: ${port}');
+    } catch (err) {
+        console.log("Error starting up database: " + err);
+        process.exit(1);
     }
-}));
-app.set('views', path.join(__dirname, 'views'));
-app.set('view engine', 'hbs');
+});
 
-// middleware setup
-app.use(cors())
-app.use(express.static(path.join(__dirname, '/public')));
-app.use(express.urlencoded());
-app.use(express.json());
+process
+    .once('SIGTERM', database.shutdown)
+    .once('SIGINT', database.shutdown);
 
-app.use(regiRouter);
-app.use(startRouter);
-app.use(ownerRouter);
-app.use(tenantRouter);
-app.use(houseRouter);
 
-// app.get('/', function(req, res) {
-//     res.render('home', { pre: 'Shit!!', title: 'Cool, huh!', name: "rakib", condition: true, anyArray: [1,2,3] });
-// });
-
-app.listen(PORT, () => console.log(`server is listening at ${PORT}`));
-
-module.exports = app; //added 
+//install dotenv: npm install dotenv
+//node server.js
