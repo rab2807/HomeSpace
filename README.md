@@ -1,2 +1,2 @@
 # Home-Rental-System
-![](public/images/property-management-software-system-solution-in-kenya.html)
+![](public/images/ultimate-guide-to-pms-2022.png)
