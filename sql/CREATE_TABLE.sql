@@ -78,7 +78,7 @@ CREATE TABLE request
 (
     house_id  NUMBER NOT NULL,
     tenant_id NUMBER NOT NULL,
-    time      DATE DEFAULT SYSDATE,
+    request_time      DATE DEFAULT SYSDATE,
     CONSTRAINT request_tenant_fk FOREIGN KEY (tenant_id) REFERENCES tenant (tenant_id),
     CONSTRAINT request_house_fk FOREIGN KEY (house_id) REFERENCES house (house_id)
 );
@@ -87,7 +87,7 @@ CREATE TABLE follow
 (
     house_id  NUMBER NOT NULL,
     tenant_id NUMBER NOT NULL,
-    time      DATE DEFAULT SYSDATE,
+    follow_time      DATE DEFAULT SYSDATE,
     CONSTRAINT follow_tenant_fk FOREIGN KEY (tenant_id) REFERENCES tenant (tenant_id),
     CONSTRAINT follow_house_fk FOREIGN KEY (house_id) REFERENCES house (house_id)
 );
@@ -96,8 +96,8 @@ CREATE TABLE leave
 (
     house_id  NUMBER NOT NULL,
     tenant_id NUMBER NOT NULL,
-    time      DATE DEFAULT SYSDATE,
-    duration  NUMBER,
+    leave_time      DATE DEFAULT SYSDATE,
+    leave_duration  NUMBER,
     CONSTRAINT leave_tenant_fk FOREIGN KEY (tenant_id) REFERENCES tenant (tenant_id),
     CONSTRAINT leave_house_fk FOREIGN KEY (house_id) REFERENCES house (house_id)
 );
@@ -107,8 +107,8 @@ CREATE TABLE notification
     owner_id  number not null,
     house_id  NUMBER NOT NULL,
     tenant_id NUMBER NOT NULL,
-    time      DATE DEFAULT SYSDATE,
-    type      varchar2(10),
+    notification_time      DATE DEFAULT SYSDATE,
+    notification_type      varchar2(10),
     CONSTRAINT notification_owner_fk FOREIGN KEY (owner_id) REFERENCES owner (owner_id),
     CONSTRAINT notification_tenant_fk FOREIGN KEY (tenant_id) REFERENCES tenant (tenant_id),
     CONSTRAINT notification_house_fk FOREIGN KEY (house_id) REFERENCES house (house_id)
