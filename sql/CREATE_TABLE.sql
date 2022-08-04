@@ -12,14 +12,13 @@ CREATE TABLE location
 CREATE TABLE person
 (
     id          NUMBER GENERATED ALWAYS as IDENTITY (START with 1 INCREMENT by 1),
-    username    VARCHAR2(255),
-    password    VARCHAR2(1024),
-    phone       char(11),
-    email       VARCHAR2(319),
+    username    VARCHAR2(255) NOT NULL,
+    password    VARCHAR2(1024) NOT NULL UNIQUE,
+    phone       char(11) NOT NULL UNIQUE,
+    email       VARCHAR2(319) NOT NULL UNIQUE,
     photo       BLOB,
     location_id NUMBER,
-    type        VARCHAR2(50),
-    CONSTRAINT unique_check UNIQUE (password, phone, email),
+    user_type        VARCHAR2(50),
     CONSTRAINT pass_check check ( password like '%________%'),
     CONSTRAINT phone_check check ( regexp_like(phone, '^01(\d{9})') ),
     CONSTRAINT email_check check (email LIKE '%@gmail.com' OR email LIKE '%@yahoo.com'),
@@ -78,7 +77,7 @@ CREATE TABLE request
 (
     house_id  NUMBER NOT NULL,
     tenant_id NUMBER NOT NULL,
-    time      DATE DEFAULT SYSDATE,
+    request_time      DATE DEFAULT SYSDATE,
     CONSTRAINT request_tenant_fk FOREIGN KEY (tenant_id) REFERENCES tenant (tenant_id),
     CONSTRAINT request_house_fk FOREIGN KEY (house_id) REFERENCES house (house_id)
 );
@@ -87,7 +86,7 @@ CREATE TABLE follow
 (
     house_id  NUMBER NOT NULL,
     tenant_id NUMBER NOT NULL,
-    time      DATE DEFAULT SYSDATE,
+    follow_time      DATE DEFAULT SYSDATE,
     CONSTRAINT follow_tenant_fk FOREIGN KEY (tenant_id) REFERENCES tenant (tenant_id),
     CONSTRAINT follow_house_fk FOREIGN KEY (house_id) REFERENCES house (house_id)
 );
@@ -96,8 +95,8 @@ CREATE TABLE leave
 (
     house_id  NUMBER NOT NULL,
     tenant_id NUMBER NOT NULL,
-    time      DATE DEFAULT SYSDATE,
-    duration  NUMBER,
+    leave_time      DATE DEFAULT SYSDATE,
+    leave_duration  NUMBER,
     CONSTRAINT leave_tenant_fk FOREIGN KEY (tenant_id) REFERENCES tenant (tenant_id),
     CONSTRAINT leave_house_fk FOREIGN KEY (house_id) REFERENCES house (house_id)
 );
@@ -107,8 +106,8 @@ CREATE TABLE notification
     owner_id  number not null,
     house_id  NUMBER NOT NULL,
     tenant_id NUMBER NOT NULL,
-    time      DATE DEFAULT SYSDATE,
-    type      varchar2(10),
+    notification_time      DATE DEFAULT SYSDATE,
+    notification_type      varchar2(10),
     CONSTRAINT notification_owner_fk FOREIGN KEY (owner_id) REFERENCES owner (owner_id),
     CONSTRAINT notification_tenant_fk FOREIGN KEY (tenant_id) REFERENCES tenant (tenant_id),
     CONSTRAINT notification_house_fk FOREIGN KEY (house_id) REFERENCES house (house_id)

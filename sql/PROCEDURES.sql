@@ -13,8 +13,7 @@ begin
     into id
     from PERSON
     where PASSWORD = password_
-      and EMAIL = email_
-      and PHONE = phone_;
+      and EMAIL = email_;
 
     if type_ = 'Owner' then
         insert into OWNER(owner_id, category) VALUES (id, category_);
