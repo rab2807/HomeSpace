@@ -8,7 +8,10 @@
                 fetch(`https://nominatim.openstreetmap.org/reverse?format=jsonv2&lat=${x}&lon=${y}&zoom=16&addressdetails=1`)
                         .then(response => response.json())
                         .then(data => {
-                            document.getElementById("loc").value = data['place_id'];
+                            console.log(data);
+                            let str = '';
+                            str = str.concat(data['address']['suburb'], ', ', data['address']['state_district']);
+                            document.getElementById("loc").value = str;
                             document.getElementById("lat").value = x;
                             document.getElementById("lon").value = y;
                         });
@@ -29,13 +32,10 @@
                 <form action="/regi/owner" method="POST">
 
                     <div style="padding-bottom: 7px; padding-top: 10px; font-size: large">Username :</div>
-                    <div><input style="width: 100%;" type="text" name="username" value="rab"></div>
+                    <div><input style="width: 100%;" type="text" name="username"></div>
 
                     <div style="padding-bottom: 7px; padding-top: 10px; font-size: large">Password :</div>
                     <div><input style="width: 100%;" type="password" name="password"></div>
-
-                    <div style="padding-bottom: 7px; padding-top: 10px; font-size: large">Full Name :</div>
-                    <div><input style="width: 100%;" type="text" name="fullName"></div>
 
                     <div style="padding-bottom: 7px; padding-top: 10px; font-size: large">Phone no. :</div>
                     <div><input style="width: 100%;" type="tel" pattern="01[0-9]{9}" name="phone"></div>
@@ -54,9 +54,9 @@
                     </div>
                     <div>
                         <label>Latitude: </label>
-                        <input style="width: auto" id="lat" type="number" name="lat"><br>
+                        <input style="width: auto" id="lat" type="text" name="lat"><br>
                         <label>Longitude: </label>
-                        <input style="width: auto" id="lon" type="number" name="lon">
+                        <input style="width: auto" id="lon" type="text" name="lon">
                     </div>
                     <div>
                         <label>Address: </label>
@@ -64,12 +64,12 @@
                     </div>
 
                     {{#if cndtn}}
-                        <div style="padding-bottom: 7px; padding-top: 10px; font-size: large">Catagory :</div>
+                        <div style="padding-bottom: 7px; padding-top: 10px; font-size: large">Category :</div>
                         <div>
                             <label>
-                                <input style="width: 100%;" list="catagory" name="catagory">
+                                <input style="width: 100%;" list="category" name="category">
                             </label>
-                            <datalist id="catagory">
+                            <datalist id="category">
                                 <option value="Individual owner">
                                 <option value="Real Estate Agency">
                                 <option value="Hostel Provider">

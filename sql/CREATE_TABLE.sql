@@ -1,6 +1,6 @@
 CREATE TABLE location
 (
-    location_id NUMBER GENERATED ALWAYS as IDENTITY (START with 1 INCREMENT by 1),
+    location_id NUMBER,
     latitude    NUMBER,
     longitude   NUMBER,
     area        VARCHAR2(1000),
@@ -12,13 +12,13 @@ CREATE TABLE location
 CREATE TABLE person
 (
     id          NUMBER GENERATED ALWAYS as IDENTITY (START with 1 INCREMENT by 1),
-    username    VARCHAR2(255) NOT NULL,
+    username    VARCHAR2(255)  NOT NULL,
     password    VARCHAR2(1024) NOT NULL UNIQUE,
-    phone       char(11) NOT NULL UNIQUE,
-    email       VARCHAR2(319) NOT NULL UNIQUE,
+    phone       char(11)       NOT NULL UNIQUE,
+    email       VARCHAR2(319)  NOT NULL UNIQUE,
     photo       BLOB,
     location_id NUMBER,
-    user_type        VARCHAR2(50),
+    type        VARCHAR2(50),
     CONSTRAINT pass_check check ( password like '%________%'),
     CONSTRAINT phone_check check ( regexp_like(phone, '^01(\d{9})') ),
     CONSTRAINT email_check check (email LIKE '%@gmail.com' OR email LIKE '%@yahoo.com'),
@@ -28,6 +28,7 @@ CREATE TABLE person
 CREATE TABLE owner
 (
     owner_id NUMBER NOT NULL UNIQUE,
+    category VARCHAR2(40),
     CONSTRAINT owner_user_fk FOREIGN KEY (owner_id) REFERENCES person (id)
 );
 
@@ -54,8 +55,8 @@ CREATE TABLE tenant
     job            VARCHAR2(50),
     house_id       NUMBER,
     family_members NUMBER,
-    CONSTRAINT tenant_user_fk FOREIGN KEY (tenant_id) REFERENCES person (id),
-    CONSTRAINT tenant_house_fk FOREIGN KEY (house_id) REFERENCES house (house_id)
+    CONSTRAINT tenant_house_fk FOREIGN KEY (house_id) REFERENCES house (house_id),
+    CONSTRAINT tenant_user_fk FOREIGN KEY (tenant_id) REFERENCES person (id)
 );
 
 CREATE TABLE deal
@@ -144,10 +145,3 @@ CREATE TABLE tenant_review
     house_id  NUMBER,
     CONSTRAINT tenant_comment_fk FOREIGN KEY (review_id) REFERENCES user_review (review_id)
 );
-
-ALTER TABLE owner
-    ADD
-        (
-        category VARCHAR2(40)
-        );
-
