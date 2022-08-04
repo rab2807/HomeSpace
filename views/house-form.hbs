@@ -1,3 +1,25 @@
+<script>
+    function getLocation() {
+        if (navigator.geolocation) {
+            navigator.geolocation.getCurrentPosition(position => {
+                let x = position.coords.latitude;
+                let y = position.coords.longitude;
+
+                fetch(`https://nominatim.openstreetmap.org/reverse?format=jsonv2&lat=${x}&lon=${y}&zoom=16&addressdetails=1`)
+                        .then(response => response.json())
+                        .then(data => {
+                            console.log(data);
+                            let str = '';
+                            str = str.concat(data['address']['suburb'], ', ', data['address']['state_district']);
+                            document.getElementById("loc").value = str;
+                            document.getElementById("lat").value = x;
+                            document.getElementById("lon").value = y;
+                        });
+            });
+        }
+    }
+</script>
+
 <div class="container main">
     <div class="row p-5 justify-content-center">
         <div class="card p-0" style="width: auto;">
@@ -11,7 +33,8 @@
                     <h3>Basics</h3>
                     <hr>
 
-                    <div style="padding-bottom: 7px; padding-top: 10px; font-size: large">Name of apartment (if any) :</div>
+                    <div style="padding-bottom: 7px; padding-top: 10px; font-size: large">Name of apartment (if any) :
+                    </div>
                     <div><input style="width: 100%;" type="text" name="name"></div>
 
                     <div style="padding-bottom: 7px; padding-top: 10px; font-size: large">Creation date:</div>
@@ -46,8 +69,22 @@
                         <label for="lNo">No</label>
                     </div>
 
-                    <div style="padding-bottom: 7px; padding-top: 10px; font-size: large">Location :</div>
-                    <div><input style="width: 100%;" type="text" name="location"></div>
+                    <div style="padding-bottom: 7px; padding-top: 10px; font-size: large">
+                        Location :
+                        <button type="button" style="font-size: small; float: right" onclick="getLocation()">
+                            get location from IP address
+                        </button>
+                    </div>
+                    <div>
+                        <label>Latitude: </label>
+                        <input style="width: 70%" id="lat" type="text" name="lat"><br>
+                        <label>Longitude: </label>
+                        <input style="width: 70%" id="lon" type="text" name="lon">
+                    </div>
+                    <div>
+                        <label>Address: </label>
+                        <input style="width: 70%" id="loc" type="text">
+                    </div>
                     <br>
 
                     <h3>Photos</h3>
@@ -78,7 +115,7 @@
                     <div style="padding-bottom: 7px; padding-top: 10px; font-size: large">Price :</div>
                     <div><input style="width: 100%;" type="number" name="price"></div>
 
-                    <div style="padding-bottom: 7px; padding-top: 10px; font-size: large">Minimum stay period:</div>
+                    <div style="padding-bottom: 7px; padding-top: 10px; font-size: large">Minimum stay period (months):</div>
                     <div><input style="width: 100%;" type="number" name="period"></div>
 
                     <div style="padding-bottom: 7px; padding-top: 10px; font-size: large">Additional notes :</div>

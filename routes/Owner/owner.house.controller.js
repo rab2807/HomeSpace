@@ -1,3 +1,6 @@
+const {db_getHouse} = require('../../Database/db_owner');
+const {extractToken} = require("../../Database/authorization");
+
 let houseArr = [
     {
         name: "XE23523",
@@ -20,14 +23,20 @@ let houseArr = [
 ]
 
 
-function renderPage(req, res) {
+async function renderPage(req, res) {
+    const token = extractToken(req);
+    houseArr = await db_getHouse(token.id);
     return res.render('house-menu', {
         house: houseArr,
     });
 }
 
-function postHandler(req, res) {
-
+async function postHandler(req, res) {
+    const token = extractToken(req);
+    houseArr = await db_getHouse(token.id, req.body.sort);
+    return res.render('house-menu', {
+        house: houseArr,
+    });
 }
 
 module.exports = {

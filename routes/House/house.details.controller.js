@@ -1,3 +1,5 @@
+const database = require('../../Database/database');
+
 const imageArr = [0, 1, 2, 3, 0, 1, 2, 3, 0, 1, 2, 3, 0, 1, 2, 3];
 const house = {
     name: "XE3654",
@@ -31,6 +33,7 @@ let commentArr = [
         comment: "bal sal",
     }
 ]
+
 
 function renderPage(req, res) {
     res.render('house-details', {

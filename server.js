@@ -14,7 +14,7 @@ app.listen(port, async () => {
     try {
         //create database connection pool
         await database.startup();
-        console.log('listening on http://loacalhost: ${port}');
+        console.log(`listening on http://localhost:${port}`);
     } catch (err) {
         console.log("Error starting up database: " + err);
         process.exit(1);

@@ -7,14 +7,10 @@
         <identifier-quote-string>&quot;</identifier-quote-string>
       </database-info>
       <case-sensitivity plain-identifiers="upper" quoted-identifiers="exact" />
-      <secret-storage>master_key</secret-storage>
       <user-name>homerental</user-name>
       <schema-mapping>
         <introspection-scope>
-          <node kind="schema">
-            <name qname="@" />
-            <name qname="PUBLIC" />
-          </node>
+          <node kind="schema" qname="HOMERENTAL" />
         </introspection-scope>
       </schema-mapping>
       <introspection-level>3</introspection-level>

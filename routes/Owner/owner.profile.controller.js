@@ -2,6 +2,7 @@ const {extractToken} = require('../../Database/authorization');
 const database = require('../../Database/database');
 
 async function db_getPerson(id) {
+
     const binds = {id: id};
     const sql = `select ID,
                         USERNAME,

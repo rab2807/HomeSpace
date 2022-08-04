@@ -3,13 +3,13 @@
         <div class="card" style="width: auto;">
             <img src="/images/dumb.jpg" class="card-img-top">
             <div class="card-body">
-                <h4 class="card-title">{{concat "House-" name}}</h4>
+                <h4 class="card-title">{{concat "House-" id}}</h4>
                 <div class="card-subtitle">
                     {{location}}<br>
                     <b style="font-size: large">Price: {{price}}</b>
                 </div>
                 <progress value={{rating}} max=5 style="width: 100%"></progress>
-                <div style="padding: 5px"><a href="#">
+                <div style="padding: 5px"><a href={{concat '/house/form'}}>
                     <button>Details</button>
                 </a></div>
             </div>
