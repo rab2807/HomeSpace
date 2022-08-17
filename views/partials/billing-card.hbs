@@ -1,0 +1,13 @@
+{{#each billingArr}}
+    <div class="row py-0">
+        <div class="card p-0">
+            <div class="card-body p-1">
+                <p style="color: {{#compare STATUS 'cleared'}}green{{else}}red{{/compare}}">{{../month}}, {{YEAR}} &nbsp;&nbsp;|&nbsp;&nbsp;
+                    <a href="/tenant/profile/{{TENANT_ID}}">{{TENANT_NAME}}</a> &nbsp;&nbsp;|&nbsp;&nbsp;
+                    <a href="/house/{{HOUSE_ID}}">House - {{HOUSE_ID}}</a> &nbsp;&nbsp;|&nbsp;&nbsp;
+                    {{PAID}} taka &nbsp;&nbsp;|&nbsp;&nbsp; <b>{{STATUS}}</b>
+                </p>
+            </div>
+        </div>
+    </div>
+{{/each}}

@@ -1,0 +1,35 @@
+<div class="container main">
+    <div class="row pt-3 px-5">
+        <div>
+            <h1>Dashboard</h1>
+            <hr>
+        </div>
+        <div class="row p-3">
+            <div class="col">
+                <form action="/owner/dashboard" id="activities" method="get">
+                    <label>Activity</label>
+                    <select name="activity">
+                        <option value="">All</option>
+                        <option value="request" {{#compare activity 'request'}}selected{{/compare}}>Request</option>
+                        <option value="leave" {{#compare activity 'leave'}}selected{{/compare}}>Leave Notice</option>
+                        <option value="follow" {{#compare activity 'follow'}}selected{{/compare}}>Follow</option>
+                        <option value="deal" {{#compare activity 'deal'}}selected{{/compare}}>Contract</option>
+                    </select>&nbsp;&nbsp;&nbsp;&nbsp;
+
+                    <label>House</label>
+                    <select name="hid">
+                        <option value="">All</option>
+                        {{#each house}}
+                            <option value={{HOUSE_ID}} {{#compare ../hid HOUSE_ID}}selected{{/compare}}>House - {{HOUSE_ID}}</option>
+                        {{/each}}
+                    </select>&nbsp;&nbsp;&nbsp;&nbsp;
+
+                    <input type="submit" value="Filter">
+                </form>
+            </div>
+        </div>
+        <div class="container" style=" height: 600px; overflow: scroll; ">
+            {{>notification-card}}
+        </div>
+    </div>
+</div>

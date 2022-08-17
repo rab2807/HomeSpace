@@ -1,22 +1,9 @@
-const database = require('../../Database/database');
+const {db_getHouseDetails, db_getHouseRating} = require("../../Database/db_house");
+const {extractToken} = require("../../Database/authorization");
+const {db_getPersonType} = require("../../Database/db_person");
+const {db_isRequested} = require("../../Database/db_request-follow-leave");
 
 const imageArr = [0, 1, 2, 3, 0, 1, 2, 3, 0, 1, 2, 3, 0, 1, 2, 3];
-const house = {
-    name: "XE3654",
-    altName: "Nuhash Polli",
-    ownerName: "Kuddus",
-    rating: [34, 43, 12, 8, 20],
-    ownerID: 12412523124,
-    location: "Dhaka, Bangladesh",
-    bedroom: 2,
-    bathroom: 2,
-    space: 1400,
-    floor: 5,
-    members: 3,
-    garage: true,
-    elevator: false,
-    note: "Load shedding occurs very much"
-}
 
 let commentArr = [
     {
@@ -34,20 +21,43 @@ let commentArr = [
     }
 ]
 
+async function renderPage(req, res) {
+    const hid = req.params.house_id;
+    const token_id = extractToken(req).id;
+    const house = await db_getHouseDetails(hid);
+    const rating = await db_getHouseRating(hid);
 
-function renderPage(req, res) {
+    let action = undefined, leaveNoticeIssued, requestButtonText;
+    if (house.OWNER_ID === token_id) {
+        requestButtonText = 'Edit Info';
+        leaveNoticeIssued = await db_isRequested(hid, house.TENANT_ID, 'leave');
+    } else if (house.TENANT_ID && house.TENANT_ID === token_id) {
+        action = 'leave';
+        let isRequested = await db_isRequested(hid, token_id, 'leave');
+        requestButtonText = isRequested ? 'Leave notice sent' : 'Leave';
+    } else if (await db_getPersonType(token_id) === 'tenant' && house.VACANT === 'yes') {
+        action = 'request';
+        let isRequested = await db_isRequested(hid, token_id, 'request');
+        requestButtonText = isRequested ? 'Cancel request' : 'Request';
+    } else if (await db_getPersonType(token_id) === 'tenant' && house.VACANT === 'no') {
+        action = 'follow';
+        let isRequested = await db_isRequested(hid, token_id, 'follow');
+        requestButtonText = isRequested ? 'Unfollow' : 'Follow';
+    }
+
     res.render('house-details', {
+        id: token_id,
+        isOwner: (await db_getPersonType(token_id) === 'owner'),
+        userID: token_id,
+        action: action,
+        leaveNoticeIssued: leaveNoticeIssued,
+        requestButtonText: requestButtonText,
         images: imageArr,
         house: house,
-        // action: '/'
         comments: commentArr,
-        ratingArr: house.rating,
-        rating: () => {
-            let sum = 0;
-            for (let i = 0; i < 5; i++)
-                sum += (5 - i) * house.rating[i];
-            return (sum / house.rating.reduce((t, n) => t += n, 0)).toFixed(2);
-        }
+        ratingArr: rating.arr,
+        avg_rating: rating.avg,
+        ratingTotalCount: rating.arr.reduce((t, n) => t += n.COUNT, 0),
     });
 }
 

@@ -1,17 +1,32 @@
 {{#each house}}
     <div class="col p-3">
-        <div class="card" style="width: auto;">
+        <div class="card" style="width: 300px; height: 600px">
             <img src="/images/dumb.jpg" class="card-img-top">
             <div class="card-body">
-                <h4 class="card-title">{{concat "House-" id}}</h4>
+                <h4 class="card-title">{{concat "House-" HOUSE_ID}}</h4>
                 <div class="card-subtitle">
-                    {{location}}<br>
-                    <b style="font-size: large">Price: {{price}}</b>
+                    {{#compare VACANT "yes"}}
+                    <b style="font-size: large; font-weight:1000; color: green">
+                        AVAILABLE FOR RENT!
+                    </b><br>
+                    {{/compare}}
+                    {{#compare VACANT "no"}}
+                        <b style="font-size: large; font-weight:1000; color: red">
+                            CURRENTLY OCCUPIED
+                        </b><br>
+                    {{/compare}}
+                    {{AREA}}, {{SUBURB}}, {{DISTRICT}}<br>
+                    <b style="font-size: large; font-weight:750">
+                        Price: {{PRICE}} BDT
+                    </b>
                 </div>
-                <progress value={{rating}} max=5 style="width: 100%"></progress>
-                <div style="padding: 5px"><a href={{concat '/house/form'}}>
-                    <button>Details</button>
-                </a></div>
+                <progress value={{RATING}} max=5 style="width: 100%"></progress>
+
+                <div style="padding: 5px">
+                    <a href="/house/{{HOUSE_ID}}">
+                        <button class="wide-button">Details</button>
+                    </a>
+                </div>
             </div>
         </div>
     </div>

@@ -17,7 +17,7 @@ begin
 
     if type_ = 'owner' then
         insert into OWNER(owner_id, category) VALUES (id, category_);
-    else
+    elsif type_ = 'tenant' then
         insert into TENANT(tenant_id, job, house_id, family_members) values (id, job_, HID, members);
     end if;
 

@@ -76,39 +76,41 @@ CREATE TABLE deal
 
 CREATE TABLE request
 (
-    house_id  NUMBER NOT NULL,
-    tenant_id NUMBER NOT NULL,
-    request_time      DATE DEFAULT SYSDATE,
+    request_id   NUMBER GENERATED ALWAYS as IDENTITY (START with 1 INCREMENT by 1),
+    house_id     NUMBER NOT NULL,
+    tenant_id    NUMBER NOT NULL,
+    request_time DATE DEFAULT SYSDATE,
     CONSTRAINT request_tenant_fk FOREIGN KEY (tenant_id) REFERENCES tenant (tenant_id),
     CONSTRAINT request_house_fk FOREIGN KEY (house_id) REFERENCES house (house_id)
 );
 
 CREATE TABLE follow
 (
-    house_id  NUMBER NOT NULL,
-    tenant_id NUMBER NOT NULL,
-    follow_time      DATE DEFAULT SYSDATE,
+    follow_id   NUMBER GENERATED ALWAYS as IDENTITY (START with 1 INCREMENT by 1),
+    house_id    NUMBER NOT NULL,
+    tenant_id   NUMBER NOT NULL,
+    follow_time DATE DEFAULT SYSDATE,
     CONSTRAINT follow_tenant_fk FOREIGN KEY (tenant_id) REFERENCES tenant (tenant_id),
     CONSTRAINT follow_house_fk FOREIGN KEY (house_id) REFERENCES house (house_id)
 );
 
 CREATE TABLE leave
 (
-    house_id  NUMBER NOT NULL,
-    tenant_id NUMBER NOT NULL,
-    leave_time      DATE DEFAULT SYSDATE,
-    leave_duration  NUMBER,
+    leave_id   NUMBER GENERATED ALWAYS as IDENTITY (START with 1 INCREMENT by 1),
+    house_id   NUMBER NOT NULL,
+    tenant_id  NUMBER NOT NULL,
+    leave_time DATE DEFAULT SYSDATE,
     CONSTRAINT leave_tenant_fk FOREIGN KEY (tenant_id) REFERENCES tenant (tenant_id),
     CONSTRAINT leave_house_fk FOREIGN KEY (house_id) REFERENCES house (house_id)
 );
 
 CREATE TABLE notification
 (
-    owner_id  number not null,
-    house_id  NUMBER NOT NULL,
-    tenant_id NUMBER NOT NULL,
-    notification_time      DATE DEFAULT SYSDATE,
-    notification_type      varchar2(10),
+    owner_id          number not null,
+    house_id          NUMBER NOT NULL,
+    tenant_id         NUMBER NOT NULL,
+    activity_id       NUMBER NOT NULL,
+    notification_type varchar2(10),
     CONSTRAINT notification_owner_fk FOREIGN KEY (owner_id) REFERENCES owner (owner_id),
     CONSTRAINT notification_tenant_fk FOREIGN KEY (tenant_id) REFERENCES tenant (tenant_id),
     CONSTRAINT notification_house_fk FOREIGN KEY (house_id) REFERENCES house (house_id)
@@ -121,27 +123,50 @@ CREATE TABLE house_picture
     CONSTRAINT house_picture_house_fk FOREIGN KEY (house_id) REFERENCES house (house_id)
 );
 
-CREATE TABLE user_review
+CREATE TABLE owner_to_tenant_review
 (
-    review_id NUMBER GENERATED ALWAYS as IDENTITY (START with 1 INCREMENT by 1),
-    statement VARCHAR2(1000),
-    rating    NUMBER,
-    time      DATE DEFAULT SYSDATE,
-    CONSTRAINT review_pk PRIMARY KEY (review_id)
+    owner_review_id NUMBER GENERATED ALWAYS as IDENTITY (START with 1 INCREMENT by 1),
+    statement       VARCHAR2(1000),
+    rating          NUMBER,
+    time            DATE DEFAULT SYSDATE,
+    owner_id        NUMBER,
+    tenant_id       NUMBER,
+    CONSTRAINT owner_review_pk PRIMARY KEY (owner_review_id)
 );
 
-CREATE TABLE owner_review
+CREATE TABLE tenant_to_house_review
 (
-    review_id NUMBER NOT NULL,
-    owner_id  NUMBER,
-    tenant_id NUMBER,
-    CONSTRAINT owner_comment_fk FOREIGN KEY (review_id) REFERENCES user_review (review_id)
+    tenant_review_id NUMBER GENERATED ALWAYS as IDENTITY (START with 1 INCREMENT by 1),
+    statement        VARCHAR2(1000),
+    rating           NUMBER,
+    time             DATE DEFAULT SYSDATE,
+    tenant_id        NUMBER,
+    house_id         NUMBER,
+    CONSTRAINT tenant_review_pk PRIMARY KEY (tenant_review_id)
 );
 
-CREATE TABLE tenant_review
+CREATE TABLE maintenance
 (
-    review_id NUMBER NOT NULL,
-    tenant_id NUMBER,
-    house_id  NUMBER,
-    CONSTRAINT tenant_comment_fk FOREIGN KEY (review_id) REFERENCES user_review (review_id)
+    maintenance_id   NUMBER GENERATED ALWAYS as IDENTITY (START with 1 INCREMENT by 1),
+    house_id         NUMBER NOT NULL,
+    tenant_id        NUMBER NOT NULL,
+    category         VARCHAR2(30),
+    details          VARCHAR2(256),
+    resolved         VARCHAR2(3),
+    cost             NUMBER,
+    maintenance_time DATE default SYSDATE,
+    CONSTRAINT maintenance_pk PRIMARY KEY (maintenance_id),
+    CONSTRAINT maintenance_tenant_fk FOREIGN KEY (tenant_id) REFERENCES tenant (tenant_id),
+    CONSTRAINT maintenance_house_fk FOREIGN KEY (house_id) REFERENCES house (house_id)
+);
+
+CREATE TABLE billing
+(
+    house_id  NUMBER NOT NULL,
+    tenant_id NUMBER NOT NULL,
+    month     NUMBER,
+    year      NUMBER,
+    paid      NUMBER,
+    CONSTRAINT billing_tenant_fk FOREIGN KEY (tenant_id) REFERENCES tenant (tenant_id),
+    CONSTRAINT billing_house_fk FOREIGN KEY (house_id) REFERENCES house (house_id)
 );

@@ -1,8 +1,18 @@
 <div class="card" style="width: auto;">
-    <h1 class="main-rating">{{rating}}</h1>
+    <h1 class="main-rating">{{avg_rating}}</h1>
     <div class="card-body">
         <table>
-            {{{ratingBarHelper ratingArr}}}
+            {{#each ratingArr}}
+                <tr>
+                    <td>
+                        <label> {{RATING}} <i class="fas fa-star"></i> ({{COUNT}}) </label>
+                    </td>
+                    <td style="padding-left: 10px">
+                        <progress value={{COUNT}} max={{ratingTotalCount}}></progress>
+                    </td>
+                </tr>
+            {{/each}}
+            <!--            {{{ratingBarHelper ratingArr}}}-->
         </table>
     </div>
 </div>

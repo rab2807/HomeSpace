@@ -1,0 +1,41 @@
+<div class="container main">
+    <div class="row pt-3 px-5">
+        <div>
+            <h1 style="font-size: 300%">{{monthName}}, {{year}}</h1>
+            <hr>
+            <hr>
+        </div>
+        <div>
+            <h2>Dues</h2>
+            <hr>
+        </div>
+        <div class="row p-3">
+            <div class="col">
+                <div class="container" style=" height: 200px; overflow: scroll; ">
+                    {{>dues-card}}
+                </div>
+            </div>
+        </div>
+        <div class="row p-3">
+            <div class="col">
+                <h3>Maintenance</h3>
+                <hr>
+                <div class="container" style=" height: 200px; overflow: scroll; ">
+                    <form action="/tenant/maintenance" method="post">
+                        <input type="text" name="type" value="maintenance" hidden>
+                        <input type="number" hidden name="id" value={{id}}>
+                        <select name="category">
+                            <option value="electricity">Electricity</option>
+                            <option value="water">Water</option>
+                            <option value="kitchen">Kitchen</option>
+                            <option value="bathroom">Bathroom</option>
+                            <option value="others">Others</option>
+                        </select><br><br>
+                        <textarea name="details" rows="4" cols="50"></textarea>
+                        <input type="submit" value="Submit">
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

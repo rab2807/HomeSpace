@@ -2,23 +2,21 @@ const express = require('express');
 const {authMiddleware} = require('../../Database/authorization')
 
 const profileController = require('./owner.profile.controller');
-const houseController = require('./owner.house.controller');
-const activityController = require('./owner.activity.controller');
+const dashboardController = require('./owner.dashboard.controller');
 const historyController = require('./owner.history.controller');
+const maintenanceController = require('./owner.maintenance.controller');
 
 const router = express.Router();
 
 // profile
-router.get('/owner/profile/:viewer?', authMiddleware, profileController.renderPage);
-router.post('/owner/profile', profileController.postHandler);
+router.get('/owner/profile/:id?', profileController.renderPage);
 
-// house
-router.get('/owner/house/:viewer?', authMiddleware, houseController.renderPage);
-router.post('/owner/house', houseController.postHandler);
+// activities
+router.get('/owner/dashboard', dashboardController.renderPage);
 
-//activities
-router.get('/owner/activities', authMiddleware, activityController.renderPage);
-router.post('/owner/activities', activityController.postHandler);
+// maintenance
+router.get('/owner/maintenance', maintenanceController.renderPage);
+router.post('/owner/maintenance', maintenanceController.postHandler);
 
 //history
 router.get('/owner/history', authMiddleware, historyController.renderPage);

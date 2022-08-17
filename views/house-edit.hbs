@@ -1,0 +1,63 @@
+<div class="container main">
+    <div class="row p-5 justify-content-center">
+        <div class="card p-0" style="width: auto;">
+            <div class="card-title center p-1 pt-3">
+                <h2>House Edit Info</h2>
+                <hr style="border-style: double">
+            </div>
+
+            <div class="card-body">
+                <form action="/house/edit/{{house.HOUSE_ID}}" method="post">
+                    <h3>Basics</h3>
+                    <hr>
+
+                    <div style="padding-bottom: 7px; padding-top: 10px; font-size: large">Name of apartment (if any) :
+                    </div>
+                    <div><input style="width: 100%;" type="text" name="name" value= {{house.NAME}}></div>
+
+                    <div style="padding-bottom: 7px; padding-top: 10px; font-size: large">Number of bedrooms :</div>
+                    <div><input style="width: 100%;" type="number" name="bedroom" value= {{house.BEDROOM}}></div>
+
+                    <div style="padding-bottom: 7px; padding-top: 10px; font-size: large">Number of bathrooms :</div>
+                    <div><input style="width: 100%;" type="number" name="bathroom" value= {{house.BATHROOM}}></div>
+
+                    <div style="padding-bottom: 7px; padding-top: 10px; font-size: large">Space (sq ft):</div>
+                    <div><input style="width: 100%;" type="number" name="space" value= {{house.SPACE}}></div>
+
+                    <div style="padding-bottom: 7px; padding-top: 10px; font-size: large">Floor level :</div>
+                    <div><input style="width: 100%;" type="number" name="floor" value= {{house.FLOOR}}></div>
+
+                    <div style="padding-bottom: 7px; padding-top: 10px; font-size: large">Garage :
+                        <input {{#compare house.GARAGE 'yes'}}checked{{/compare}} type="radio" id="gYes" name="garage"
+                               value="yes">
+                        <label for="gYes">Yes</label>
+                        <input {{#compare house.GARAGE 'no'}}checked{{/compare}} type="radio" id="gNo" name="garage"
+                               value="no">
+                        <label for="gNo">No</label>
+                    </div>
+
+                    <div style="padding-bottom: 7px; padding-top: 10px; font-size: large">Elevator :
+                        <input {{#compare house.ELEVATOR 'yes'}}checked{{/compare}} type="radio" id="lYes"
+                               name="elevator" value="yes">
+                        <label for="lYes">Yes</label>
+                        <input {{#compare house.ELEVATOR 'no'}}checked{{/compare}} type="radio" id="lNo" name="elevator"
+                               value="no">
+                        <label for="lNo">No</label>
+                    </div>
+
+                    <h3>Pricing</h3>
+                    <hr>
+                    <div style="padding-bottom: 7px; padding-top: 10px; font-size: large">Price :</div>
+                    <div><input style="width: 100%;" type="number" name="price" value= {{house.PRICE}}></div>
+
+                    <div style="padding-bottom: 7px; padding-top: 10px; font-size: large">Additional notes :</div>
+                    <div><textarea name="note" rows="3" cols="50">{{house.NOTE}}</textarea></div>
+                    <div style="padding-bottom: 7px; padding-top: 10px;">
+                        <input type="reset" value="Reset">
+                        <input type="submit" value="Submit">
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

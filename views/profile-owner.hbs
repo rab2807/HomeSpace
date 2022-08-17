@@ -16,7 +16,7 @@
     <div class="row">
         <div class="col px-5">
             <div style="padding: 5px">
-                <i class="fa-solid fa-user"></i>&emsp;{{catagory}}
+                <i class="fa-solid fa-user"></i>&emsp;{{category}}
             </div>
             <div style="padding: 5px">
                 <i class="fas fa-home"></i>&emsp;currently lives in {{location}}
@@ -28,53 +28,16 @@
                 <i class="fas fa-phone-alt"></i>&emsp;{{phone}}
             </div>
             <div style="padding: 5px">
-                <i class="fas fa-city"></i>&emsp;House owned: {{house_num}}
+                <i class="fas fa-city"></i>&emsp;Total house owned: {{total_house_num}}
             </div>
             <div style="padding: 5px">
-                <i class="fas fa-users"></i>&emsp;successfully rented tenants: {{tenant_num}}
+                <i class="fas fa-users"></i>&emsp;Currently vacant: {{vacant_house_num}}
             </div>
             <div style="padding: 8px">
-                <a href='/owner/house'>
+                <a href="/house/list/{{id}}">
                     <button class="wide-button">See the houses</button>
                 </a>
             </div>
-            {{#if isOwner}}
-                <div style="padding: 8px">
-                    <a href="#">
-                        <button class="wide-button">Edit Profile</button>
-                    </a>
-                </div>
-            {{/if}}
         </div>
     </div>
-    {{#unless isOwner}}
-        <div style="padding-left: 20px;padding-top: 20px;"><h1>Reviews</h1></div>
-        <hr>
-    <div class="row">
-        <div class="col-3"></div>
-        <div class="col-6">
-            {{>post-comment}}
-        </div>
-    </div>
-        <div class="row">
-            <div class="col-3"></div>
-            <div class="col-6">
-                {{>read-comment}}
-            </div>
-        </div>
-    {{/unless}}
 </div>
-
-<!--<div class="col">-->
-<!--    <div>-->
-<!--        {{>ratingCard}}-->
-<!--    </div>-->
-<!--    <div>-->
-<!--        {{>post-comment}}-->
-<!--        <div style="width: 37rem; height: 300px; overflow-y:scroll;">-->
-<!--            {{>read-comment}}-->
-<!--        </div>-->
-<!--    </div>-->
-<!--</div>-->
-<!--</div>-->
-<!--</div>-->

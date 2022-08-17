@@ -6,6 +6,7 @@ const starString = (value) => {
         str = str.concat('<i class="far fa-star"></i>');
     return str;
 };
+
 const ratingBarHelper = (arr) => {
     /*
                 <tr>
@@ -31,7 +32,7 @@ const concat = (val1, val2) => {
 };
 
 const compare = (a, b, opts) => {
-    if (a === b) {
+    if (a == b) {
         return opts.fn(this);
     }
     return opts.inverse(this);

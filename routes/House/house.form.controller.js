@@ -1,14 +1,21 @@
 const {db_houseForm} = require('../../Database/db_house');
 const {extractToken} = require("../../Database/authorization");
+const {db_getPersonType} = require("../../Database/db_person");
 
-function renderPage(req, res) {
-    res.render('house-form', {});
+async function renderPage(req, res) {
+    console.log('hello');
+    let token_id = extractToken(req).id;
+    return res.render('house-form', {
+        id: token_id,
+        isOwner: (await db_getPersonType(token_id) === 'owner'),
+    });
 }
 
 async function postForm(req, res) {
     const token = extractToken(req);
+    console.log(typeof token.id)
     await db_houseForm(req.body, token.id);
-    res.redirect('/owner/house');
+    // res.redirect(`/house/list/${token.id}`);
 }
 
 module.exports = {

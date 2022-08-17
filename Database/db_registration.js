@@ -21,7 +21,6 @@ async function db_registration(response) {
     };
 
     console.log(binds);
-    // begin add_user('Modon', 'hdfdjfhjd', '01744956510', 'iudgidd@gmail.com', 87346587, 23.7441269, 90.4222081, '56 no road', 'Shahidbagh', 'Dhaka District', 'owner', category_=>'Real Estate Agency'); end;
     let sql;
     if (response.category) {
         sql = `begin ADD_USER(:name, :pass, :phone, :mail, :lid, :lat, :lon, :area, :suburb, :district, 'owner', category_=>:category); end;`;

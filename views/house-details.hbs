@@ -5,13 +5,37 @@
                 {{>ratingCard}}
             </div>
 
-            <div style="padding: 15px"><h1>HOUSE - {{house.name}}</h1></div>
-            <div style="padding: 15px"><h3>Price: {{house.price}}</h3></div>
+            <div style="padding: 5px 15px;"><h1>HOUSE - {{house.HOUSE_ID}}</h1></div>
+            <div style="padding: 5px 15px;"><h3>
+                <b style="font-size: x-large; font-weight:1000;
+                        color: {{#compare house.VACANT "yes"}} green {{else}} red{{/compare}}">
+                    {{#compare house.VACANT "yes"}} VACANT {{else}}OCCUPIED{{/compare}}
+                </b><br>
+            </h3></div>
+            <div style="padding: 5px 15px;"><h3>Price: {{house.PRICE}}</h3></div>
             <div style="padding-left: 15px">
-                {{#if house.vacant}}
-                    <button class="wide-button">Request</button>
+                {{#if isOwner}}
+                    <a href="/house/edit/{{house.HOUSE_ID}}">
+                        <button class="wide-button">{{requestButtonText}}</button>
+                    </a><br><br>
+                    {{#compare house.VACANT "yes"}}
+                        <a href="/house/activity/{{../house.HOUSE_ID}}">
+                            <button class="wide-button">
+                                See Requests
+                            </button>
+                        </a>
+                    {{/compare}}
+                    {{#if leaveNoticeIssued}}
+                        <a href="/house/request/{{house.HOUSE_ID}}/leave">
+                            <button class="wide-button">
+                                Confirm leave notice for House - {{house.HOUSE_ID}}
+                            </button>
+                        </a>
+                    {{/if}}
                 {{else}}
-                    <button class="wide-button">Follow</button>
+                    <a href="/house/request/{{house.HOUSE_ID}}/{{action}}">
+                        <button class="wide-button">{{requestButtonText}}</button>
+                    </a>
                 {{/if}}
                 <hr>
             </div>
@@ -37,42 +61,45 @@
         <div class="col-1"></div>
         <div class="col">
             <div style="padding: 5px">
-                <i class="fa-solid fa-house"></i>&emsp;House - {{house.name}}
+                <i class="fa-solid fa-house"></i>&emsp;House - {{house.HOUSE_ID}}
             </div>
             <div style="padding: 5px">
-                <i class="fa-solid fa-house-chimney"></i>&emsp;{{house.altName}}
+                <i class="fa-solid fa-house-chimney"></i>&emsp;{{house.NAME}}
             </div>
             <div style="padding: 5px">
-                <i class="fa-solid fa-location-dot"></i>&emsp;{{house.location}}
+                <i class="fa-solid fa-location-dot"></i>&emsp;{{house.AREA}}, {{house.SUBURB}}, {{house.DISTRICT}}
             </div>
             <div style="padding: 5px">
                 <i class="fa-solid fa-house-user"></i>&emsp;owned by
-                <a href="#">{{house.ownerName}}</a>
+                <a href="/owner/profile/{{house.OWNER_ID}}">{{house.OWNER_NAME}}</a>
+            </div>
+            {{#compare house.VACANT 'no'}}
+                <div style="padding: 5px">
+                    <i class="fa-solid fa-house-user"></i>&emsp;Current tenant:
+                    <a href="/tenant/profile/{{../house.TENANT_ID}}">{{../house.TENANT_NAME}}</a>
+                </div>
+            {{/compare}}
+            <div style="padding: 5px">
+                <i class="fa-solid fa-dollar-sign"></i>&emsp;{{house.PRICE}}
             </div>
             <div style="padding: 5px">
-                <i class="fa-solid fa-dollar-sign"></i>&emsp;{{house.price}}
+                <i class="fa-solid fa-clock"></i>&emsp;{{house.CREATED}}
             </div>
             <div style="padding: 5px">
-                <i class="fa-solid fa-clock"></i>&emsp;{{house.created}}
+                <i class="fa-solid fa-bed"></i>&emsp;Bedrooms: {{house.BEDROOM}}
             </div>
             <div style="padding: 5px">
-                <i class="fa-solid fa-bed"></i>&emsp;Bedrooms: {{house.bedroom}}
+                <i class="fa-solid fa-shower"></i>&emsp;Bathrooms: {{house.BATHROOM}}
             </div>
             <div style="padding: 5px">
-                <i class="fa-solid fa-shower"></i>&emsp;Bathrooms: {{house.bathroom}}
+                <i class="fa-solid fa-arrows-to-dot"></i>&emsp;Space: {{house.SPACE}} sq ft
             </div>
             <div style="padding: 5px">
-                <i class="fa-solid fa-arrows-to-dot"></i>&emsp;Space: {{house.space}} sq ft
-            </div>
-            <div style="padding: 5px">
-                <i class="fa-solid fa-arrow-up-right-dots"></i>&emsp;Floor level: {{house.floor}}
-            </div>
-            <div style="padding: 5px">
-                <i class="fa-solid fa-people-roof"></i>&emsp;Expected members: {{house.members}}
+                <i class="fa-solid fa-arrow-up-right-dots"></i>&emsp;Floor level: {{house.FLOOR}}
             </div>
             <div style="padding: 5px">
                 <i class="fa-solid fa-car"></i>&emsp;
-                {{#if house.garage}}
+                {{#if house.GARAGE}}
                     has
                 {{else}}
                     does not have
@@ -81,7 +108,7 @@
             </div>
             <div style="padding: 5px">
                 <i class="fa-solid fa-elevator"></i>&emsp;
-                {{#if house.elevator}}
+                {{#if house.ELEVATOR}}
                     has
                 {{else}}
                     does not have
@@ -89,25 +116,29 @@
                 elevator
             </div>
             <div style="padding: 5px">
-                <i class="fa-regular fa-note-sticky"></i>&emsp;"{{house.note}}"
+                <i class="fa-solid fa-arrow-up-right-dots"></i>&emsp;Minimum stay period before changing the
+                house: {{house.MINIMUM_STAY}}
+            </div>
+            <div style="padding: 5px">
+                <i class="fa-regular fa-note-sticky"></i>&emsp;"{{house.NOTE}}"
             </div>
         </div>
     </div>
 
-    {{#unless isOwner}}
-        <div style="padding-left: 20px;padding-top: 20px;"><h1>Reviews</h1></div>
-        <hr>
+    <div style="padding-left: 20px;padding-top: 20px;"><h1>Reviews</h1></div>
+    </hr>
+    {{#compare userType 'tenant'}}
         <div class="row">
             <div class="col-3"></div>
             <div class="col-6">
                 {{>post-comment}}
             </div>
         </div>
-        <div class="row">
-            <div class="col-3"></div>
-            <div class="col-6">
-                {{>read-comment}}
-            </div>
+    {{/compare}}
+    <div class="row">
+        <div class="col-3"></div>
+        <div class="col-6">
+            {{>read-comment}}
         </div>
-    {{/unless}}
+    </div>
 </div>

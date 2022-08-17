@@ -1,0 +1,19 @@
+{{#each arr}}
+    <div class="row py-0 px-5">
+        <div class="card p-0">
+            <div class="card-body p-1">
+                <div>
+                    <small style="font-size: 13px">{{REQUEST_TIME}}</small>
+                </div>
+                <a href="/house/request/{{HOUSE_ID}}/deal/{{TENANT_ID}}">
+                    <button style="float: right">Accept Request</button>
+                </a>
+                <p>
+                    <a href="/tenant/profile/{{TENANT_ID}}">{{TENANT_NAME}}</a> has
+                    requested to rent
+                    <a href="/house/{{HOUSE_ID}}">House - {{HOUSE_ID}}</a>
+                </p>
+            </div>
+        </div>
+    </div>
+{{/each}}

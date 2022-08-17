@@ -1,0 +1,54 @@
+<div class="container main">
+    <div class="row pt-5 px-5">
+        <div class="col">
+            <div>
+                <img class="profile-pic" src="/images/dumb.jpg" style="float: left;height: 200px; width: 200px;"/>
+                <div style="float: right">
+                    {{>ratingCard}}
+                </div>
+                <div class="center"><h1 style="font-size: 350%">{{name}}</h1></div>
+                <div class="center"><small>{{type}}</small></div>
+                <hr>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col px-5">
+            <div style="padding: 5px">
+                <i class="fa-solid fa-user"></i>&emsp;{{job}}
+            </div>
+            {{#if house_id}}
+                <div style="padding: 5px">
+                    <i class="fa-solid fa-user"></i>&emsp;currently living in
+                    <a href="/house/{{house_id}}">House-{{house_id}}</a>
+                </div>
+            {{/if}}
+            <div style="padding: 5px">
+                <i class="fas fa-home"></i>&emsp;currently lives in {{location}}
+            </div>
+            <div style="padding: 5px">
+                <i class="fa-regular fa-envelope"></i>&emsp;{{email}}
+            </div>
+            <div style="padding: 5px">
+                <i class="fas fa-phone-alt"></i>&emsp;{{phone}}
+            </div>
+        </div>
+    </div>
+    <div style="padding-left: 20px;padding-top: 20px;"><h1>Reviews</h1></div>
+    <hr>
+    {{#if canReview}}
+        <div class="row">
+            <div class="col-3"></div>
+            <div class="col-6">
+                {{>post-comment}}
+            </div>
+        </div>
+    {{/if}}
+    <div class="row">
+        <div class="col-3"></div>
+        <div class="col-6">
+            {{>read-comment}}
+        </div>
+    </div>
+</div>

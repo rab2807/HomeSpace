@@ -30,10 +30,19 @@
         crossorigin="anonymous"></script>
 
 <div class="sidebar">
-    <a href="#">About</a>
-    <a href="#">Services</a>
-    <a href="#">Clients</a>
-    <a href="#">Contact</a>
+    {{#if isOwner}}
+        <a href="/owner/profile">Profile</a>
+        <a href="/house/list/{{id}}">Houses</a>
+        <a href="/owner/dashboard">Dashboard</a>
+        <a href="/owner/maintenance">Billing and Maintenance</a>
+        <a href="/owner/edit">Edit Profile</a>
+    {{else}}
+        <a href="/tenant/profile">Profile</a>
+        <a href="/tenant/search">Search</a>
+        <a href="/tenant/dashboard">Dashboard</a>
+        <a href="/tenant/maintenance">Billing and Maintenance</a>
+        <a href="/tenant/edit">Edit Profile</a>
+    {{/if}}
 </div>
 <div class="navbar">
 </div>

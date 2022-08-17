@@ -1,4 +1,4 @@
-const {db_getHouse} = require('../../Database/db_owner');
+const {db_getHousesFromPerson} = require('../../Database/db_house');
 const {extractToken} = require("../../Database/authorization");
 
 let houseArr = [
@@ -22,23 +22,26 @@ let houseArr = [
     },
 ]
 
-
 async function renderPage(req, res) {
-    const token = extractToken(req);
-    houseArr = await db_getHouse(token.id);
-    return res.render('house-menu', {
-        house: houseArr,
-    });
-}
+    const id = req.params.owner_id;
+    let sort = 'RATING', order = 'DESC';
+    if (req.params.sort && req.params.sort !== '')
+        sort = req.params.sort;
+    if (req.params.order && req.params.order !== '')
+        order = req.params.order;
 
-async function postHandler(req, res) {
-    const token = extractToken(req);
-    houseArr = await db_getHouse(token.id, req.body.sort);
+    const token_id = extractToken(req).id;
+    const type = (token_id == id) ? 'owner' : 'tenant';
+
+    houseArr = await db_getHousesFromPerson(id, sort, order);
+
     return res.render('house-menu', {
+        id: Number(id),
+        isOwner: type === 'owner',
         house: houseArr,
     });
 }
 
 module.exports = {
-    renderPage, postHandler
+    renderPage
 }

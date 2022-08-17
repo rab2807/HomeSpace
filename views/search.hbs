@@ -1,19 +1,19 @@
 <div class="sidebar-right">
-    <form action="/regi/owner" method="post" id="search">
+    <form action="/tenant/search" method="get" id="search">
         <div class="row px-2">
             <h3>Place</h3>
             <hr>
             <div class="row px-2">
                 <div class="col">
                     <label style="padding: 4px" for="suburb">Suburb </label>
-                    <input type="text" name="suburb">
+                    <input type="text" value="{{search.suburb}}" name="suburb">
                 </div>
             </div>
 
             <div class="row px-2">
                 <div class="col">
                     <label style="padding: 4px" for="district">District </label>
-                    <input type="text" name="district">
+                    <input type="text" value="{{search.district}}" name="district">
                 </div>
             </div>
         </div>
@@ -24,105 +24,88 @@
             <div class="row px-2">
                 <div class="col">
                     <label style="padding: 4px" for="vacant">Show only vacant</label>
-                    <input type="checkbox" checked id="vacant" name="vacant" value="yes">&nbsp;&nbsp;
+                    <input type="checkbox"
+                           {{#compare search.vacant 'yes'}}checked{{/compare}} id="vacant" name="vacant" value="yes">&nbsp;&nbsp;
                 </div>
             </div>
             <div class="row px-2">
                 <div class="col">
                     <label style="padding: 4px" for="rating">Rating </label><br>
-                    <input type="number" min="0" max="5" name="rating_low" placeholder="min">
+                    <input type="number" min="0" max="5" value="{{search.rating_low}}" name="rating_low"
+                           placeholder="min">
                     <label> - </label>
-                    <input type="number" min="0" max="5" name="rating_high" placeholder="max">
+                    <input type="number" min="0" max="5" value="{{search.rating_high}}" name="rating_high"
+                           placeholder="max">
                 </div>
             </div>
             <div class="row px-2">
                 <div class="col">
                     <label style="padding: 4px" for="price">Price Range </label>
-                    <div class="col"><input type="number" min="0" name="price_low" placeholder="min"></div>
-                    <div class="col"><input type="number" min="0" name="price_high" placeholder="max"></div>
+                    <div class="col"><input type="number" min="0" value="{{search.price_low}}" name="price_low"
+                                            placeholder="min"></div>
+                    <div class="col"><input type="number" min="0" value="{{search.price_high}}" name="price_high"
+                                            placeholder="max"></div>
                 </div>
             </div>
             <div class="row px-2">
                 <div class="col">
-                    <label style="padding: 4px" for="space">Space </label>
-                    <input type="number" min="0" name="space" placeholder="in sq ft">
+                    <label style="padding: 4px" for="space">Space (in sq ft)</label>
+                    <input type="number" min="0" value="{{search.space}}" name="space">
                 </div>
             </div>
             <div class="row px-2">
                 <div class="col">
                     <label style="padding: 4px" for="floor">Floor level </label>
-                    <input type="number" min="0" name="floor">
+                    <input type="number" min="0" value="{{search.floor}}" name="floor">
                 </div>
             </div>
             <div class="row px-2">
                 <div class="col">
                     <label style="padding: 4px" for="bedroom">Number of Bedrooms </label>
-                    <input type="number" min="0" name="bedroom">
+                    <input type="number" min="0" value="{{search.bedroom}}" name="bedroom">
                 </div>
             </div>
             <div class="row px-2">
                 <div class="col">
                     <label style="padding: 4px" for="bathroom">Number of Bathrooms </label>
-                    <input type="number" min="0" name="bathroom">
+                    <input type="number" min="0" value="{{search.bathroom}}" name="bathroom">
                 </div>
             </div>
             <div class="row px-2">
                 <div class="col">
                     <label style="padding: 4px" for="garage">Garage</label>
-                    <input type="checkbox" id="garage" name="garage" value="yes">&nbsp;&nbsp;
+                    <input type="checkbox"
+                           {{#compare search.garage 'yes'}}checked{{/compare}} id="garage" name="garage" value="yes">&nbsp;&nbsp;
                     <label style="padding: 4px" for="elevator">Elevator</label>
-                    <input type="checkbox" id="elevator" name="elevator" value="yes">
+                    <input type="checkbox"
+                           {{#compare search.elevator 'yes'}}checked{{/compare}} id="elevator" name="elevator"
+                           value="yes">
                 </div>
             </div>
         </div>
-
-        <div class="row px-2">
-            <h3>User</h3>
-            <hr>
-            <div class="row px-2">
-                <div class="col">
-                    <label style="padding: 4px" for="ownerName">Owner name </label>
-                    <input type="text" name="ownerName">
-                </div>
-            </div>
-            <div class="row px-2">
-                <div class="col">
-                    <label style="padding: 4px" for="ownerRating">Owner Rating </label><br>
-                    <input type="number" min="0" max="5" name="ownerRating_low" placeholder="min">
-                    <label> - </label>
-                    <input type="number" min="0" max="5" name="ownerRating_high" placeholder="max">
-                </div>
-            </div>
-            <div class="row px-2">
-                <div class="col">
-                    <label style="padding: 4px" for="member">Expected members </label>
-                    <input type="number" min="0" name="member">
-                </div>
-            </div>
+        <div>
+            <input type="submit" value="Search">
+            <input type="reset" value="Reset">
         </div>
-
-        <div class="row px-2 pt-2">
-            <div class="col">
-                <input type="submit" value="Search">
-                <input type="reset" value="Clear All">
-            </div>
-        </div>
-
     </form>
 </div>
-
 
 <div class="container main-search">
     <div class="row px-3 pt-3">
         <div class="col-3">
             <select name="sort" form="search">
-                <option value="rating">Rating</option>
-                <option value="price">Price</option>
-                <option value="space">Space</option>
-                <option value="rented">Most rented</option>
-                <option value="room">Total rooms</option>
-                <option value="space">Space</option>
-                <option value="floor">Floor level</option>
+                <option value=''></option>
+                <option value="rating" {{#compare search.sort 'rating'}}selected{{/compare}}>Rating</option>
+                <option value="price" {{#compare search.sort 'price'}}selected{{/compare}}>Price</option>
+                <option value="space" {{#compare search.sort 'space'}}selected{{/compare}}>Space</option>
+                <option value="room" {{#compare search.sort 'room'}}selected{{/compare}}>Total rooms</option>
+                <option value="space" {{#compare search.sort 'space'}}selected{{/compare}}>Space</option>
+                <option value="floor" {{#compare search.sort 'floor'}}selected{{/compare}}>Floor level</option>
+            </select>
+            <select name="order" form="search">
+                <option value=''></option>
+                <option value="ASC">Ascending</option>
+                <option value="DESC">Descending</option>
             </select>
             <input type="submit" value="sort" form="search">
         </div>

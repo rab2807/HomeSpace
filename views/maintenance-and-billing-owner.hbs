@@ -1,0 +1,38 @@
+<div class="container main">
+    <div class="row pt-3 px-5">
+        <div>
+            <h1 style="font-size: 300%">{{month}}, {{year}}</h1>
+            <hr>
+            <hr>
+        </div>
+        <div>
+            <h2>Billing</h2>
+            <hr>
+        </div>
+
+        <div class="row p-3">
+            <div class="col">
+                <p>Expected revenue this month: {{expectedRev}} taka</p>
+                <p>Gained revenue this month: {{gainedRev}} taka</p>
+                <p>Dues of previous months: {{previousDues}} taka</p>
+                <p>Maintenance expenses this month: {{expense}} taka</p>
+            </div>
+            <div class="col">
+                <h3>Billing history</h3>
+                <hr>
+                <div class="container" style=" height: 200px; overflow: scroll; ">
+                    {{>billing-card}}
+                </div>
+            </div>
+        </div>
+        <div class="row p-3">
+            <div class="col">
+                <h3>Maintenance</h3>
+                <hr>
+                <div class="container" style=" height: 400px; overflow: scroll; ">
+                    {{>maintenance-card}}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
