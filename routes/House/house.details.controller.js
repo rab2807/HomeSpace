@@ -1,7 +1,8 @@
 const {db_getHouseDetails, db_getHouseRating} = require("../../Database/db_house");
 const {extractToken} = require("../../Database/authorization");
-const {db_getPersonType} = require("../../Database/db_person");
+const {db_getPersonType, db_getPerson} = require("../../Database/db_person");
 const {db_isRequested} = require("../../Database/db_request-follow-leave");
+const {db_getComments} = require("../../Database/db_review");
 
 const imageArr = [0, 1, 2, 3, 0, 1, 2, 3, 0, 1, 2, 3, 0, 1, 2, 3];
 
@@ -27,7 +28,7 @@ async function renderPage(req, res) {
     const house = await db_getHouseDetails(hid);
     const rating = await db_getHouseRating(hid);
 
-    let action = undefined, leaveNoticeIssued, requestButtonText;
+    let action = undefined, leaveNoticeIssued, requestButtonText, canReview, reviewer;
     if (house.OWNER_ID === token_id) {
         requestButtonText = 'Edit Info';
         leaveNoticeIssued = await db_isRequested(hid, house.TENANT_ID, 'leave');
@@ -45,6 +46,18 @@ async function renderPage(req, res) {
         requestButtonText = isRequested ? 'Unfollow' : 'Follow';
     }
 
+    const ratingArr = [{RATING: 5, COUNT: 0},
+        {RATING: 4, COUNT: 0},
+        {RATING: 3, COUNT: 0},
+        {RATING: 2, COUNT: 0},
+        {RATING: 1, COUNT: 0}];
+    rating.arr.forEach(e => ratingArr[5 - e.RATING].COUNT = e.COUNT);
+    if (requestButtonText === 'Leave notice sent' || requestButtonText === 'Leave') {
+        canReview = true;
+        reviewer = await db_getPerson(token_id);
+    }
+    let commentArr = await db_getComments(house.HOUSE_ID, 'house');
+
     res.render('house-details', {
         id: token_id,
         isOwner: (await db_getPersonType(token_id) === 'owner'),
@@ -54,8 +67,10 @@ async function renderPage(req, res) {
         requestButtonText: requestButtonText,
         images: imageArr,
         house: house,
-        comments: commentArr,
-        ratingArr: rating.arr,
+        commentArr: commentArr,
+        canReview: canReview,
+        reviewer: reviewer,
+        ratingArr: ratingArr,
         avg_rating: rating.avg,
         ratingTotalCount: rating.arr.reduce((t, n) => t += n.COUNT, 0),
     });

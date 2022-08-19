@@ -1,7 +1,7 @@
 const {extractToken} = require('../../Database/authorization');
 const {db_getPerson, db_getPersonType, db_getRating} = require('../../Database/db_person');
 const {db_getHouse} = require('../../Database/db_tenant')
-const {db_getCount} = require("../../Database/db_owner");
+const {db_getComments} = require("../../Database/db_review");
 
 async function renderPage(req, res) {
     let id = req.params.id;
@@ -10,33 +10,45 @@ async function renderPage(req, res) {
     if (!id && type !== 'tenant')
         res.redirect('/login');
 
-    let tenant, house, rating, canComment;
+    let tenant, house, rating, canReview, reviewer;
     tenant = await db_getPerson(id ? id : token.id);
     house = await db_getHouse(id ? id : token.id);
     rating = await db_getRating(id ? id : token.id, 'tenant');
-    if (!tenant) return res.status(404).send("No data found");
 
-    if (house && token.id === house.OWNER_ID)
-        canComment = true;
-    console.log(tenant);
+    const ratingArr = [{RATING: 5, COUNT: 0},
+        {RATING: 4, COUNT: 0},
+        {RATING: 3, COUNT: 0},
+        {RATING: 2, COUNT: 0},
+        {RATING: 1, COUNT: 0}];
+    rating.arr.forEach(e => ratingArr[5 - e.RATING].COUNT = e.COUNT);
+
+    if (house && token.id === house.OWNER_ID) {
+        canReview = true;
+        reviewer = await db_getPerson(token.id);
+    }
+
+    let commentArr = await db_getComments(id ? id : token.id, 'tenant');
 
     return res.render('profile-tenant', {
         pre: tenant.USERNAME + `'s Profile`,
-        isOwner: type === 'owner',
+        isTenant: type === 'tenant',
         type: "Tenant",
         id: tenant.ID,
         name: tenant.USERNAME,
         job: tenant.JOB,
         house_id: tenant.HOUSE_ID,
-        family: tenant.FAMILY_MEMBERS,
+        members: tenant.FAMILY_MEMBERS,
         category: tenant.CATEGORY,
         location: tenant.AREA + ', ' + tenant.SUBURB + ', ' + tenant.DISTRICT,
         email: tenant.EMAIL,
         phone: tenant.PHONE,
         avg_rating: rating.avg,
-        ratingArr: rating.arr,
+        ratingArr: ratingArr,
         ratingTotalCount: rating.arr.reduce((t, n) => t += n.COUNT, 0),
-        canComment: canComment,
+        isViewer: id && (token.id != id),
+        canReview: canReview,
+        reviewer: reviewer,
+        commentArr : commentArr
     });
 }
 

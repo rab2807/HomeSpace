@@ -5,6 +5,7 @@ const profileController = require('./owner.profile.controller');
 const dashboardController = require('./owner.dashboard.controller');
 const historyController = require('./owner.history.controller');
 const maintenanceController = require('./owner.maintenance.controller');
+const editController = require("./owner.edit.controller");
 
 const router = express.Router();
 
@@ -18,8 +19,8 @@ router.get('/owner/dashboard', dashboardController.renderPage);
 router.get('/owner/maintenance', maintenanceController.renderPage);
 router.post('/owner/maintenance', maintenanceController.postHandler);
 
-//history
-router.get('/owner/history', authMiddleware, historyController.renderPage);
-router.post('/owner/history', historyController.postHandler);
+// edit profile
+router.get('/owner/edit', editController.renderPage);
+router.post('/owner/edit', editController.postHandler);
 
 module.exports = router;

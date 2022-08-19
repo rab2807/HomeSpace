@@ -1,0 +1,58 @@
+<div class="container">
+<div class="row p-5 justify-content-center">
+<div class="card p-0" style="width: auto;">
+    <div class="card-title center p-1 pt-3">
+        <h2>Edit profile</h2>
+        <hr style="border-style: double">
+    </div>
+    <hr>
+<div class="card-body">
+        <form action={{#if isOwner}}"/owner/edit"{{else}}"/tenant/edit"{{/if}} method="POST">
+    <input hidden type="number" name="id" value={{person.ID}}>
+
+    <div style="padding-bottom: 7px; padding-top: 10px; font-size: large">Username :</div>
+    <div><input style="width: 100%;" type="text" name="username" value="{{person.USERNAME}}"></div>
+
+    <div style="padding-bottom: 7px; padding-top: 10px; font-size: large">Old Password :</div>
+    <div><input style="width: 100%;" type="password" name="old_password"></div>
+
+    <div style="padding-bottom: 7px; padding-top: 10px; font-size: large">New Password :</div>
+    <div><input style="width: 100%;" type="password" name="new_password"></div>
+
+    <div style="padding-bottom: 7px; padding-top: 10px; font-size: large">Phone no. :</div>
+    <div><input style="width: 100%;" type="tel" pattern="01[0-9]{9}" name="phone"
+                value={{person.PHONE}}></div>
+
+    <div style="padding-bottom: 7px; padding-top: 10px; font-size: large">Email :</div>
+    <div><input style="width: 100%;" type="email" name="email" value={{person.EMAIL}}></div>
+
+{{#if isOwner}}
+        <div style="padding-bottom: 7px; padding-top: 10px; font-size: large">Category :</div>
+        <div>
+            <label>
+                <input style="width: 100%;" list="category" name="category" value="{{person.CATEGORY}}">
+            </label>
+            <datalist id="category">
+                <option value="Individual owner">
+                <option value="Real Estate Agency">
+                <option value="Hostel Provider">
+            </datalist>
+        </div>
+
+{{else}}
+        <div style="padding-bottom: 7px; padding-top: 10px; font-size: large">Job :</div>
+        <div><input style="width: 100%;" type="text" name="job" value={{person.JOB}}></div>
+
+        <div style="padding-bottom: 7px; padding-top: 10px; font-size: large">Family Members :</div>
+        <div><input style="width: 100%;" type="number" name="members" value={{person.MEMBER}}></div>
+{{/if}}
+
+    <div style="padding-bottom: 7px; padding-top: 13px; font-size: large">
+        <input type="reset" value="Reset">
+        <input type="submit" value="Save">
+    </div>
+</form>
+</div>
+</div>
+</div>
+</div>

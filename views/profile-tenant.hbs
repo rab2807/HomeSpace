@@ -33,9 +33,19 @@
             <div style="padding: 5px">
                 <i class="fas fa-phone-alt"></i>&emsp;{{phone}}
             </div>
+            <div style="padding: 5px">
+                <i class="fa-solid fa-people-group"></i>&emsp;Family members: {{members}}
+            </div>
+            {{#unless isViewer}}
+                <div style="padding: 8px">
+                    <a href="/tenant/edit">
+                        <button class="wide-button">Edit profile</button>
+                    </a>
+                </div>
+            {{/unless}}
         </div>
     </div>
-    <div style="padding-left: 20px;padding-top: 20px;"><h1>Reviews</h1></div>
+    <div style="padding-left: 20px;padding-top: 40px;"><h1>Reviews</h1></div>
     <hr>
     {{#if canReview}}
         <div class="row">

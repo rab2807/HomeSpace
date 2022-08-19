@@ -18,6 +18,23 @@ async function db_getCount(id) {
     }
 }
 
+async function db_editProfile(person) {
+    let sql = `begin
+                UPDATE_USER(:id, :username, :oldPass, :newPass, :phone, :email, category_=>:category);
+               end;`;
+    let binds = {
+        id: person.id,
+        username: person.username,
+        oldPass: person.old_password,
+        newPass: person.new_password,
+        phone: person.phone,
+        email: person.email,
+        category: person.category
+    }
+    await database.execute(sql, binds);
+}
+
+
 module.exports = {
-    db_getCount
+    db_getCount, db_editProfile
 }

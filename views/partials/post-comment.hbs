@@ -1,23 +1,31 @@
 <div class="card">
     <div class="card-body">
-        <form action="#" method="post" id="commentForm">
-            <div>
-                <table style="width: 100%">
-                    <td style="width: 10%">
-                        <img src="/images/dumb.jpg" height="40px" width="40px" style="border-radius: 50%;">
-                    </td>
-                    <td style="width: 20%; font-size: 20px">
-                        <a>{{name}}</a>
-                    </td>
-                    <td style="width: 70%;">
-                        <div style="float: right">
-                            {{>starRatingButton}}
-                        </div>
-                    </td>
-                </table>
-            </div>
-            <textarea style="width: 100%" name="comment"></textarea><br>
-            <input type="submit" value="Submit">
+        <form action={{#if isTenant}}'/tenant/postReview'{{else}}'/house/postReview'{{/if}}
+        method="post" id="commentForm">
+        <div>
+            <table style="width: 100%">
+                <td style="width: 10%">
+                    <img src="/images/dumb.jpg" height="40px" width="40px" style="border-radius: 50%;">
+                </td>
+                <td style="width: 50%; font-size: 20px">
+                    <a>{{reviewer.USERNAME}}</a>
+                </td>
+                <td style="width: 70%;">
+                    <div style="float: right">
+                        {{>starRatingButton}}
+                    </div>
+                </td>
+            </table>
+        </div>
+        <textarea style="width: 100%" name="comment"></textarea><br>
+        {{#if isTenant}}
+            <input hidden name="owner_id" value={{reviewer.ID}}>
+            <input hidden name="tenant_id" value={{id}}>
+        {{else}}
+            <input hidden name="tenant_id" value={{reviewer.ID}}>
+            <input hidden name="house_id" value={{house.HOUSE_ID}}>
+        {{/if}}
+        <input type="submit" value="Submit">
         </form>
     </div>
 </div>

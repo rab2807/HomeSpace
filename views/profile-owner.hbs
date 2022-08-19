@@ -38,6 +38,13 @@
                     <button class="wide-button">See the houses</button>
                 </a>
             </div>
+            {{#unless isViewer}}
+                <div style="padding: 8px">
+                    <a href="/owner/edit">
+                        <button class="wide-button">Edit profile</button>
+                    </a>
+                </div>
+            {{/unless}}
         </div>
     </div>
 </div>

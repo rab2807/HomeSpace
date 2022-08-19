@@ -126,15 +126,15 @@
     </div>
 
     <div style="padding-left: 20px;padding-top: 20px;"><h1>Reviews</h1></div>
-    </hr>
-    {{#compare userType 'tenant'}}
+    <hr>
+    {{#if canReview}}
         <div class="row">
             <div class="col-3"></div>
             <div class="col-6">
                 {{>post-comment}}
             </div>
         </div>
-    {{/compare}}
+    {{/if}}
     <div class="row">
         <div class="col-3"></div>
         <div class="col-6">

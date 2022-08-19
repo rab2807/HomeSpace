@@ -11,6 +11,23 @@ async function db_getHouse(id) {
     return res.rows[0];
 }
 
+async function db_editProfile(person) {
+    let sql = `begin
+                UPDATE_USER(:id, :username, :oldPass, :newPass, :phone, :email, job_=>:job, members=>:members);
+               end;`;
+    let binds = {
+        id: person.id,
+        username: person.username,
+        oldPass: person.oldPass,
+        newPass: person.newPass,
+        phone: person.phone,
+        email: person.email,
+        job: person.job,
+        members: person.members
+    }
+    await database.execute(sql, binds);
+}
+
 module.exports = {
-    db_getHouse
+    db_getHouse, db_editProfile
 }

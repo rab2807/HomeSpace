@@ -13,7 +13,7 @@ async function renderPage(req, res) {
     owner = await db_getPerson(id ? id : token.id);
     count = await db_getCount(id ? id : token.id);
     rating = await db_getRating(id ? id : token.id, 'owner');
-    console.log(owner);
+    console.log(id, token.id);
     if (!owner) return res.status(404).send("No data found");
 
     return res.render('profile-owner', {
@@ -31,6 +31,7 @@ async function renderPage(req, res) {
         avg_rating: rating.avg,
         ratingArr: rating.arr,
         ratingTotalCount: rating.arr.reduce((t, n) => t += n.COUNT, 0),
+        isViewer: id && (token.id != id)
     });
 }
 

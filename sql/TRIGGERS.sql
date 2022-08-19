@@ -98,6 +98,12 @@ begin
         delete
         from FOLLOW
         where HOUSE_ID = :old.HOUSE_ID;
+
+        -- insert end date of the deal
+        update DEAL
+        set END_DATE = sysdate
+        where HOUSE_ID = :old.HOUSE_ID
+          and END_DATE is null;
     end if;
 end;
 
