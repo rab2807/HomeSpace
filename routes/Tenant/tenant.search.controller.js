@@ -1,6 +1,5 @@
 const {db_searchHouse} = require("../../Database/db_search");
 
-// http://localhost:3000/tenant/search?suburb=&district=&vacant=yes&rating_low=&rating_high=&price_low=&price_high=&space=&floor=&bedroom=&bathroom=&ownerName=&ownerRating_low=&ownerRating_high=&sort=rating
 async function renderPage(req, res) {
     let search = {
         suburb: req.query.suburb ? req.query.suburb : '',
@@ -19,7 +18,6 @@ async function renderPage(req, res) {
     }
 
     let houseArr = await db_searchHouse(search);
-    console.log(houseArr);
     return res.render('search', {
         house: houseArr,
         search: search

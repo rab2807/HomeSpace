@@ -1,0 +1,19 @@
+<div class="container main">
+    <div class="row pt-3 px-5">
+        <div style="height: 550px; overflow:scroll;">
+            <div class="container">
+                {{>message-card}}
+            </div>
+        </div>
+    </div>
+    <div class="row pt-3 px-5">
+        <form action="/message/{{sender}}/{{receiver}}/post" method="post">
+            <input hidden name="id1" value={{sender}}>
+            <input hidden name="id2" value={{receiver}}>
+            <input type="text" name="msg" style="width:90%; height:50px">
+            <button type="submit" style="height: 50px; width: auto">
+                <i class="fa-solid fa-paper-plane"></i>
+            </button>
+        </form>
+    </div>
+</div>

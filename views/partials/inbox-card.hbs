@@ -1,0 +1,18 @@
+{{#each inboxArr}}
+    <div class="row py-0" style="font-size: larger">
+        <div class="card p-0">
+            <div class="card-body p-1">
+                <a href="/message/{{../id}}/{{ID}}">
+                    <button style="
+                        {{#compare UNSEEN 0}}
+                        {{else}}background-color: lightgray;
+                        {{/compare}}
+                            width: 100%;
+                            text-align: left;">
+                    <h3>{{NAME}}</h3>
+                    <small>{{UNSEEN}} new message</small>
+                    </button>
+                </a>
+            </div>
+        </div>
+{{/each}}

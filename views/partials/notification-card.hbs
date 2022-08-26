@@ -3,24 +3,107 @@
         <div class="card p-0">
             <div class="card-body p-1">
                 <div>
-                    <small style="font-size: 13px">{{NOTIFICATION_TIME}} &nbsp;&nbsp;|&nbsp;&nbsp;{{NOTIFICATION_TYPE}}</small>
+                    <small style="font-size: 13px">{{NOTIFICATION_TIME}}
+                        &nbsp;&nbsp;|&nbsp;&nbsp;{{NOTIFICATION_TYPE}}</small>
                 </div>
-                <p>
-                    <a href="/tenant/profile/{{TENANT_ID}}">{{TENANT_NAME}}</a> has
-                    {{#compare NOTIFICATION_TYPE 'request'}}
-                        requested to rent
-                    {{/compare}}
-                    {{#compare NOTIFICATION_TYPE 'follow'}}
-                        followed
-                    {{/compare}}
-                    {{#compare NOTIFICATION_TYPE 'leave'}}
-                        sent leave-notice for
-                    {{/compare}}
-                    {{#compare NOTIFICATION_TYPE 'deal'}}
-                        confirmed a deal to rent
-                    {{/compare}}
-                    <a href="/house/{{HOUSE_ID}}">House - {{HOUSE_ID}}</a>
-                </p>
+                {{#if ../isOwner}}
+                    <p>
+                        {{#compare NOTIFICATION_TYPE 'request'}}
+                            <a href="/tenant/profile/{{../TENANT_ID}}">{{../TENANT_NAME}}</a> has
+                            requested to rent
+                            <a href="/house/{{../HOUSE_ID}}">House - {{../HOUSE_ID}}</a>
+                        {{/compare}}
+
+                        {{#compare NOTIFICATION_TYPE 'follow'}}
+                            <a href="/tenant/profile/{{../TENANT_ID}}">{{../TENANT_NAME}}</a> has
+                            followed
+                            <a href="/house/{{../HOUSE_ID}}">House - {{../HOUSE_ID}}</a>
+                        {{/compare}}
+
+                        {{#compare NOTIFICATION_TYPE 'leave-request'}}
+                            <a href="/tenant/profile/{{../TENANT_ID}}">{{../TENANT_NAME}}</a> has
+                            sent leave-notice for
+                            <a href="/house/{{../HOUSE_ID}}">House - {{../HOUSE_ID}}</a>
+                        {{/compare}}
+
+                        {{#compare NOTIFICATION_TYPE 'leave-confirm'}}
+                            You confirmed
+                            <a href="/tenant/profile/{{../TENANT_ID}}">{{../TENANT_NAME}}</a>'s
+                            request to leave
+                            <a href="/house/{{../HOUSE_ID}}">House - {{../HOUSE_ID}}</a>
+                        {{/compare}}
+
+                        {{#compare NOTIFICATION_TYPE 'maintenance-issue'}}
+                            <a href="/tenant/profile/{{../TENANT_ID}}">{{../TENANT_NAME}}</a> has
+                            sent raised a maintenance issue for
+                            <a href="/house/{{../HOUSE_ID}}">House - {{../HOUSE_ID}}</a>
+                        {{/compare}}
+
+                        {{#compare NOTIFICATION_TYPE 'maintenance-resolve'}}
+                            You resolved
+                            <a href="/tenant/profile/{{../TENANT_ID}}">{{../TENANT_NAME}}</a>'s
+                            maintenance issue for
+                            <a href="/house/{{../HOUSE_ID}}">House - {{../HOUSE_ID}}</a>
+                        {{/compare}}
+
+                        {{#compare NOTIFICATION_TYPE 'billing-resolve'}}
+                            <a href="/tenant/profile/{{../TENANT_ID}}">{{../TENANT_NAME}}</a> has
+                            paid {{../PAID}} taka of {{../MONTH}}, {{../YEAR}} for
+                            <a href="/house/{{../HOUSE_ID}}">House - {{../HOUSE_ID}}</a>
+                        {{/compare}}
+
+                        {{#compare NOTIFICATION_TYPE 'deal'}}
+                            You confirmed a deal with
+                            <a href="/tenant/profile/{{../TENANT_ID}}">{{../TENANT_NAME}}</a>
+                            to rent
+                            <a href="/house/{{../HOUSE_ID}}">House - {{../HOUSE_ID}}</a>
+                        {{/compare}}
+                    </p>
+                {{else}}
+                    <p>
+                        {{#compare NOTIFICATION_TYPE 'request'}}
+                            You have requested to rent
+                            <a href="/house/{{../HOUSE_ID}}">House - {{../HOUSE_ID}}</a>
+                        {{/compare}}
+
+                        {{#compare NOTIFICATION_TYPE 'follow'}}
+                            You have followed
+                            <a href="/house/{{../HOUSE_ID}}">House - {{../HOUSE_ID}}</a>
+                        {{/compare}}
+
+                        {{#compare NOTIFICATION_TYPE 'leave-request'}}
+                            You have sent leave-notice for
+                            <a href="/house/{{../HOUSE_ID}}">House - {{../HOUSE_ID}}</a>
+                        {{/compare}}
+
+                        {{#compare NOTIFICATION_TYPE 'leave-confirm'}}
+                            Your request to leave
+                            <a href="/house/{{../HOUSE_ID}}">House - {{../HOUSE_ID}}</a>
+                            has been granted
+                        {{/compare}}
+
+                        {{#compare NOTIFICATION_TYPE 'maintenance-issue'}}
+                            You have raised a maintenance issue for
+                            <a href="/house/{{../HOUSE_ID}}">House - {{../HOUSE_ID}}</a>
+                        {{/compare}}
+
+                        {{#compare NOTIFICATION_TYPE 'maintenance-resolve'}}
+                            Your maintenance issue for
+                            <a href="/house/{{../HOUSE_ID}}">House - {{../HOUSE_ID}}</a>
+                            has been resolved
+                        {{/compare}}
+
+                        {{#compare NOTIFICATION_TYPE 'billing-resolve'}}
+                            You have paid {{../PAID}} taka of {{../MONTH}}, {{../YEAR}} for
+                            <a href="/house/{{../HOUSE_ID}}">House - {{../HOUSE_ID}}</a>
+                        {{/compare}}
+
+                        {{#compare NOTIFICATION_TYPE 'deal'}}
+                            You confirmed a deal to rent
+                            <a href="/house/{{../HOUSE_ID}}">House - {{../HOUSE_ID}}</a>
+                        {{/compare}}
+                    </p>
+                {{/if}}
             </div>
         </div>
     </div>

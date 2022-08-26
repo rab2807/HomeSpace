@@ -43,7 +43,7 @@ begin
 end;
 
 create or replace trigger FOLLOW_TRIGGER
-    after insert
+    after insert or delete
     on FOLLOW
     for each row
 begin
@@ -69,10 +69,11 @@ begin
     -- after insert make a notification
     if :old.LEAVE_ID is null then
         insert into NOTIFICATION(house_id, tenant_id, activity_id, notification_type)
-        values (:new.house_id, :new.tenant_id, :new.leave_id, 'leave');
+        values (:new.house_id, :new.tenant_id, :new.leave_id, 'leave-request');
     end if;
-    -- after delete, delete the notification
+
     if :new.LEAVE_ID is null then
+        -- update house vacancy
         update HOUSE
         set VACANT = 'yes'
         where HOUSE_ID = :old.HOUSE_ID;
@@ -82,11 +83,9 @@ begin
         set HOUSE_ID = null
         where TENANT_ID = :old.TENANT_ID;
 
-        -- delete the notification
-        delete
-        from NOTIFICATION
-        where ACTIVITY_ID = :old.leave_id
-          and NOTIFICATION_TYPE = 'leave';
+        -- make the notification
+        insert into NOTIFICATION(house_id, tenant_id, activity_id, notification_type)
+        values (:new.house_id, :new.tenant_id, :new.leave_id, 'leave-confirm');
 
         -- convert all follows to requests
         insert into REQUEST(HOUSE_ID, TENANT_ID)
@@ -104,6 +103,18 @@ begin
         set END_DATE = sysdate
         where HOUSE_ID = :old.HOUSE_ID
           and END_DATE is null;
+    end if;
+end;
+
+create or replace trigger MAINTENANCE_TRIGGER
+    after insert
+    on MAINTENANCE
+    for each row
+begin
+    -- after insert make a notification
+    if :old.MAINTENANCE_ID is null then
+        insert into NOTIFICATION(house_id, tenant_id, activity_id, notification_type)
+        values (:new.house_id, :new.tenant_id, :new.MAINTENANCE_ID, 'maintenance-issue');
     end if;
 end;
 

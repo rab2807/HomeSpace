@@ -5,23 +5,12 @@
             <hr>
             <hr>
         </div>
-        <div>
-            <h2>Dues</h2>
-            <hr>
-        </div>
-        <div class="row p-3">
-            <div class="col">
-                <div class="container" style=" height: 200px; overflow: scroll; ">
-                    {{>dues-card}}
-                </div>
-            </div>
-        </div>
         <div class="row p-3">
             <div class="col">
                 <h3>Maintenance</h3>
                 <hr>
-                <div class="container" style=" height: 200px; overflow: scroll; ">
-                    <form action="/tenant/maintenance" method="post">
+                <div class="container">
+                    <form action="/tenant/maintenance/post" method="post">
                         <input type="text" name="type" value="maintenance" hidden>
                         <input type="number" hidden name="id" value={{id}}>
                         <select name="category">
@@ -31,9 +20,13 @@
                             <option value="bathroom">Bathroom</option>
                             <option value="others">Others</option>
                         </select><br><br>
-                        <textarea name="details" rows="4" cols="50"></textarea>
+                        <textarea name="details" rows="4" cols="50"></textarea><br>
                         <input type="submit" value="Submit">
                     </form>
+                </div>
+                <hr>
+                <div class="container" style=" height: 600px; overflow: scroll; ">
+                    {{>maintenance-card}}
                 </div>
             </div>
         </div>

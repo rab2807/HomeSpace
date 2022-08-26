@@ -1,0 +1,23 @@
+<div class="container main">
+    <div class="row pt-3 px-5">
+        <div>
+            <h1 style="font-size: 300%">{{monthName}}, {{year}}</h1>
+            <hr>
+            <hr>
+        </div>
+        <div>
+            <h2>Dues</h2>
+            <hr>
+        </div>
+        {{#if noDues}}
+            <div class="center"><i>No Bills to pay :D </i></div>
+        {{/if}}
+        <div class="row p-3">
+            <div class="col">
+                <div class="container" style=" height: 200px; overflow: scroll; ">
+                    {{>dues-card}}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

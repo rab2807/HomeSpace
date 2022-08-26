@@ -3,7 +3,6 @@ const path = require('path');
 const cors = require('cors');
 const {engine} = require('express-handlebars');
 const cookieParser = require('cookie-parser');
-const jwt = require('jsonwebtoken');
 
 const app = express();
 
@@ -14,6 +13,7 @@ const loginRouter = require('./routes/Login/login.router')
 const ownerRouter = require('./routes/Owner/owner.router');
 const tenantRouter = require('./routes/Tenant/tenant.router');
 const houseRouter = require('./routes/House/house.router');
+const messageRouter = require('./routes/Message/message.router');
 
 // view engine setup
 const helper = require('./helpers/helpers');
@@ -31,13 +31,6 @@ app.engine('hbs', engine({
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'hbs');
 
-const duration = 3*24*60*60;
-const createToken = (id) => {
-    return jwt.sign({id}, 'dbproject', {
-        expiresIn: duration
-    })
-}
-
 // middleware setup
 app.use(cors())
 app.use(express.static(path.join(__dirname, '/public')));
@@ -51,5 +44,6 @@ app.use(startRouter);
 app.use(ownerRouter);
 app.use(tenantRouter);
 app.use(houseRouter);
+app.use(messageRouter);
 
 module.exports = app; //added 

@@ -2,7 +2,7 @@
     <div class="row pt-5 px-5">
         <div class="col">
             <div>
-                <img class="profile-pic" src="/images/dumb.jpg" style="float: left;height: 200px; width: 200px;"/>
+                <img class="profile-pic" src="/images/{{photo}}" style="float: left;height: 200px; width: 200px;"/>
                 <div style="float: right">
                     {{>ratingCard}}
                 </div>
@@ -12,6 +12,19 @@
             </div>
         </div>
     </div>
+
+    {{#unless isViewer}}
+        <div class="px-5 py-0">
+            <form action="/tenant/profile/upload" method="post" enctype="multipart/form-data">
+                <label for="upload" class="btn">Upload Profile Picture</label>
+                <input hidden type="number" name="id" value={{id}}>
+                <input id="upload" accept=".jpg,.png" style="display: none" type="file" name="image">
+                <input type="submit" value="Upload">
+            </form>
+        </div>
+        <br>
+        <br>
+    {{/unless}}
 
     <div class="row">
         <div class="col px-5">
@@ -42,9 +55,16 @@
                         <button class="wide-button">Edit profile</button>
                     </a>
                 </div>
+            {{else}}
+                <div style="padding: 8px">
+                    <a href="/message/{{viewerID}}/{{id}}">
+                        <button class="wide-button">Message</button>
+                    </a>
+                </div>
             {{/unless}}
         </div>
     </div>
+
     <div style="padding-left: 20px;padding-top: 40px;"><h1>Reviews</h1></div>
     <hr>
     {{#if canReview}}

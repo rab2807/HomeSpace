@@ -21,7 +21,8 @@ async function db_getComments(id, type) {
                           to_char(time, 'DD-MON-YYYY, MM:HH AM')            as time,
                           owner_id,
                           tenant_id,
-                          (select USERNAME from PERSON where ID = OWNER_ID) as owner_name
+                          (select USERNAME from PERSON where ID = OWNER_ID) as owner_name,
+                          (select PHOTO from PERSON where ID = OWNER_ID)    as owner_pic
                    from OWNER_TO_TENANT_REVIEW
                    where TENANT_ID = :id
                      and STATEMENT is not null
@@ -32,10 +33,11 @@ async function db_getComments(id, type) {
     if (type == 'house') {
         let sql = `select statement,
                           rating,
-                          to_char(time, 'DD-MON-YYYY, HH:MI:SS AM') as time,
+                          to_char(time, 'DD-MON-YYYY, HH:MI:SS AM')          as time,
                           house_id,
                           tenant_id,
-                          (select USERNAME from PERSON where ID = TENANT_ID) as tenant_name
+                          (select USERNAME from PERSON where ID = TENANT_ID) as tenant_name,
+                          (select PHOTO from PERSON where ID = TENANT_ID)    as tenant_pic
                    from TENANT_TO_HOUSE_REVIEW
                    where HOUSE_ID = :id
                      and STATEMENT is not null

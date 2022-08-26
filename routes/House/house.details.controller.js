@@ -1,26 +1,15 @@
-const {db_getHouseDetails, db_getHouseRating} = require("../../Database/db_house");
+const {
+    db_getHouseDetails,
+    db_getHouseRating,
+    db_updateProPic,
+    db_uploadPictures,
+    db_getPictures
+} = require("../../Database/db_house");
 const {extractToken} = require("../../Database/authorization");
 const {db_getPersonType, db_getPerson} = require("../../Database/db_person");
 const {db_isRequested} = require("../../Database/db_request-follow-leave");
 const {db_getComments} = require("../../Database/db_review");
-
-const imageArr = [0, 1, 2, 3, 0, 1, 2, 3, 0, 1, 2, 3, 0, 1, 2, 3];
-
-let commentArr = [
-    {
-        // picture link should be added
-        name: "Rakib",
-        post_date: "21 July 2020",
-        star: "⭐⭐⭐",
-        comment: "bal sal",
-    },
-    {
-        name: "Ahsan",
-        post_date: "21 Feb 2020",
-        star: "⭐⭐⭐⭐",
-        comment: "bal sal",
-    }
-]
+const {saveImages, saveImage} = require("../../config/multer");
 
 async function renderPage(req, res) {
     const hid = req.params.house_id;
@@ -57,9 +46,11 @@ async function renderPage(req, res) {
         reviewer = await db_getPerson(token_id);
     }
     let commentArr = await db_getComments(house.HOUSE_ID, 'house');
+    let imageArr = await db_getPictures(house.HOUSE_ID);
 
     res.render('house-details', {
         id: token_id,
+        isHouse: true,
         isOwner: (await db_getPersonType(token_id) === 'owner'),
         userID: token_id,
         action: action,
@@ -76,6 +67,21 @@ async function renderPage(req, res) {
     });
 }
 
+async function postHandler(req, res) {
+    saveImages(req, res, async () => {
+        const data = req.body;
+        let filenames = req.files.map(function (file) {
+            return file.filename;
+        });
+        console.log(filenames);
+        if (data.type === 'propic')
+            await db_updateProPic(data.id, filenames[0]);
+        else if (data.type === 'otherpic')
+            await db_uploadPictures(data.id, filenames);
+        return res.redirect(`/house/${data.id}`);
+    });
+}
+
 module.exports = {
-    renderPage,
+    renderPage, postHandler
 }

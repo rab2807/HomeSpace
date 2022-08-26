@@ -1,6 +1,5 @@
 const {
-    db_getMaintenanceHistory, db_loadCurrentMonth,
-    db_resolveMaintenance
+    db_loadCurrentMonth, db_getUnpaidBillList, db_postMaintenance, db_resolveBilling
 } = require("../../Database/db_maintenance_billing");
 const {extractToken} = require("../../Database/authorization");
 const {db_getPersonType} = require("../../Database/db_person");
@@ -13,26 +12,31 @@ async function renderPage(req, res) {
     const year = d.getFullYear();
 
     const token = extractToken(req);
-    const isOwner = await db_getPersonType(token.id) === 'owner';
-    if (!isOwner)
+    const isTenant = await db_getPersonType(token.id) === 'tenant';
+    if (!isTenant)
         return res.redirect('/login');
 
     await db_loadCurrentMonth(token.id, d.getMonth() + 1, year);
-    let maintenanceArr = await db_getMaintenanceHistory(token.id, 'owner');
+    const duesArr = await db_getUnpaidBillList(token.id, d.getMonth() + 1, year);
 
-    return res.render('maintenance-owner', {
-        pre: "Maintenance",
-        isOwner: isOwner,
+    return res.render('billing-tenant', {
         id: token.id,
-        month: monthName,
+        monthName: monthName,
         year: year,
-        maintenanceArr: maintenanceArr
+        duesArr: duesArr,
+        noDues: duesArr.length === 0
     });
 }
 
 async function postHandler(req, res) {
-    await db_resolveMaintenance(req.body.maintenance_id, req.body.cost);
-    return res.redirect('/owner/maintenance');
+    const token = extractToken(req);
+    const isTenant = await db_getPersonType(token.id) === 'tenant';
+    if (!isTenant)
+        return res.redirect('/login');
+
+    const data = req.body;
+    await db_resolveBilling(data.id, data.month, data.year);
+    return res.redirect('/tenant/billing');
 }
 
 module.exports = {

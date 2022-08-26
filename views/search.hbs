@@ -94,7 +94,6 @@
     <div class="row px-3 pt-3">
         <div class="col-3">
             <select name="sort" form="search">
-                <option value=''></option>
                 <option value="rating" {{#compare search.sort 'rating'}}selected{{/compare}}>Rating</option>
                 <option value="price" {{#compare search.sort 'price'}}selected{{/compare}}>Price</option>
                 <option value="space" {{#compare search.sort 'space'}}selected{{/compare}}>Space</option>
@@ -103,14 +102,13 @@
                 <option value="floor" {{#compare search.sort 'floor'}}selected{{/compare}}>Floor level</option>
             </select>
             <select name="order" form="search">
-                <option value=''></option>
-                <option value="ASC">Ascending</option>
-                <option value="DESC">Descending</option>
+                <option value="ASC" {{#compare search.order 'ASC'}}selected{{/compare}}>Ascending</option>
+                <option value="DESC" {{#compare search.order 'DESC'}}selected{{/compare}}>Descending</option>
             </select>
             <input type="submit" value="sort" form="search">
         </div>
     </div>
     <div class="row px-2 justify-content-center">
-        {{>houseCards}}
+        {{>house-card}}
     </div>
 </div>

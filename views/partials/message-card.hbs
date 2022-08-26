@@ -1,0 +1,13 @@
+{{#each msgArr}}
+    <div class="card p-0" style="width: 55%;
+        {{#compare ID1 ../sender}}float: left; {{else}}float:right;{{/compare}}">
+        <div class="card-body p-1" style="
+                background-color: {{#compare ID1 ../sender}}lightgray {{else}}white{{/compare}}">
+            <div>
+                <b>{{NAME1}}</b> ||
+                <i style="font-size: 12px">{{MESSAGE_TIME}}</i>
+            </div>
+            <div class="pt-1 px-3">{{STATEMENT}}</div>
+        </div>
+    </div>
+{{/each}}

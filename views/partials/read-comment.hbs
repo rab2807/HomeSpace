@@ -4,7 +4,11 @@
             <div>
                 <table style="width: 100%">
                     <td style="width: 10%">
-                        <img src="/images/dumb.jpg" height="40px" width="40px" style="border-radius: 50%;">
+                        {{#if ../isTenant}}
+                            <img src="/images/{{OWNER_PIC}}" height="40px" width="40px" style="border-radius: 50%;">
+                        {{else}}
+                            <img src="/images/{{TENANT_PIC}}" height="40px" width="40px" style="border-radius: 50%;">
+                        {{/if}}
                     </td>
                     <td style="width: 60%; font-size: 20px">
                         {{#if ../isTenant}}

@@ -5,6 +5,10 @@
                 {{>ratingCard}}
             </div>
 
+            <div style="float: left;padding-right: 20px">
+                <img src="/images/{{house.PROFILE_PICTURE}}" height="220px" width="220px">
+            </div>
+
             <div style="padding: 5px 15px;"><h1>HOUSE - {{house.HOUSE_ID}}</h1></div>
             <div style="padding: 5px 15px;"><h3>
                 <b style="font-size: x-large; font-weight:1000;
@@ -37,17 +41,41 @@
                         <button class="wide-button">{{requestButtonText}}</button>
                     </a>
                 {{/if}}
+                {{#compare requestButtonText 'Edit Info'}}
+                    <div class="py-0 px-0">
+                        <form action="/house/upload" method="post" enctype="multipart/form-data">
+                            <label for="upload" class="btn">Add House Profile Picture</label>
+                            <input hidden type="number" name="id" value={{../house.HOUSE_ID}}>
+                            <input hidden type="text" name="type" value='propic'>
+                            <input id="upload" accept=".jpg,.png" style="display: none" type="file"
+                                   name="image">
+                            <input type="submit" value="Upload">
+                        </form>
+                    </div>
+                {{/compare}}
                 <hr>
             </div>
         </div>
         <div class="col-sm-1"></div>
     </div>
 
-    <div class="row p-3 justify-content-center">
+    {{#compare requestButtonText 'Edit Info'}}
+        <div class="px-5 py-0">
+            <form action="/house/upload" method="post" enctype="multipart/form-data">
+                <label for="upload" class="btn">Add House Pictures</label>
+                <input hidden type="number" name="id" value={{../house.HOUSE_ID}}>
+                <input hidden type="text" name="type" value='otherpic'>
+                <input id="upload" accept=".jpg,.png" style="display: compact" type="file" name="image" multiple>
+                <input type="submit" value="Upload">
+            </form>
+        </div>
+    {{/compare}}
+
+    <div class="row p-3 py-0justify-content-center">
         <div id="cont">
             <div class="photobanner">
-                {{#each images as |image|}}
-                    <img src="/images/dumb.jpg" width="200px" height=auto>
+                {{#each images}}
+                    <img src="/images/{{PICTURE}}" width="300px" height="300px">
                 {{/each}}
             </div>
         </div>

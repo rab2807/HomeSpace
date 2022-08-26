@@ -1,10 +1,9 @@
 {{#each duesArr}}
-    <div class="row py-0">
+    <div class="row py-0" style="font-size: large">
         <div class="card p-0">
             <div class="card-body p-2 px-5">
                 <div>
-                    <form action="/tenant/maintenance" method="post">
-                        <input type="text" name="type" value="billing" hidden>
+                    <form action="/tenant/billing/post" method="post">
                         <input type="number" name="id" value={{TENANT_ID}} hidden>
                         <input type="number" name="month" value={{MONTH}} hidden>
                         <input type="number" name="year" value={{YEAR}} hidden>

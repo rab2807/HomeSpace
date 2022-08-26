@@ -21,7 +21,7 @@ async function db_houseForm(req, id) {
     };
 
     let sql = `insert into house(owner_id, name, location_id, created, price, vacant, floor, bedroom, bathroom,
-                                 elevator, garage, minimum_stay, space, note)
+                                 elevator, garage, space, note)
                values (:owner_id, :name, :location_id, TO_DATE(:created, 'yyyy-mm-dd'), :price, :vacant, :floor,
                        :bedroom, :bathroom, :elevator, :garage, :minimum_stay, :space, :note)`;
     await database.execute(sql, binds);
@@ -44,11 +44,12 @@ async function db_getHouseDetails(house_id) {
                       OWNER_ID,
                       (select USERNAME from PERSON where ID = OWNER_ID)  as OWNER_NAME,
                       CREATED,
+                      PROFILE_PICTURE,
                       PRICE,
                       VACANT,
                       FLOOR,
                       BEDROOM,
-                      BATHROOM, 
+                      BATHROOM,
                       ELEVATOR,
                       GARAGE,
                       NOTE,
@@ -96,6 +97,7 @@ async function db_getHouseRating(id) {
 
 async function db_getHousesFromPerson(id, sort = 'RATING', order = 'DESC') {
     let sql = `select HOUSE_ID,
+                      PROFILE_PICTURE,
                       OWNER_ID,
                       AREA,
                       SUBURB,
@@ -127,19 +129,26 @@ async function db_getHouseActivity(id, type) {
     return res.rows;
 }
 
+async function db_getPictures(id) {
+    let sql = `select PICTURE
+               from HOUSE_PICTURE
+               where HOUSE_ID = :id`
+    const res = await database.execute(sql, {id: id});
+    return res.rows;
+}
+
 async function db_editHouseInfo(hid, house) {
     console.log(house);
     let sql = `update HOUSE
-               set 
-                   PRICE       =:price,
-                   FLOOR       =:floor,
-                   BEDROOM     =:bedroom,
-                   BATHROOM    =:bathroom,
-                   ELEVATOR    =:elevator,
-                   GARAGE      =:garage, 
-                   NAME        =:name,
-                   NOTE        =:note,
-                   SPACE       =:space
+               set PRICE    =:price,
+                   FLOOR    =:floor,
+                   BEDROOM  =:bedroom,
+                   BATHROOM =:bathroom,
+                   ELEVATOR =:elevator,
+                   GARAGE   =:garage,
+                   NAME     =:name,
+                   NOTE     =:note,
+                   SPACE    =:space
                where HOUSE_ID = :hid`;
     let binds = {
         hid: hid,
@@ -156,6 +165,29 @@ async function db_editHouseInfo(hid, house) {
     await database.execute(sql, binds);
 }
 
+async function db_updateProPic(id, file) {
+    let sql = `update HOUSE
+               set PROFILE_PICTURE = :fileName
+               where HOUSE_ID = :id`;
+    await database.execute(sql, {id: id, fileName: file});
+}
+
+async function db_uploadPictures(id, files) {
+    for (let i = 0; i < files.length; i++) {
+        let sql = `insert into HOUSE_PICTURE
+                   values (:id, '${files[i]}')`;
+        await database.execute(sql, {id: id});
+    }
+}
+
 module.exports = {
-    db_houseForm, db_getHouseRating, db_getHousesFromPerson, db_getHouseDetails, db_getHouseActivity, db_editHouseInfo
+    db_houseForm,
+    db_getHouseRating,
+    db_getHousesFromPerson,
+    db_getHouseDetails,
+    db_getHouseActivity,
+    db_editHouseInfo,
+    db_uploadPictures,
+    db_updateProPic,
+    db_getPictures
 }

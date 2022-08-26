@@ -7,15 +7,19 @@
                     <b>{{CATEGORY}}</b> : {{DETAILS}}<br>
                 </p>
                 {{#compare RESOLVED 'no'}}
-                    <form action="/owner/maintenance" method="post">
-                        <input hidden type="number" name="mid" value={{../MAINTENANCE_ID}}>
-                        <label>Cost: </label>
-                        <input type="number" name="cost">
-                        <input type="submit" value="Resolve">
-                    </form>
+                    {{#if ../../isOwner}}
+                        <form action="/owner/maintenance/post" method="post">
+                            <input hidden type="number" name="maintenance_id" value={{../MAINTENANCE_ID}}>
+                            <label>Cost: </label>
+                            <input type="number" name="cost">
+                            <input type="submit" value="Resolve">
+                        </form>
+                    {{else}}
+                        <button style="color:red">NOT RESOLVED</button>
+                    {{/if}}
                 {{else}}
                     Cost: {{../COST}} taka <br><br>
-                    <button>RESOLVED</button>
+                    <button style="color:green">RESOLVED</button>
                 {{/compare}}
             </div>
         </div>

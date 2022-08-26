@@ -7,7 +7,7 @@ async function db_getNotification_owner(owner_id, hid, activity) {
 
     let sql = `select HOUSE_ID,
                       TENANT_ID,
-                      to_char(NOTIFICATION_TIME, 'DD-MON-YYYY')          as NOTIFICATION_TIME,
+                      to_char(TIME, 'DD-MON-YYYY')                       as NOTIFICATION_TIME,
                       NOTIFICATION_TYPE,
                       (select USERNAME from PERSON where ID = TENANT_ID) as TENANT_NAME
                from NOTIFICATION
@@ -15,7 +15,7 @@ async function db_getNotification_owner(owner_id, hid, activity) {
                                   from HOUSE
                                   where OWNER_ID = :owner_id)
                    ${str}
-               order by NOTIFICATION_TIME desc`;
+               order by "TIME" desc`;
 
     const res = await database.execute(sql, {owner_id: owner_id});
     return res.rows;
@@ -24,7 +24,8 @@ async function db_getNotification_owner(owner_id, hid, activity) {
 async function db_getNotification_tenant(tenant_id) {
     let sql = `select HOUSE_ID,
                       TENANT_ID,
-                      to_char(NOTIFICATION_TIME, 'DD-MON-YYYY')          as NOTIFICATION_TIME,
+                      ACTIVITY_ID,
+                      to_char(TIME, 'DD-MON-YYYY')                       as NOTIFICATION_TIME,
                       NOTIFICATION_TYPE,
                       (select USERNAME from PERSON where ID = TENANT_ID) as TENANT_NAME
                from NOTIFICATION

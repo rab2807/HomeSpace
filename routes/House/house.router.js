@@ -13,6 +13,9 @@ const router = express.Router();
 router.get('/house/form', formController.renderPage);
 router.post('/house/form', formController.postForm);
 
+// house picture upload
+router.post('/house/upload', detailsController.postHandler);
+
 // house edit
 router.get('/house/edit/:hid', editController.renderPage);
 router.post('/house/edit/:hid', editController.postHandler);

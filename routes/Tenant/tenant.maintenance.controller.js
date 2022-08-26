@@ -1,5 +1,5 @@
 const {
-    db_loadCurrentMonth, db_getUnpaidBillList, db_postMaintenance, db_resolveBilling
+    db_loadCurrentMonth, db_getUnpaidBillList, db_postMaintenance, db_resolveBilling, db_getMaintenanceHistory
 } = require("../../Database/db_maintenance_billing");
 const {extractToken} = require("../../Database/authorization");
 const {db_getPersonType} = require("../../Database/db_person");
@@ -16,15 +16,14 @@ async function renderPage(req, res) {
     if (!isTenant)
         return res.redirect('/login');
 
-    await db_loadCurrentMonth(token.id, d.getMonth(), year);
-    const duesArr = await db_getUnpaidBillList(token.id, d.getMonth(), year);
-    console.log(duesArr);
+    let maintenanceArr = await db_getMaintenanceHistory(token.id, 'tenant');
+    console.log(maintenanceArr);
 
-    return res.render('maintenance-and-billing-tenant', {
+    return res.render('maintenance-tenant', {
         id: token.id,
         monthName: monthName,
         year: year,
-        duesArr: duesArr,
+        maintenanceArr: maintenanceArr,
     });
 }
 
@@ -39,7 +38,7 @@ async function postHandler(req, res) {
         await db_postMaintenance(data.id, data.category, data.details);
     else if (data.type === 'billing')
         await db_resolveBilling(data.id, data.month, data.year);
-    return await renderPage(req, res);
+    return res.redirect('/tenant/maintenance')
 }
 
 module.exports = {

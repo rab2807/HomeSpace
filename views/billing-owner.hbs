@@ -17,21 +17,12 @@
                 <p>Dues of previous months: {{previousDues}} taka</p>
                 <p>Maintenance expenses this month: {{expense}} taka</p>
             </div>
-            <div class="col">
-                <h3>Billing history</h3>
-                <hr>
-                <div class="container" style=" height: 200px; overflow: scroll; ">
-                    {{>billing-card}}
-                </div>
-            </div>
         </div>
         <div class="row p-3">
-            <div class="col">
-                <h3>Maintenance</h3>
-                <hr>
-                <div class="container" style=" height: 400px; overflow: scroll; ">
-                    {{>maintenance-card}}
-                </div>
+            <h3>Billing history</h3>
+            <hr>
+            <div class="container" style=" height: 200px; overflow: scroll; ">
+                {{>billing-card}}
             </div>
         </div>
     </div>

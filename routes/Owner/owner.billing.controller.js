@@ -1,5 +1,7 @@
 const {
-    db_getMaintenanceHistory, db_loadCurrentMonth,
+    db_getExpectedRevenue,
+    db_getGainedRevenue,
+    db_getPreviousDues, db_getExpense, db_getBillingHistory, db_getMaintenanceHistory, db_loadCurrentMonth,
     db_resolveMaintenance
 } = require("../../Database/db_maintenance_billing");
 const {extractToken} = require("../../Database/authorization");
@@ -18,21 +20,28 @@ async function renderPage(req, res) {
         return res.redirect('/login');
 
     await db_loadCurrentMonth(token.id, d.getMonth() + 1, year);
-    let maintenanceArr = await db_getMaintenanceHistory(token.id, 'owner');
+    let expectedRev = await db_getExpectedRevenue(token.id);
+    let gainedRev = await db_getGainedRevenue(token.id, d.getMonth() + 1, year);
+    let previousDues = await db_getPreviousDues(token.id, d.getMonth() + 1, year);
+    let expense = await db_getExpense(token.id, d.getMonth() + 1, year);
+    let billingArr = await db_getBillingHistory(token.id);
 
-    return res.render('maintenance-owner', {
-        pre: "Maintenance",
+    return res.render('billing-owner', {
         isOwner: isOwner,
         id: token.id,
         month: monthName,
         year: year,
-        maintenanceArr: maintenanceArr
+        expectedRev: expectedRev,
+        gainedRev: gainedRev,
+        previousDues: previousDues,
+        expense: expense,
+        billingArr: billingArr,
     });
 }
 
 async function postHandler(req, res) {
-    await db_resolveMaintenance(req.body.maintenance_id, req.body.cost);
-    return res.redirect('/owner/maintenance');
+    await db_resolveMaintenance(req.body.mid, req.body.cost);
+    return await renderPage(req, res);
 }
 
 module.exports = {

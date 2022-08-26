@@ -3,7 +3,8 @@ const database = require('../Database/database');
 async function db_getExpectedRevenue(owner_id) {
     let sql = `select nvl(sum(PRICE), 0) as sum
                from HOUSE
-               where OWNER_ID = :owner_id`
+               where OWNER_ID = :owner_id
+                 and VACANT = 'yes'`
 
     const res = await database.execute(sql, {owner_id: owner_id});
     return res.rows[0].SUM;
@@ -69,15 +70,32 @@ async function db_getBillingHistory(owner_id) {
     return res.rows;
 }
 
-async function db_getMaintenanceHistory(owner_id) {
+async function db_getBillingInfo(id) {
     let sql = `select *
+               from BILLING
+               where BILLING_ID = :id`;
+    const res = await database.execute(sql, {id: id});
+    return res.rows[0];
+}
+
+async function db_getMaintenanceHistory(id, flag) {
+    let sql = '';
+    if (flag == 'owner')
+        sql = `select *
                from MAINTENANCE
                where HOUSE_ID IN (select HOUSE_ID
                                   from HOUSE
-                                  where OWNER_ID = :owner_id)
+                                  where OWNER_ID = :id)
+               order by MAINTENANCE_TIME desc`;
+    else
+        sql = `select *
+               from MAINTENANCE
+               where HOUSE_ID IN (select HOUSE_ID
+                                  from HOUSE
+                                  where TENANT_ID = :id)
                order by MAINTENANCE_TIME desc`;
 
-    const res = await database.execute(sql, {owner_id: owner_id});
+    const res = await database.execute(sql, {id: id});
     return res.rows;
 }
 
@@ -96,7 +114,7 @@ async function db_loadCurrentMonth(owner_id, month, year) {
               and YEAR = :year;
             
             if num = 0 then
-                insert into BILLING
+                insert into BILLING(house_id, tenant_id, month, year, paid, status)
                 select H.HOUSE_ID, TENANT_ID, :month, :year, PRICE, 'due'
                 from HOUSE H
                          join TENANT T on H.HOUSE_ID = T.HOUSE_ID
@@ -106,7 +124,7 @@ async function db_loadCurrentMonth(owner_id, month, year) {
                   and VACANT = 'no';
             end if;
         end;
-    `;
+        `;
 
     let binds = {owner_id: owner_id, month: month, year: year};
     await database.execute(sql, binds);
@@ -118,6 +136,12 @@ async function db_resolveMaintenance(id, cost) {
                    RESOLVED = 'yes'
                where MAINTENANCE_ID = :id`;
     await database.execute(sql, {id: id, cost: cost});
+
+    sql = `insert into NOTIFICATION(house_id, tenant_id, activity_id, notification_type)
+           select house_id, tenant_id, activity_id, 'maintenance-resolve'
+           from NOTIFICATION
+           where ACTIVITY_ID = :id`;
+    await database.execute(sql, {id: id});
 }
 
 async function db_postMaintenance(tid, category, details) {
@@ -128,7 +152,6 @@ async function db_postMaintenance(tid, category, details) {
 }
 
 async function db_resolveBilling(tid, month, year) {
-    console.log(tid, month, year);
     let sql = `update BILLING
                set PAID   = (
                    select PRICE
@@ -141,6 +164,16 @@ async function db_resolveBilling(tid, month, year) {
                  and YEAR = :year`;
     let binds = {tid: tid, month: month, year: year}
     await database.execute(sql, binds);
+
+    sql = `insert into NOTIFICATION(house_id, tenant_id, activity_id, notification_type)
+           select HOUSE_ID, TENANT_ID, BILLING_ID, 'billing-resolve'
+           from BILLING
+           where TENANT_ID = :tid
+             and MONTH = :month
+             and YEAR = :year`;
+    binds = {tid: tid, month: month, year: year}
+    await database.execute(sql, binds);
+
 }
 
 async function db_getUnpaidBillList(tid, month, year) {
@@ -164,5 +197,5 @@ module.exports = {
     db_getExpense,
     db_loadCurrentMonth,
     db_resolveMaintenance,
-    db_postMaintenance, db_resolveBilling, db_getUnpaidBillList
+    db_postMaintenance, db_resolveBilling, db_getUnpaidBillList, db_getBillingInfo
 }

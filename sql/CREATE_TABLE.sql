@@ -16,7 +16,7 @@ CREATE TABLE person
     password    VARCHAR2(1024) NOT NULL UNIQUE,
     phone       char(11)       NOT NULL UNIQUE,
     email       VARCHAR2(319)  NOT NULL UNIQUE,
-    photo       BLOB,
+    photo       VARCHAR2(1024),
     location_id NUMBER,
     type        VARCHAR2(50),
     CONSTRAINT pass_check check ( password like '%________%'),
@@ -34,17 +34,18 @@ CREATE TABLE owner
 
 CREATE TABLE house
 (
-    house_id     NUMBER GENERATED ALWAYS as IDENTITY (START with 1 INCREMENT by 1),
-    owner_id     NUMBER NOT NULL,
-    created      DATE DEFAULT SYSDATE,
-    price        NUMBER,
-    vacant       NUMBER,
-    floor        NUMBER,
-    bedroom      NUMBER,
-    bathroom     NUMBER,
-    elevator     CHAR(1),
-    garage       CHAR(1),
-    minimum_stay NUMBER,
+    house_id        NUMBER GENERATED ALWAYS as IDENTITY (START with 1 INCREMENT by 1),
+    owner_id        NUMBER NOT NULL,
+    profile_picture VARCHAR2(1024),
+    created         DATE DEFAULT SYSDATE,
+    price           NUMBER,
+    vacant          NUMBER,
+    floor           NUMBER,
+    bedroom         NUMBER,
+    bathroom        NUMBER,
+    elevator        CHAR(1),
+    garage          CHAR(1),
+    minimum_stay    NUMBER,
     CONSTRAINT house_pk PRIMARY KEY (house_id),
     CONSTRAINT house_owner_fk FOREIGN KEY (owner_id) REFERENCES owner (owner_id)
 );
@@ -106,11 +107,11 @@ CREATE TABLE leave
 
 CREATE TABLE notification
 (
-    owner_id          number not null,
+    owner_id          NUMBER NOT NULL,
     house_id          NUMBER NOT NULL,
     tenant_id         NUMBER NOT NULL,
     activity_id       NUMBER NOT NULL,
-    notification_type varchar2(10),
+    notification_type VARCHAR2(10),
     CONSTRAINT notification_owner_fk FOREIGN KEY (owner_id) REFERENCES owner (owner_id),
     CONSTRAINT notification_tenant_fk FOREIGN KEY (tenant_id) REFERENCES tenant (tenant_id),
     CONSTRAINT notification_house_fk FOREIGN KEY (house_id) REFERENCES house (house_id)
@@ -119,7 +120,7 @@ CREATE TABLE notification
 CREATE TABLE house_picture
 (
     house_id NUMBER NOT NULL,
-    picture  BLOB,
+    picture  VARCHAR2(1024),
     CONSTRAINT house_picture_house_fk FOREIGN KEY (house_id) REFERENCES house (house_id)
 );
 
@@ -162,11 +163,24 @@ CREATE TABLE maintenance
 
 CREATE TABLE billing
 (
-    house_id  NUMBER NOT NULL,
-    tenant_id NUMBER NOT NULL,
-    month     NUMBER,
-    year      NUMBER,
-    paid      NUMBER,
+    billing_id NUMBER GENERATED ALWAYS as IDENTITY (START with 1 INCREMENT by 1),
+    house_id   NUMBER NOT NULL,
+    tenant_id  NUMBER NOT NULL,
+    month      NUMBER,
+    year       NUMBER,
+    paid       NUMBER,
+    CONSTRAINT billing_pk PRIMARY KEY (billing_id),
     CONSTRAINT billing_tenant_fk FOREIGN KEY (tenant_id) REFERENCES tenant (tenant_id),
     CONSTRAINT billing_house_fk FOREIGN KEY (house_id) REFERENCES house (house_id)
 );
+
+alter table billing
+    add CONSTRAINT billing_pk PRIMARY KEY (billing_id);
+
+CREATE TABLE message
+(
+    person1_id NUMBER references person (id),
+    person2_id NUMBER references person (id),
+    time       DATE default SYSDATE,
+    statement  VARCHAR2(1024)
+)

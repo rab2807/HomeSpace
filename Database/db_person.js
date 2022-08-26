@@ -12,6 +12,7 @@ async function db_getPerson(id) {
                         AREA,
                         SUBURB,
                         DISTRICT,
+                        PHOTO,
                         ${str}
                  from PERSON P
                           join LOCATION L on P.LOCATION_ID = L.LOCATION_ID
@@ -28,15 +29,6 @@ async function db_getPersonType(id) {
                                     where ID = :id`, {id: id})).rows[0].USER_TYPE;
 }
 
-function db_getAvgRating(arr) {
-    let sum1 = 0, sum2 = 0;
-    for (let i = 0; i < arr.length; i++) {
-        sum1 += arr[i].RATING * arr[i].COUNT;
-        sum2 += arr[i].COUNT;
-    }
-    return sum1 / sum2;
-}
-
 async function db_getRating(id, type) {
     let sql = `select *
                from GET_RATING(:id, :type)`
@@ -47,7 +39,6 @@ async function db_getRating(id, type) {
         id: id, type: type, ret: {dir: oracledb.BIND_OUT, type: oracledb.NUMBER}
     }
     const res2 = await database.execute(sql, binds);
-
     let arr = [{RATING: 5, COUNT: 0}, {RATING: 4, COUNT: 0}, {RATING: 3, COUNT: 0}, {RATING: 2, COUNT: 0}, {
         RATING: 1, COUNT: 0
     },];
@@ -58,6 +49,13 @@ async function db_getRating(id, type) {
     }
 }
 
+async function db_updateProPic(id, file) {
+    let sql = `update PERSON
+               set PHOTO = :fileName
+               where ID = :id`;
+    await database.execute(sql, {id: id, fileName: file});
+}
+
 module.exports = {
-    db_getPerson, db_getRating, db_getPersonType
+    db_getPerson, db_getRating, db_getPersonType, db_updateProPic
 }
