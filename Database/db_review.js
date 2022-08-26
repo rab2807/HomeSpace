@@ -1,5 +1,6 @@
 const database = require("./database");
 
+// owner reviews tenant
 async function db_postReviewOnTenant(oid, tid, rating, comment) {
     const binds = {oid: Number(oid), tid: Number(tid), rating: Number(rating), statement: comment};
     let sql = `insert into OWNER_TO_TENANT_REVIEW(statement, rating, owner_id, tenant_id)
@@ -7,6 +8,7 @@ async function db_postReviewOnTenant(oid, tid, rating, comment) {
     await database.execute(sql, binds);
 }
 
+// tenant reviews house
 async function db_postReviewOnHouse(tid, hid, rating, comment) {
     const binds = {hid: hid, tid: tid, rating: rating, statement: comment};
     let sql = `insert into TENANT_TO_HOUSE_REVIEW(statement, rating, house_id, tenant_id)
@@ -14,6 +16,7 @@ async function db_postReviewOnHouse(tid, hid, rating, comment) {
     await database.execute(sql, binds);
 }
 
+// get tenant/house comments list
 async function db_getComments(id, type) {
     if (type == 'tenant') {
         let sql = `select statement,

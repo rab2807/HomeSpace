@@ -1,4 +1,4 @@
-const {db_getNotification_tenant} = require("../../Database/db_dashboard_owner");
+const {db_getNotification_tenant} = require("../../Database/db_dashboard");
 const {extractToken} = require("../../Database/authorization");
 const {db_getPersonType} = require("../../Database/db_person");
 const {db_getBillingInfo} = require("../../Database/db_maintenance_billing");

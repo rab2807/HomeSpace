@@ -4,7 +4,7 @@ async function db_getInbox(id) {
     let sql = `select id,
                       (select USERNAME
                        from PERSON
-                       where PERSON.ID = T.id) name
+                       where PERSON.ID = T.id) name 
                from (
                         select RECEIVER_ID id
                         from MESSAGE
@@ -50,6 +50,7 @@ async function db_postMessage(id1, id2, msg) {
     await database.execute(sql, binds);
 }
 
+// when user enters a chat-box, unseen messages get seen
 async function db_seenZoneMessage(id1, id2) {
     let sql = `update MESSAGE
                set SEEN = 'yes'

@@ -67,5 +67,4 @@ values (27, 'c')
 select 1
 from dual;
 
-delete from BILLING;
-commit ;
+drop table MESSAGE;

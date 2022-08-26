@@ -1,6 +1,7 @@
 const database = require('../Database/database');
 const {getLocation} = require('../helpers/locationUtil');
 
+// house form input for '/house/form'
 async function db_houseForm(req, id) {
     const location = await getLocation(req.lat, req.lon);
     let binds = {
@@ -39,6 +40,7 @@ async function db_houseForm(req, id) {
     console.log('house regi done');
 }
 
+// get house details for '/house/:id'
 async function db_getHouseDetails(house_id) {
     let sql = `select H.HOUSE_ID,
                       OWNER_ID,
@@ -73,6 +75,7 @@ async function db_getHouseDetails(house_id) {
     return res.rows[0];
 }
 
+// get house details for '/house/:id'
 async function db_getHouseRating(id) {
     let sql = `select *
                from GET_RATING(:id, 'house')`;
@@ -95,6 +98,7 @@ async function db_getHouseRating(id) {
     }
 }
 
+// get house list of an owner for '/house/list/:owner_id'
 async function db_getHousesFromPerson(id, sort = 'RATING', order = 'DESC') {
     let sql = `select HOUSE_ID,
                       PROFILE_PICTURE,
@@ -115,6 +119,7 @@ async function db_getHousesFromPerson(id, sort = 'RATING', order = 'DESC') {
     return res;
 }
 
+// get house follow/request list for '/house/:id'
 async function db_getHouseActivity(id, type) {
     let table = (type === 'request') ? 'REQUEST' : 'FOLLOW';
 
@@ -125,10 +130,11 @@ async function db_getHouseActivity(id, type) {
                from ${table}
                where HOUSE_ID = :id`;
     let res = await database.execute(sql, {id: id});
-    console.log(res.rows);
+    // console.log(res.rows);
     return res.rows;
 }
 
+// get house pictures
 async function db_getPictures(id) {
     let sql = `select PICTURE
                from HOUSE_PICTURE
@@ -137,6 +143,7 @@ async function db_getPictures(id) {
     return res.rows;
 }
 
+// update house values
 async function db_editHouseInfo(hid, house) {
     console.log(house);
     let sql = `update HOUSE
@@ -165,6 +172,7 @@ async function db_editHouseInfo(hid, house) {
     await database.execute(sql, binds);
 }
 
+// update house profile picture
 async function db_updateProPic(id, file) {
     let sql = `update HOUSE
                set PROFILE_PICTURE = :fileName
@@ -172,6 +180,7 @@ async function db_updateProPic(id, file) {
     await database.execute(sql, {id: id, fileName: file});
 }
 
+// insert house pictures
 async function db_uploadPictures(id, files) {
     for (let i = 0; i < files.length; i++) {
         let sql = `insert into HOUSE_PICTURE

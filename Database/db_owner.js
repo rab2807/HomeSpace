@@ -1,11 +1,15 @@
 const database = require("./database");
 
+// get house count
 async function db_getCount(id) {
+    // total houses
     const binds = {id: id};
     let sql = `select count(*) as cnt
                from HOUSE
                where OWNER_ID = :id`
     const res1 = await database.execute(sql, binds);
+
+    // vacant houses
     sql = `select count(*) as cnt
            from HOUSE
            where OWNER_ID = :id
@@ -18,6 +22,7 @@ async function db_getCount(id) {
     }
 }
 
+// edit profile info
 async function db_editProfile(person) {
     let sql = `begin
                 UPDATE_USER(:id, :username, :oldPass, :newPass, :phone, :email, category_=>:category);

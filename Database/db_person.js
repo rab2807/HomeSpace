@@ -1,5 +1,6 @@
 const database = require("./database");
 
+// person info
 async function db_getPerson(id) {
     const binds = {id: id};
     let type = await db_getPersonType(id);
@@ -23,12 +24,14 @@ async function db_getPerson(id) {
     return res.rows[0];
 }
 
+// if the person is owner or tenant
 async function db_getPersonType(id) {
     return (await database.execute(`select user_type
                                     from PERSON
                                     where ID = :id`, {id: id})).rows[0].USER_TYPE;
 }
 
+// get person rating
 async function db_getRating(id, type) {
     let sql = `select *
                from GET_RATING(:id, :type)`

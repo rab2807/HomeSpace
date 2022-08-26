@@ -1,12 +1,14 @@
 const database = require('../Database/database');
 
+// owner notification list
 async function db_getNotification_owner(owner_id, hid, activity) {
     let str = '';
     if (hid && hid !== '') str = str.concat(`and HOUSE_ID = ${hid} `);
-    if (activity && activity !== '') str = str.concat(`and NOTIFICATION_TYPE = '${activity}' `);
+    if (activity && activity !== '') str = str.concat(`and NOTIFICATION_TYPE LIKE '%${activity}%' `);
 
     let sql = `select HOUSE_ID,
                       TENANT_ID,
+                      ACTIVITY_ID,
                       to_char(TIME, 'DD-MON-YYYY')                       as NOTIFICATION_TIME,
                       NOTIFICATION_TYPE,
                       (select USERNAME from PERSON where ID = TENANT_ID) as TENANT_NAME
@@ -21,6 +23,7 @@ async function db_getNotification_owner(owner_id, hid, activity) {
     return res.rows;
 }
 
+// tenant notification list
 async function db_getNotification_tenant(tenant_id) {
     let sql = `select HOUSE_ID,
                       TENANT_ID,

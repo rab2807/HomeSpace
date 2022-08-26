@@ -5,9 +5,9 @@ oracledb.autoCommit = true;
 async function startup() {
     console.log('starting up database.');
     await oracledb.createPool({
-        user: process.env.DB_USER || 'system',
-        password: process.env.DB_PASS || '*************',
-        connectstring: process.env.DB_CONNECTSTRING || 'localhost/XEPDB1',
+        user: process.env.DB_USER,
+        password: process.env.DB_PASS,
+        connectstring: process.env.DB_CONNECTSTRING,
         poolMin: 4,
         poolMax: 10,
         poolIncrement: 1
@@ -52,7 +52,7 @@ async function executeMany(sql, binds, options) {
     let connection;
     try {
         connection = await oracledb.getConnection();
-        results = await connection.executeMany(sql, binds, options = {outFormat: oracledb.OUT_FORMAT_OBJECT});
+        let results = await connection.executeMany(sql, binds, options = {outFormat: oracledb.OUT_FORMAT_OBJECT});
     } catch (err) {
         console.log("Error executing sql: " + err.message);
     } finally {

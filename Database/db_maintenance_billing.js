@@ -1,15 +1,17 @@
 const database = require('../Database/database');
 
+// total revenue to be gained from rented houses per month
 async function db_getExpectedRevenue(owner_id) {
     let sql = `select nvl(sum(PRICE), 0) as sum
                from HOUSE
                where OWNER_ID = :owner_id
-                 and VACANT = 'yes'`
+                 and VACANT = 'no'`
 
     const res = await database.execute(sql, {owner_id: owner_id});
     return res.rows[0].SUM;
 }
 
+// total gained revenue from rented houses in current month
 async function db_getGainedRevenue(owner_id, month, year) {
     let sql = `select nvl(sum(PRICE), 0) as sum
                from HOUSE H
@@ -17,13 +19,14 @@ async function db_getGainedRevenue(owner_id, month, year) {
                where OWNER_ID = :owner_id
                  and MONTH = :month
                  and YEAR = :year
-                 and STATUS = 'clear'`;
+                 and STATUS = 'cleared'`;
 
     let binds = {owner_id: owner_id, month: month, year: year};
     const res = await database.execute(sql, binds);
     return res.rows[0].SUM;
 }
 
+// unpaid dues of previous months
 async function db_getPreviousDues(owner_id, month, year) {
     let sql = `select nvl(sum(PRICE), 0) as sum
                from HOUSE H
@@ -37,6 +40,7 @@ async function db_getPreviousDues(owner_id, month, year) {
     return res.rows[0].SUM;
 }
 
+// maintenance cost of current month
 async function db_getExpense(owner_id, month, year) {
     let sql = `select nvl(sum(COST), 0) as sum
                from MAINTENANCE
@@ -52,6 +56,7 @@ async function db_getExpense(owner_id, month, year) {
     return res.rows[0].SUM;
 }
 
+// get billing history
 async function db_getBillingHistory(owner_id) {
     let sql = `select HOUSE_ID,
                       TENANT_ID,
@@ -70,6 +75,7 @@ async function db_getBillingHistory(owner_id) {
     return res.rows;
 }
 
+// get billing info for a specific id
 async function db_getBillingInfo(id) {
     let sql = `select *
                from BILLING
@@ -78,6 +84,7 @@ async function db_getBillingInfo(id) {
     return res.rows[0];
 }
 
+// get maintenance history
 async function db_getMaintenanceHistory(id, flag) {
     let sql = '';
     if (flag == 'owner')
@@ -99,6 +106,7 @@ async function db_getMaintenanceHistory(id, flag) {
     return res.rows;
 }
 
+// include the entry of current month in the billing table for all houses of an owner
 async function db_loadCurrentMonth(owner_id, month, year) {
     let sql = `
         DECLARE
@@ -130,6 +138,7 @@ async function db_loadCurrentMonth(owner_id, month, year) {
     await database.execute(sql, binds);
 }
 
+// update maintenance info and make a notification after the owner resolves an issue
 async function db_resolveMaintenance(id, cost) {
     let sql = `update maintenance
                set COST     = :cost,
@@ -144,6 +153,7 @@ async function db_resolveMaintenance(id, cost) {
     await database.execute(sql, {id: id});
 }
 
+// add row in maintenance table after a tenant posts an issue
 async function db_postMaintenance(tid, category, details) {
     let sql = `insert into MAINTENANCE(house_id, tenant_id, category, details, resolved)
                values ((select HOUSE_ID from TENANT where TENANT_ID = :tid), :tid, :category, :details, 'no')`;
@@ -151,6 +161,7 @@ async function db_postMaintenance(tid, category, details) {
     await database.execute(sql, binds);
 }
 
+// update info in billing table and make a notification after payment of the tenant
 async function db_resolveBilling(tid, month, year) {
     let sql = `update BILLING
                set PAID   = (
@@ -176,6 +187,7 @@ async function db_resolveBilling(tid, month, year) {
 
 }
 
+// get unpaid billing list
 async function db_getUnpaidBillList(tid, month, year) {
     let sql = `select *
                from BILLING

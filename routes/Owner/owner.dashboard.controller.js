@@ -1,4 +1,4 @@
-const {db_getNotification_owner} = require("../../Database/db_dashboard_owner");
+const {db_getNotification_owner} = require("../../Database/db_dashboard");
 const {extractToken} = require("../../Database/authorization");
 const {db_getHousesFromPerson} = require("../../Database/db_house");
 const {db_getPersonType} = require("../../Database/db_person");
@@ -16,6 +16,7 @@ async function renderPage(req, res) {
     for (const e of notiArr) {
         if (e.NOTIFICATION_TYPE === 'billing-resolve') {
             const billInfo = await db_getBillingInfo(e.ACTIVITY_ID);
+
             e.MONTH = months[billInfo.MONTH - 1];
             e.YEAR = billInfo.YEAR;
             e.PAID = billInfo.PAID;

@@ -17,13 +17,12 @@ begin
 
     if type_ = 'owner' then
         insert into OWNER(owner_id, category) VALUES (id, category_);
-    elsif type_ = 'tenant' then
+    else
         insert into TENANT(tenant_id, job, house_id, family_members) values (id, job_, HID, members);
     end if;
 
     ADD_LOCATION(lid, lat, lon, area_, suburb_, district_);
 end;
-
 
 create or replace procedure ADD_LOCATION(id in number, lat in number, lon in number, area_ in varchar2,
                                          suburb_ in varchar2, district_ in varchar2) is
@@ -65,7 +64,8 @@ begin
 
         if oldPass = p and p like '%________%' then
             update PERSON
-            set PASSWORD = newPass, USERNAME = 'modon'
+            set PASSWORD = newPass,
+                USERNAME = 'modon'
             where ID = userID;
         else
             raise wrongPass;

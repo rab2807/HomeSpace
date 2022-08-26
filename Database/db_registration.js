@@ -20,7 +20,6 @@ async function db_registration(response) {
         district: location.district,
     };
 
-    console.log(binds);
     let sql;
     if (response.category) {
         sql = `begin ADD_USER(:name, :pass, :phone, :mail, :lid, :lat, :lon, :area, :suburb, :district, 'owner', category_=>:category); end;`;

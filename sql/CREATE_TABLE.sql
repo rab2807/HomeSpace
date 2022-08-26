@@ -81,6 +81,7 @@ CREATE TABLE request
     house_id     NUMBER NOT NULL,
     tenant_id    NUMBER NOT NULL,
     request_time DATE DEFAULT SYSDATE,
+    CONSTRAINT request_pk PRIMARY KEY (request_id),
     CONSTRAINT request_tenant_fk FOREIGN KEY (tenant_id) REFERENCES tenant (tenant_id),
     CONSTRAINT request_house_fk FOREIGN KEY (house_id) REFERENCES house (house_id)
 );
@@ -91,6 +92,7 @@ CREATE TABLE follow
     house_id    NUMBER NOT NULL,
     tenant_id   NUMBER NOT NULL,
     follow_time DATE DEFAULT SYSDATE,
+    CONSTRAINT follow_pk PRIMARY KEY (follow_id),
     CONSTRAINT follow_tenant_fk FOREIGN KEY (tenant_id) REFERENCES tenant (tenant_id),
     CONSTRAINT follow_house_fk FOREIGN KEY (house_id) REFERENCES house (house_id)
 );
@@ -101,6 +103,7 @@ CREATE TABLE leave
     house_id   NUMBER NOT NULL,
     tenant_id  NUMBER NOT NULL,
     leave_time DATE DEFAULT SYSDATE,
+    CONSTRAINT leave_pk PRIMARY KEY (leave_id),
     CONSTRAINT leave_tenant_fk FOREIGN KEY (tenant_id) REFERENCES tenant (tenant_id),
     CONSTRAINT leave_house_fk FOREIGN KEY (house_id) REFERENCES house (house_id)
 );
@@ -132,7 +135,9 @@ CREATE TABLE owner_to_tenant_review
     time            DATE DEFAULT SYSDATE,
     owner_id        NUMBER,
     tenant_id       NUMBER,
-    CONSTRAINT owner_review_pk PRIMARY KEY (owner_review_id)
+    CONSTRAINT owner_review_pk PRIMARY KEY (owner_review_id),
+    CONSTRAINT review_tenant_fk FOREIGN KEY (tenant_id) REFERENCES tenant (tenant_id),
+    CONSTRAINT review_owner_fk FOREIGN KEY (owner_id) REFERENCES owner (owner_id)
 );
 
 CREATE TABLE tenant_to_house_review
@@ -143,7 +148,9 @@ CREATE TABLE tenant_to_house_review
     time             DATE DEFAULT SYSDATE,
     tenant_id        NUMBER,
     house_id         NUMBER,
-    CONSTRAINT tenant_review_pk PRIMARY KEY (tenant_review_id)
+    CONSTRAINT tenant_review_pk PRIMARY KEY (tenant_review_id),
+    CONSTRAINT review_tenant_fk FOREIGN KEY (tenant_id) REFERENCES tenant (tenant_id),
+    CONSTRAINT review_house_fk FOREIGN KEY (house_id) REFERENCES house (house_id)
 );
 
 CREATE TABLE maintenance
@@ -174,13 +181,11 @@ CREATE TABLE billing
     CONSTRAINT billing_house_fk FOREIGN KEY (house_id) REFERENCES house (house_id)
 );
 
-alter table billing
-    add CONSTRAINT billing_pk PRIMARY KEY (billing_id);
-
 CREATE TABLE message
 (
-    person1_id NUMBER references person (id),
-    person2_id NUMBER references person (id),
-    time       DATE default SYSDATE,
-    statement  VARCHAR2(1024)
-)
+    sender_id   NUMBER references person (id),
+    receiver_id NUMBER references person (id),
+    time        DATE        default SYSDATE,
+    statement   VARCHAR2(1024),
+    seen        VARCHAR2(3) default 'no'
+);

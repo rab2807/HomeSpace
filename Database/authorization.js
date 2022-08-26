@@ -30,10 +30,8 @@ const authMiddleware = (req, res, next) => {
     if (token) {
         jwt.verify(token, process.env.DB_PRIVKEY, (err, decodedToken) => {
             if (err) {
-                console.log(err.message);
                 res.redirect('/login');
             } else {
-                console.log('cookie: ', decodedToken);
                 next();
             }
         });
