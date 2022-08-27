@@ -8,11 +8,10 @@
                         <label> {{RATING}} <i class="fas fa-star"></i> ({{COUNT}}) </label>
                     </td>
                     <td style="padding-left: 10px">
-                        <progress value={{COUNT}} max={{ratingTotalCount}}></progress>
+                        <progress value={{COUNT}} max={{../ratingTotalCount}}></progress>
                     </td>
                 </tr>
             {{/each}}
-            <!--            {{{ratingBarHelper ratingArr}}}-->
         </table>
     </div>
 </div>

@@ -4,7 +4,7 @@ async function db_getInbox(id) {
     let sql = `select id,
                       (select USERNAME
                        from PERSON
-                       where PERSON.ID = T.id) name 
+                       where PERSON.ID = T.id) name
                from (
                         select RECEIVER_ID id
                         from MESSAGE
@@ -19,11 +19,11 @@ async function db_getInbox(id) {
 }
 
 async function db_getUnseenMessageCount(id1, id2) {
+    console.log(id1, id2);
     let sql = `select count(*) CNT
                from MESSAGE
                where SEEN = 'no'
-                 and ((SENDER_ID = :id1 and RECEIVER_ID = :id2)
-                   or (SENDER_ID = :id2 and RECEIVER_ID = :id1))`;
+                 and (SENDER_ID = :id2 and RECEIVER_ID = :id1)`;
     const res = await database.execute(sql, {id1: id1, id2: id2});
     return res.rows[0].CNT;
 }
@@ -34,7 +34,8 @@ async function db_getMessages(id1, id2) {
                       RECEIVER_ID                                          id2,
                       (select USERNAME from PERSON where ID = RECEIVER_ID) name2,
                       to_char(time, 'DD-MON-YYYY, MM:HH AM') as            message_time,
-                      statement
+                      statement,
+                      seen
                from MESSAGE
                where (SENDER_ID = :id1 and RECEIVER_ID = :id2)
                   or (RECEIVER_ID = :id1 and SENDER_ID = :id2)
@@ -55,8 +56,7 @@ async function db_seenZoneMessage(id1, id2) {
     let sql = `update MESSAGE
                set SEEN = 'yes'
                where SEEN = 'no'
-                 and ((SENDER_ID = :id1 and RECEIVER_ID = :id2)
-                   or (SENDER_ID = :id2 and RECEIVER_ID = :id1))`;
+                 and (SENDER_ID = :id2 and RECEIVER_ID = :id1)`;
     let binds = {id1: id1, id2: id2};
     await database.execute(sql, binds);
 }

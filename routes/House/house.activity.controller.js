@@ -11,6 +11,7 @@ async function renderPage(req, res) {
     let arr = await db_getHouseActivity(hid, 'request');
 
     return res.render('house-activity', {
+        pre: 'Requests',
         id: token.id,
         isOwner: (await db_getPersonType(token.id) === 'owner'),
         arr: arr,

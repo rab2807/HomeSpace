@@ -6,9 +6,9 @@ async function renderPage(req, res) {
     const hid = req.params.hid;
     const token_id = extractToken(req).id;
     const house = await db_getHouseDetails(hid);
-    console.log(house);
 
     res.render('house-edit', {
+        pre: 'Edit house info',
         id: token_id,
         isOwner: (await db_getPersonType(token_id) === 'owner'),
         userID: token_id,

@@ -24,7 +24,7 @@ async function db_houseForm(req, id) {
     let sql = `insert into house(owner_id, name, location_id, created, price, vacant, floor, bedroom, bathroom,
                                  elevator, garage, space, note)
                values (:owner_id, :name, :location_id, TO_DATE(:created, 'yyyy-mm-dd'), :price, :vacant, :floor,
-                       :bedroom, :bathroom, :elevator, :garage, :minimum_stay, :space, :note)`;
+                       :bedroom, :bathroom, :elevator, :garage, :space, :note)`;
     await database.execute(sql, binds);
 
     sql = `begin ADD_LOCATION(:lid, :lat, :lon, :area, :suburb, :district); end;`;
@@ -113,6 +113,7 @@ async function db_getHousesFromPerson(id, sort = 'RATING', order = 'DESC') {
                         join location l on h.LOCATION_ID = l.LOCATION_ID
                where h.OWNER_ID = :id
                order by ${sort} ${order}`;
+    console.log(sql);
     let binds = {id: id};
     const res = (await database.execute(sql, binds)).rows;
     // console.log('db_getHousesFromPerson---------------------------\n', res);

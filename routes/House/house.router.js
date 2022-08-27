@@ -32,7 +32,7 @@ router.get('/house/request/:hid/:action/:tid?', requestController.handler);
 // house activity manager
 router.get('/house/activity/:hid', activityController.renderPage);
 
-// house activity manager
+// house review manager
 router.post('/house/postReview', reviewController.postHandler);
 
 module.exports = router;

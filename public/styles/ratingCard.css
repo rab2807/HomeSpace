@@ -4,20 +4,21 @@
 }
 
 progress {
-    background: mediumpurple;
+    background: white;
     height: 7px;
     vertical-align: center;
     box-sizing: content-box;
+    border: 1px double black;
 }
 
 progress::-webkit-progress-value {
-    background: rebeccapurple;
+    background: black;
     height: 7px;
     vertical-align: center;
 }
 
 progress::-webkit-progress-bar{
-    background-color: #baafd0;
+    background-color: white;
     vertical-align: center;
     height: 7px;
 }

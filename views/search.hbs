@@ -1,16 +1,16 @@
 <div class="sidebar-right">
     <form action="/tenant/search" method="get" id="search">
-        <div class="row px-2">
+        <div class="row px-3">
             <h3>Place</h3>
             <hr>
-            <div class="row px-2">
+            <div class="row px-3">
                 <div class="col">
                     <label style="padding: 4px" for="suburb">Suburb </label>
                     <input type="text" value="{{search.suburb}}" name="suburb">
                 </div>
             </div>
 
-            <div class="row px-2">
+            <div class="row px-3">
                 <div class="col">
                     <label style="padding: 4px" for="district">District </label>
                     <input type="text" value="{{search.district}}" name="district">
@@ -21,14 +21,14 @@
         <div class="row px-2 pt-2">
             <h3>House</h3>
             <hr>
-            <div class="row px-2">
+            <div class="row px-3">
                 <div class="col">
                     <label style="padding: 4px" for="vacant">Show only vacant</label>
                     <input type="checkbox"
                            {{#compare search.vacant 'yes'}}checked{{/compare}} id="vacant" name="vacant" value="yes">&nbsp;&nbsp;
                 </div>
             </div>
-            <div class="row px-2">
+            <div class="row px-3">
                 <div class="col">
                     <label style="padding: 4px" for="rating">Rating </label><br>
                     <input type="number" min="0" max="5" value="{{search.rating_low}}" name="rating_low"
@@ -38,7 +38,7 @@
                            placeholder="max">
                 </div>
             </div>
-            <div class="row px-2">
+            <div class="row px-3">
                 <div class="col">
                     <label style="padding: 4px" for="price">Price Range </label>
                     <div class="col"><input type="number" min="0" value="{{search.price_low}}" name="price_low"
@@ -47,31 +47,31 @@
                                             placeholder="max"></div>
                 </div>
             </div>
-            <div class="row px-2">
+            <div class="row px-3">
                 <div class="col">
                     <label style="padding: 4px" for="space">Space (in sq ft)</label>
                     <input type="number" min="0" value="{{search.space}}" name="space">
                 </div>
             </div>
-            <div class="row px-2">
+            <div class="row px-3">
                 <div class="col">
                     <label style="padding: 4px" for="floor">Floor level </label>
                     <input type="number" min="0" value="{{search.floor}}" name="floor">
                 </div>
             </div>
-            <div class="row px-2">
+            <div class="row px-3">
                 <div class="col">
                     <label style="padding: 4px" for="bedroom">Number of Bedrooms </label>
                     <input type="number" min="0" value="{{search.bedroom}}" name="bedroom">
                 </div>
             </div>
-            <div class="row px-2">
+            <div class="row px-3">
                 <div class="col">
                     <label style="padding: 4px" for="bathroom">Number of Bathrooms </label>
                     <input type="number" min="0" value="{{search.bathroom}}" name="bathroom">
                 </div>
             </div>
-            <div class="row px-2">
+            <div class="row px-3">
                 <div class="col">
                     <label style="padding: 4px" for="garage">Garage</label>
                     <input type="checkbox"
@@ -83,7 +83,7 @@
                 </div>
             </div>
         </div>
-        <div>
+        <div class=" px-3">
             <input type="submit" value="Search">
             <input type="reset" value="Reset">
         </div>
@@ -104,7 +104,7 @@
             <select name="order" form="search">
                 <option value="ASC" {{#compare search.order 'ASC'}}selected{{/compare}}>Ascending</option>
                 <option value="DESC" {{#compare search.order 'DESC'}}selected{{/compare}}>Descending</option>
-            </select>
+            </select><br>
             <input type="submit" value="sort" form="search">
         </div>
     </div>

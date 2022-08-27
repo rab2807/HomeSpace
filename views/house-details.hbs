@@ -2,7 +2,7 @@
     <div class="row p-3 justify-content-center">
         <div class="col-11">
             <div style="float: right">
-                {{>ratingCard}}
+                {{>rating-card}}
             </div>
 
             <div style="float: left;padding-right: 20px">
@@ -18,7 +18,7 @@
                     </b><br>
                 </h4>
             </div>
-            <div style="padding: 5px 15px;"><h3>Price: {{house.PRICE}}</h3></div>
+            <div style="padding: 5px 15px;"><h3>Price: {{house.PRICE}} taka</h3></div>
             <div style="padding-left: 15px">
                 {{#if isOwner}}
                     <div style="padding: 7px">
@@ -70,7 +70,7 @@
     </div>
 
     {{#compare requestButtonText 'Edit Info'}}
-        <div class="px-5 py-0">
+        <div class="row px-5 py-0">
             <form action="/house/upload" method="post" enctype="multipart/form-data">
                 <label for="upload" class="btn">Add House Pictures</label>
                 <input hidden type="number" name="id" value={{../house.HOUSE_ID}}>
@@ -81,11 +81,11 @@
         </div>
     {{/compare}}
 
-    <div class="row p-3 py-0justify-content-center">
+    <div class="row p-3 py-0">
         <div id="cont">
             <div class="photobanner">
                 {{#each images}}
-                    <img src="/images/{{PICTURE}}" width="300px" height="300px">
+                    <img class="expandable-img" src="/images/{{PICTURE}}" width="300px" height="300px">
                 {{/each}}
             </div>
         </div>

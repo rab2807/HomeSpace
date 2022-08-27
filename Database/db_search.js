@@ -31,6 +31,7 @@ async function db_searchHouse(criteria) {
 
     let sql = `select HOUSE_ID,
                       OWNER_ID,
+                      PROFILE_PICTURE,
                       AREA,
                       SUBURB,
                       DISTRICT,
@@ -40,7 +41,6 @@ async function db_searchHouse(criteria) {
                from house h
                         join location l on h.LOCATION_ID = l.LOCATION_ID
                where HOUSE_ID = HOUSE_ID ` + str;
-    console.log(sql);
     const res = await database.execute(sql, {});
     return res.rows;
 }

@@ -1,13 +1,24 @@
 {{#each msgArr}}
     <div class="card p-0" style="width: 55%;
-        {{#compare ID1 ../sender}}float: left; {{else}}float:right;{{/compare}}">
+        {{#compare ID1 ../sender}}float: left; {{else}}float:right;{{/compare}}
+            border-radius: 30px;">
         <div class="card-body p-1" style="
-                background-color: {{#compare ID1 ../sender}}lightgray {{else}}white{{/compare}}">
-            <div>
+                background-color: {{#compare ID1 ../sender}}lightgray {{else}}white{{/compare}};
+                border-radius: 30px;">
+            <div class="px-2">
                 <b>{{NAME1}}</b> ||
                 <i style="font-size: 12px">{{MESSAGE_TIME}}</i>
             </div>
-            <div class="pt-1 px-3">{{STATEMENT}}</div>
+            <div class="pt-1 px-5">{{STATEMENT}}</div>
+            <div class="px-4" style="font-size: smaller; text-align: right">
+                {{#compare ID1 ../sender}}
+                    {{#compare ../SEEN 'yes'}}
+                        <i class="fa-solid fa-check-double"></i>
+                    {{else}}
+                        <i class="fa-solid fa-x"></i>
+                    {{/compare}}
+                {{/compare}}
+            </div>
         </div>
     </div>
 {{/each}}

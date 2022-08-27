@@ -6,21 +6,25 @@ create or replace procedure ADD_USER(username_ in varchar2, password_ in varchar
                                      members in number default null) is
     id number;
 begin
+    -- insert
     insert into PERSON(username, password, phone, email, location_id, user_type)
     values (username_, password_, phone_, email_, LID, type_);
 
+    -- get the id
     select ID
     into id
     from PERSON
     where PASSWORD = password_
       and EMAIL = email_;
 
+    -- insert into owner/tenant table
     if type_ = 'owner' then
         insert into OWNER(owner_id, category) VALUES (id, category_);
     else
         insert into TENANT(tenant_id, job, house_id, family_members) values (id, job_, HID, members);
     end if;
 
+    -- add location
     ADD_LOCATION(lid, lat, lon, area_, suburb_, district_);
 end;
 
@@ -28,11 +32,13 @@ create or replace procedure ADD_LOCATION(id in number, lat in number, lon in num
                                          suburb_ in varchar2, district_ in varchar2) is
     loc_count number default 0;
 begin
+    -- check if the location is already in database
     select count(*)
     into loc_count
     from LOCATION
     where LOCATION_ID = id;
 
+    -- insert location
     if loc_count = 0 then
         insert into LOCATION(LOCATION_ID, latitude, longitude, area, suburb, district)
         VALUES (id, lat, lon, area_, suburb_, district_);
@@ -49,13 +55,15 @@ create or replace procedure UPDATE_USER(userID in number, username_ in varchar2,
     wrongPass exception;
     pragma exception_init ( wrongPass, -20001 );
 begin
-
+    -- update
     update PERSON
     set username = username_,
         phone    = phone_,
         email    = email_
     where ID = userID;
 
+    -- check if old pass is correct. If it is, check if new pass is 8 chars long.
+    -- Then approve the new pass, otherwise raise exception
     if newPass != '' or newPass is not null then
         select PASSWORD
         into p
@@ -72,6 +80,7 @@ begin
         end if;
     end if;
 
+    -- get id and update owner/tenant table
     select USER_TYPE
     into t
     from PERSON

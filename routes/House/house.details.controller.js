@@ -49,6 +49,7 @@ async function renderPage(req, res) {
     let imageArr = await db_getPictures(house.HOUSE_ID);
 
     res.render('house-details', {
+        pre: `House - ${house.HOUSE_ID}`,
         id: token_id,
         isHouse: true,
         isOwner: (await db_getPersonType(token_id) === 'owner'),

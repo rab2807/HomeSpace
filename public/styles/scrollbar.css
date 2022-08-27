@@ -6,6 +6,6 @@
     background: lightgray;
 }
 ::-webkit-scrollbar-thumb {
-    background: rebeccapurple;
+    background: black;
     border-radius: 5px;
 }

@@ -1,16 +1,20 @@
 #cont {
-    height:210px;
-    position:relative;
-    overflow:hidden;
+    height: 300px;
+    overflow: hidden;
+    position: relative;
 }
 
 .photobanner {
-    position:absolute;
+    position: absolute;
     /*top:0px;*/
     /*left:0px;*/
-    overflow:hidden;
+    overflow: hidden;
     white-space: nowrap;
     animation: bannermove 4s linear infinite;
+    top: 15%;
+    -ms-transform: translateY(-50%);
+    transform: translateY(-50%);
+
 }
 
 .photobanner:hover {
@@ -18,7 +22,20 @@
 }
 
 .photobanner img {
-    margin: 0 0.5em
+    margin: 0 0.5em;
+}
+
+.expandable-img {
+    width: 150px;
+    height: 150px;
+    border: 2px solid slategray;
+    transition: 0.3s;
+}
+
+.expandable-img:hover {
+    border: 2px solid slategray;
+    width: 250px;
+    height: 250px;
 }
 
 @keyframes bannermove {

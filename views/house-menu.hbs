@@ -3,13 +3,13 @@
         <div class="col-3">
             <form action="/house/list/{{id}}" method="get">
                 <select name="sort">
-                    <option value="RATING">Rating</option>
-                    <option value="PRICE">Price</option>
-                    <option value="SPACE">Space</option>
+                    <option value="RATING" {{#compare sort "RATING"}}selected{{/compare}}>Rating</option>
+                    <option value="PRICE" {{#compare sort "PRICE"}}selected{{/compare}}>Price</option>
+                    <option value="SPACE" {{#compare sort "SPACE"}}selected{{/compare}}>Space</option>
                 </select>
                 <select name="order">
-                    <option value="ASC">Ascending</option>
-                    <option value="DESC">Descending</option>
+                    <option value="ASC" {{#compare order "ASC"}}selected{{/compare}}>Ascending</option>
+                    <option value="DESC" {{#compare order "DESC"}}selected{{/compare}}>Descending</option>
                 </select>
                 <input type="submit" value="Sort">
             </form>

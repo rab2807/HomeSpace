@@ -12,6 +12,7 @@ async function renderPage(req, res) {
     let isOwner = (await db_getPersonType(token.id)) === 'owner';
 
     return res.render('message', {
+        pre: 'Messaging',
         id: token.id,
         isOwner: isOwner,
         pre: 'Message',

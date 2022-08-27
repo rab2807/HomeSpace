@@ -10,7 +10,7 @@ async function renderPage(req, res) {
 
     const inboxArr = await db_getInbox(token.id);
     for (const e of inboxArr)
-        e.UNSEEN = await db_getUnseenMessageCount(token.id, e.ID2);
+        e.UNSEEN = await db_getUnseenMessageCount(token.id, e.ID);
 
     return res.render('inbox', {
         isOwner: isOwner,
