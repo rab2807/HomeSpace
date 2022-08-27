@@ -1,19 +1,20 @@
 const {extractToken} = require("../../Database/authorization");
 const {db_getPersonType} = require("../../Database/db_person");
-const {db_getHistory_owner} = require("../../Database/db_history");
+const {db_getHistory_tenant} = require("../../Database/db_history");
 
 async function renderPage(req, res) {
     const token = extractToken(req);
-    const isOwner = await db_getPersonType(token.id) === 'owner';
-    if (!isOwner)
+    const isTenant = await db_getPersonType(token.id) === 'tenant';
+    if (!isTenant)
         return res.redirect('/login');
 
-    const historyArr = await db_getHistory_owner(token.id);
+    const historyArr = await db_getHistory_tenant(token.id);
+    console.log(historyArr);
 
     return res.render('history', {
         pre: 'History',
-        isOwner: isOwner,
-        type: 'owner',
+        isTenant: isTenant,
+        type: 'tenant',
         id: token.id,
         historyArr: historyArr,
     });

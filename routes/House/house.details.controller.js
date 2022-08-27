@@ -9,7 +9,7 @@ const {extractToken} = require("../../Database/authorization");
 const {db_getPersonType, db_getPerson} = require("../../Database/db_person");
 const {db_isRequested} = require("../../Database/db_request-follow-leave");
 const {db_getComments} = require("../../Database/db_review");
-const {saveImages, saveImage} = require("../../config/multer");
+const {saveImages} = require("../../config/multer");
 
 async function renderPage(req, res) {
     const hid = req.params.house_id;
@@ -74,12 +74,22 @@ async function postHandler(req, res) {
         let filenames = req.files.map(function (file) {
             return file.filename;
         });
-        console.log(filenames);
-        if (data.type === 'propic')
-            await db_updateProPic(data.id, filenames[0]);
-        else if (data.type === 'otherpic')
-            await db_uploadPictures(data.id, filenames);
-        return res.redirect(`/house/${data.id}`);
+
+        if (data.type === 'propic') {
+            try {
+                await db_updateProPic(data.id, filenames[0]);
+            } catch (e) {
+            } finally {
+                return res.redirect(`/house/${data.id}`);
+            }
+        } else if (data.type === 'otherpic') {
+            try {
+                await db_uploadPictures(data.id, filenames);
+            } catch (e) {
+            } finally {
+                return res.redirect(`/house/${data.id}`);
+            }
+        }
     });
 }
 

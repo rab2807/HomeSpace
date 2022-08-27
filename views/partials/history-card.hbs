@@ -1,13 +1,13 @@
-{{#each history}}
+{{#each historyArr}}
     <div class="row py-0 px-5">
         <div class="card p-0">
             <div class="card-body p-1">
                 <p>
-                    <a href="#">House - {{name}}</a>&nbsp;&nbsp;|&nbsp;&nbsp;
-                    <a href="#">Tenant: {{tenant}}</a>&nbsp;&nbsp;|&nbsp;&nbsp;
-                    joined {{join_date}}&nbsp;&nbsp;|&nbsp;&nbsp;
-                    left {{leave_date}}&nbsp;&nbsp;|&nbsp;&nbsp;
-                    Duration: {{duration}}
+                    <a href="/house/{{HOUSE_ID}}">House - {{HOUSE_ID}}</a>&nbsp;&nbsp;|&nbsp;&nbsp;
+                    <a href="/tenant/profile/{{TENANT_ID}}">Tenant: {{TENANT_NAME}}</a>&nbsp;&nbsp;|&nbsp;&nbsp;
+                    boarded: {{JOIN_DATE}}&nbsp;&nbsp;|&nbsp;&nbsp;
+                    left: {{LEAVE_DATE}}&nbsp;&nbsp;|&nbsp;&nbsp;
+                    Duration: {{DURATION}} days
                 </p>
             </div>
         </div>

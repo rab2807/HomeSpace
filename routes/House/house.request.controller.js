@@ -16,7 +16,7 @@ async function handler(req, res) {
     if (action === 'leave') {
         let tid = (await db_getHouseDetails(hid)).TENANT_ID;
         let leaveNoticeIssued = await db_isRequested(hid, tid, 'leave');
-        console.log(leaveNoticeIssued);
+
         if (leaveNoticeIssued)
             await db_removeRequest(hid, tid, 'leave');
         else

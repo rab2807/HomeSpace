@@ -6,6 +6,7 @@ const requestController = require('./house.request.controller');
 const activityController = require('./house.activity.controller');
 const editController = require('./house.edit.controller');
 const reviewController = require('./house.review.controller');
+const historyController = require("./house.history.controller");
 
 const router = express.Router();
 
@@ -34,5 +35,9 @@ router.get('/house/activity/:hid', activityController.renderPage);
 
 // house review manager
 router.post('/house/postReview', reviewController.postHandler);
+
+// history
+router.get('/house/history/:id', historyController.renderPage);
+
 
 module.exports = router;

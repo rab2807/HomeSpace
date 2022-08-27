@@ -40,7 +40,7 @@ async function db_houseForm(req, id) {
     console.log('house regi done');
 }
 
-// get house details for '/house/:id'
+// get house details
 async function db_getHouseDetails(house_id) {
     let sql = `select H.HOUSE_ID,
                       OWNER_ID,
@@ -71,7 +71,6 @@ async function db_getHouseDetails(house_id) {
     let binds = {id: house_id};
 
     const res = await database.execute(sql, binds);
-    // console.log('db_getHouseDetails---------------------------\n', res.rows[0]);
     return res.rows[0];
 }
 
@@ -115,9 +114,7 @@ async function db_getHousesFromPerson(id, sort = 'RATING', order = 'DESC') {
                order by ${sort} ${order}`;
     console.log(sql);
     let binds = {id: id};
-    const res = (await database.execute(sql, binds)).rows;
-    // console.log('db_getHousesFromPerson---------------------------\n', res);
-    return res;
+    return (await database.execute(sql, binds)).rows;
 }
 
 // get house follow/request list for '/house/:id'

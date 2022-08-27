@@ -6,6 +6,7 @@ const searchController = require('./tenant.search.controller')
 const dashboardController = require("./tenant.dashboard.controller");
 const maintenanceController = require("./tenant.maintenance.controller");
 const billingController = require("./tenant.billing.controller");
+const historyController = require('./tenant.history.controller');
 const editController = require("./tenant.edit.controller");
 const reviewController = require("./tenant.review.controller");
 const inboxController = require("./tenant.inbox.controller");
@@ -36,6 +37,9 @@ router.get('/tenant/inbox', inboxController.renderPage);
 // edit profile
 router.get('/tenant/edit', editController.renderPage);
 router.post('/tenant/edit', editController.postHandler);
+
+// history
+router.get('/tenant/history', historyController.renderPage);
 
 // review
 router.post('/tenant/postReview', reviewController.postHandler);

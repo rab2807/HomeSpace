@@ -4,27 +4,8 @@
             <h1>History</h1>
             <hr>
         </div>
-        <div class="row p-3">
-            <div class="col">
-                <form action="/regi/owner" id="activities" method="post">
-                    <select name="activity">
-                        <option value="contract">Contract</option>
-                        <option value="request">Request</option>
-                        <option value="leave">Leave Notice</option>
-                        <option value="follow">Follow</option>
-                    </select>
-                    <select name="sort">
-                        <option value="all">All</option>
-                        {{#each house}}
-                            <option value={{id}}>{{name}}</option>
-                        {{/each}}
-                    </select>
-                    <input type="submit" value="Filter">
-                </form>
-            </div>
-        </div>
         <div class="container" style=" height: 600px; overflow: scroll; ">
-            {{>notification-card}}
+            {{>history-card}}
         </div>
     </div>
 </div>

@@ -28,8 +28,14 @@
                 <hr style="border-style: double">
             </div>
             <hr>
+            <div class="center" style="color: red">
+                {{errorMessage}}
+            </div>
+
             <div class="card-body">
-                <form action="/regi/owner" method="POST">
+                <form action="/regi/post" method="POST">
+
+                    <input hidden name="type" value={{type}}>
 
                     <div style="padding-bottom: 7px; padding-top: 10px; font-size: large">Username :</div>
                     <div><input style="width: 100%;" type="text" name="username"></div>

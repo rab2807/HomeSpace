@@ -9,6 +9,7 @@ async function db_postRequest(hid, tid, type) {
 
 async function db_removeRequest(hid, tid, type) {
     const binds = {tid: tid, hid: hid};
+
     let sql = `delete
                from ${type}
                where HOUSE_ID = :hid 

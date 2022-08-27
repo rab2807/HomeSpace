@@ -50,9 +50,13 @@ async function postHandler(req, res) {
         if (type !== 'owner')
             res.redirect('/login');
 
-        if (req.file.filename)
-            await db_updateProPic(token.id, req.file.filename);
-        return res.redirect('/owner/profile');
+        try {
+            if (req.file.filename)
+                await db_updateProPic(token.id, req.file.filename);
+        } catch (e) {
+        } finally {
+            return res.redirect('/owner/profile');
+        }
     });
 }
 

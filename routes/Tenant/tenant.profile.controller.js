@@ -64,10 +64,14 @@ async function postHandler(req, res) {
         if (type !== 'tenant')
             res.redirect('/login');
 
-        if (req.file.filename)
-            await db_updateProPic(token.id, req.file.filename);
-        console.log(await db_getPerson(token.id));
-        return res.redirect('/tenant/profile');
+
+        try {
+            if (req.file.filename)
+                await db_updateProPic(token.id, req.file.filename);
+        } catch (e) {
+        } finally {
+            return res.redirect('/tenant/profile');
+        }
     });
 }
 

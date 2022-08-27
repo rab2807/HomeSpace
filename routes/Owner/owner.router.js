@@ -6,6 +6,7 @@ const profileController = require('./owner.profile.controller');
 const dashboardController = require('./owner.dashboard.controller');
 const billingController = require('./owner.billing.controller');
 const maintenanceController = require('./owner.maintenance.controller');
+const historyController = require('./owner.history.controller');
 const editController = require('./owner.edit.controller');
 const inboxController = require('./owner.inbox.controller');
 
@@ -28,6 +29,9 @@ router.post('/owner/billing/post', billingController.postHandler);
 
 // message
 router.get('/owner/inbox', inboxController.renderPage);
+
+// history
+router.get('/owner/history', historyController.renderPage);
 
 // edit profile
 router.get('/owner/edit', editController.renderPage);

@@ -30,6 +30,9 @@
         crossorigin="anonymous"></script>
 
 <div class="sidebar">
+    <img src="/images/logo-small.jpg" style="width: 200px; height: auto">
+    <br>
+    <br>
     {{#if isOwner}}
         <a href="/owner/profile">Profile</a>
         <a href="/house/list/{{id}}">Houses</a>
@@ -37,6 +40,7 @@
         <a href="/owner/billing">Billing</a>
         <a href="/owner/maintenance">Maintenance</a>
         <a href="/owner/inbox">Inbox</a>
+        <a href="/owner/history">History</a>
         <a href="/owner/edit">Edit Profile</a>
     {{else}}
         <a href="/tenant/profile">Profile</a>
@@ -45,6 +49,7 @@
         <a href="/tenant/billing">Billing</a>
         <a href="/tenant/maintenance">Maintenance</a>
         <a href="/tenant/inbox">Inbox</a>
+        <a href="/tenant/history">History</a>
         <a href="/tenant/edit">Edit Profile</a>
     {{/if}}
     <span style="position: absolute; bottom: 0; width: 100%">

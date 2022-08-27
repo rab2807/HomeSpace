@@ -85,7 +85,7 @@ begin
 
         -- make the notification
         insert into NOTIFICATION(house_id, tenant_id, activity_id, notification_type)
-        values (:new.house_id, :new.tenant_id, :new.leave_id, 'leave-confirm');
+        values (:old.house_id, :old.tenant_id, :old.leave_id, 'leave-confirm');
 
         -- convert all follows to requests
         insert into REQUEST(HOUSE_ID, TENANT_ID)

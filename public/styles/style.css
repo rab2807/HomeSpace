@@ -117,6 +117,7 @@ a:hover {
     background-color: black;
     overflow-x: hidden;
     padding-top: 20px;
+    border-left: 2px solid white;
 }
 
 .sidebar-right {

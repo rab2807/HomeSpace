@@ -20,6 +20,7 @@
             </div>
             <div style="padding: 5px 15px;"><h3>Price: {{house.PRICE}} taka</h3></div>
             <div style="padding-left: 15px">
+
                 {{#if isOwner}}
                     <div style="padding: 7px">
                         <a href="/house/edit/{{house.HOUSE_ID}}">
@@ -35,9 +36,10 @@
                             </a>
                         </div>
                     {{/compare}}
+
                     {{#if leaveNoticeIssued}}
                         <div style="padding: 5px">
-                            <a href="/house/request/{{house.HOUSE_ID}}/leave">
+                            <a href="/house/request/{{house.HOUSE_ID}}/leave/{{house.TENANT_ID}}">
                                 <button class="wide-button">
                                     Confirm leave notice for House - {{house.HOUSE_ID}}
                                 </button>
@@ -51,6 +53,15 @@
                         </a>
                     </div>
                 {{/if}}
+
+                <div style="padding-left: 15px">
+                    <a href="/house/history/{{house.HOUSE_ID}}">
+                        <button>
+                            See History
+                        </button>
+                    </a>
+                </div>
+
                 {{#compare requestButtonText 'Edit Info'}}
                     <div class="py-2 px-0">
                         <form action="/house/upload" method="post" enctype="multipart/form-data">

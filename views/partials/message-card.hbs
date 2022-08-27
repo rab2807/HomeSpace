@@ -1,9 +1,9 @@
 {{#each msgArr}}
     <div class="card p-0" style="width: 55%;
-        {{#compare ID1 ../sender}}float: left; {{else}}float:right;{{/compare}}
+        {{#compare ID1 ../sender}}float: right; {{else}}float:left;{{/compare}}
             border-radius: 30px;">
         <div class="card-body p-1" style="
-                background-color: {{#compare ID1 ../sender}}lightgray {{else}}white{{/compare}};
+                background-color: {{#compare ID1 ../sender}}white {{else}}lightgray{{/compare}};
                 border-radius: 30px;">
             <div class="px-2">
                 <b>{{NAME1}}</b> ||
