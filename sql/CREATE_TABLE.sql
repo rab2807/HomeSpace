@@ -45,7 +45,10 @@ CREATE TABLE house
     bathroom        NUMBER,
     elevator        CHAR(1),
     garage          CHAR(1),
-    minimum_stay    NUMBER,
+    NAME            VARCHAR2(512),
+    NOTE            VARCHAR2(1024),
+    LOCATION_ID     NUMBER,
+    SPACE           NUMBER,
     CONSTRAINT house_pk PRIMARY KEY (house_id),
     CONSTRAINT house_owner_fk FOREIGN KEY (owner_id) REFERENCES owner (owner_id)
 );

@@ -17,7 +17,6 @@ async function db_houseForm(req, id) {
         space: req.space,
         garage: req.garage,
         elevator: req.elevator,
-        minimum_stay: req.minimum_stay,
         note: req.note,
     };
 

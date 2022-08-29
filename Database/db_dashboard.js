@@ -29,11 +29,11 @@ async function db_getNotification_tenant(tenant_id) {
                       TENANT_ID,
                       ACTIVITY_ID,
                       to_char(TIME, 'DD-MON-YYYY')                       as NOTIFICATION_TIME,
-                      NOTIFICATION_TYPE,
+                      NOTIFICATION_TYPE, 
                       (select USERNAME from PERSON where ID = TENANT_ID) as TENANT_NAME
                from NOTIFICATION
                where TENANT_ID = :tenant_id
-               order by NOTIFICATION_TIME desc`;
+               order by "TIME" desc`;
     const res = await database.execute(sql, {tenant_id: tenant_id});
     return res.rows;
 }
