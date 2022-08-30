@@ -1,8 +1,8 @@
 {{#each house}}
     <div class="col p-3">
-        <div class="card" style="width: 300px; height: 600px">
+        <div class="card" style="width: 300px; height: 600px; float: left;">
             <img src="/images/{{PROFILE_PICTURE}}" class="card-img-top" style="height: 300px; width: 300px">
-            <div class="card-body">
+            <div class="card-body" style="float: left;">
                 <h4 class="card-title">{{concat "House-" HOUSE_ID}}</h4>
                 <div class="card-subtitle">
                     {{#compare VACANT "yes"}}

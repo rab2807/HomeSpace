@@ -39,7 +39,7 @@ CREATE TABLE house
     profile_picture VARCHAR2(1024),
     created         DATE DEFAULT SYSDATE,
     price           NUMBER,
-    vacant          NUMBER,
+    vacant          VARCHAR2(10),
     floor           NUMBER,
     bedroom         NUMBER,
     bathroom        NUMBER,

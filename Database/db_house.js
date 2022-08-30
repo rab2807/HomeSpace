@@ -4,6 +4,7 @@ const {getLocation} = require('../helpers/locationUtil');
 // house form input for '/house/form'
 async function db_houseForm(req, id) {
     const location = await getLocation(req.lat, req.lon);
+
     let binds = {
         owner_id: id,
         name: req.name,
@@ -111,7 +112,6 @@ async function db_getHousesFromPerson(id, sort = 'RATING', order = 'DESC') {
                         join location l on h.LOCATION_ID = l.LOCATION_ID
                where h.OWNER_ID = :id
                order by ${sort} ${order}`;
-    console.log(sql);
     let binds = {id: id};
     return (await database.execute(sql, binds)).rows;
 }

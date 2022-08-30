@@ -13,9 +13,8 @@ async function renderPage(req, res) {
 
 async function postForm(req, res) {
     const token = extractToken(req);
-    console.log(typeof token.id)
     await db_houseForm(req.body, token.id);
-    // res.redirect(`/house/list/${token.id}`);
+    res.redirect(`/house/list/${token.id}`);
 }
 
 module.exports = {
