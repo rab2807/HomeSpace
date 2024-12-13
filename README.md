@@ -1,5 +1,35 @@
+<div id="top"></div>
+<!--Project LOGO -->
+<br/>
+<div align="center">
+
 ![logo-small](https://github.com/user-attachments/assets/762b1b1e-eecc-4556-b833-a33aff58b026)
 
+<h2 align="center">HomeRental</h2>
+  <h3 align="center">Home is where the heart is </h3>
+</div>
+
+<!--TABLE OF CONTENTS -->
+<details>
+  <summary>Table of Contents</summary>
+  <ol>
+    <li>
+      <a href="#about-the-project">About The Project</a>
+      <ul>
+        <li><a href="#built-with">Built With</a></li>
+      </ul>
+    </li>
+    <li>
+      <a href="#getting-started">Getting Started</a>
+      <ul>
+        <li><a href="#prerequisites">Prerequisites</a></li>
+        <li><a href="#installation">Installation</a></li>
+      </ul>
+    </li>
+    <li><a href="#license">License</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ol>
+</details>
 
 # Home-Rental-System
 A web app for seamless rental property booking. Homeowners can register and list their rental homes, and tenants can browse and book. A messaging system facilitates the personal communication between owners and tenants to finalize the deal.
