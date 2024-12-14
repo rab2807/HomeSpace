@@ -62,7 +62,7 @@ A web app for seamless rental property booking. Homeowners can register and list
 ![billing-tenant](https://github.com/user-attachments/assets/f7dbb71f-2548-49f6-98e7-a6e393ef58fb)
 
 ### House Details
-![house-details-1](https://github.com/user-attachments/assets/7c3ceb5f-1381-4e74-940a-84eb3c5b4e3a)
+![House_details_edited](https://github.com/user-attachments/assets/003b3ee4-2ff4-4ed7-9f94-0a85cef217a8)
 ![house-details-2](https://github.com/user-attachments/assets/42e609d5-80d2-4e10-bb23-14bd48709ee0)
 ![house-details-3](https://github.com/user-attachments/assets/5c003244-115f-4e51-9378-b83d52e44a72)
 
@@ -70,7 +70,8 @@ A web app for seamless rental property booking. Homeowners can register and list
 ![house-history](https://github.com/user-attachments/assets/8e471f98-3383-4460-b280-8036b77cda8e)
 
 ### House Search
-![house-search](https://github.com/user-attachments/assets/c44d0382-c40f-4f82-b78f-83a97f705ce6)
+![House_edited](https://github.com/user-attachments/assets/9a404fa8-5e06-43fc-96c2-473966e2b4e6)
+
 
 ### Maintenance Owner
 ![maintenance-owner](https://github.com/user-attachments/assets/a2e0a339-86be-4157-b355-0c4e39d56b3d)
