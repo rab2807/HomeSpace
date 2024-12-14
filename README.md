@@ -14,9 +14,9 @@
   <summary>Table of Contents</summary>
   <ol>
     <li>
-      <a href="#about-the-project">Home-Rental-System</a>
+      <a href="#home-rental-system">Home-Rental-System</a>
       <ul>
-        <li><a href="#built-with">Tech Stack</a></li>
+        <li><a href="#tech-stack">Tech Stack</a></li>
       </ul>
     </li>
     <li>
