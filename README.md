@@ -26,8 +26,9 @@
         <li><a href="#installation">Installation</a></li>
       </ul>
     </li>
+    <li><a href="#home-rental-pages">Home Rental Pages</a></li>
     <li><a href="#license">License</a></li>
-    <li><a href="#contact">Contact</a></li>
+    <li><a href="#contributors">Contributors</a></li>
   </ol>
 </details>
 
@@ -55,6 +56,34 @@ A web app for seamless rental property booking. Homeowners can register and list
 
 ## Home Rental Pages
 ### Billing Owner 
+![billing-owner](https://github.com/user-attachments/assets/bd75e72f-178c-4ed5-9f93-f881bdc3f991)
+
+### Billing Tenant
+![billing-tenant](https://github.com/user-attachments/assets/f7dbb71f-2548-49f6-98e7-a6e393ef58fb)
+
+### House Details
+![house-details-1](https://github.com/user-attachments/assets/7c3ceb5f-1381-4e74-940a-84eb3c5b4e3a)
+![house-details-2](https://github.com/user-attachments/assets/42e609d5-80d2-4e10-bb23-14bd48709ee0)
+![house-details-3](https://github.com/user-attachments/assets/5c003244-115f-4e51-9378-b83d52e44a72)
+
+### House History
+![house-history](https://github.com/user-attachments/assets/8e471f98-3383-4460-b280-8036b77cda8e)
+
+### House Search
+![house-search](https://github.com/user-attachments/assets/c44d0382-c40f-4f82-b78f-83a97f705ce6)
+
+### Maintenance Owner
+![maintenance-owner](https://github.com/user-attachments/assets/a2e0a339-86be-4157-b355-0c4e39d56b3d)
+
+### Maintenance Tenant
+![maintenance-tenant](https://github.com/user-attachments/assets/90e69de9-9c38-45c2-8bae-1d1afe6ffa75)
+
+### Chat System
+![message](https://github.com/user-attachments/assets/509dde71-0c14-475a-8e96-c1f32f8eb0c4)
+
+### Owner's Profile
+![profile-owner](https://github.com/user-attachments/assets/9760cc59-6402-40ea-b503-c19db32acf0c)
+
 
 <!-- LICENSE -->
 
