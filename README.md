@@ -14,9 +14,9 @@
   <summary>Table of Contents</summary>
   <ol>
     <li>
-      <a href="#about-the-project">About The Project</a>
+      <a href="#about-the-project">Home-Rental-System</a>
       <ul>
-        <li><a href="#built-with">Built With</a></li>
+        <li><a href="#built-with">Tech Stack</a></li>
       </ul>
     </li>
     <li>
@@ -32,16 +32,17 @@
 </details>
 
 # Home-Rental-System
-A web app for seamless rental property booking. Homeowners can register and list their rental homes, and tenants can browse and book. A messaging system facilitates the personal communication between owners and tenants to finalize the deal.
+A web app for seamless rental property booking. Homeowners can register and list their rental homes, and tenants can browse and book. A messaging system facilitates personal communication between owners and tenants to finalize the deal.
+
+## ERD
+
 
 ## Tech Stack
-- **Backend**
-- **Front End**
-- **Database**
-* NodeJS
-* Express
-* Handlebars
-* Oracle
+- **Backend** : NodeJS, Express
+- **Front End** : Handlebars
+- **Database** : Oracle
+
+<p align="right">(<a href="#top">back to top</a>)</p>
 
 ## Features
 * Registration and Login as owners/tenants. **OracleDB** is used to save user info.
@@ -55,4 +56,19 @@ A web app for seamless rental property booking. Homeowners can register and list
 ## Home Rental Pages
 ### Billing Owner 
 
+<!-- CONTACT -->
+## Contributors
+- **Rakib Ahsan** - 1905024
+- **Sakib Mohammed Sobaha** - 1905021
 
+## Supervisor
+- Dr. Mukit Rashid
+  - **Professor**
+     ▶️: **Contact**
+     Department of Computer Science and Engineering
+     Bangladesh University of Engineering and Technology
+     Dhaka-1000, Bangladesh
+
+     ▶️: **Homepage**
+
+<p align="right">(<a href="#top">back to top</a>)</p>
