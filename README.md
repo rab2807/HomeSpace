@@ -56,6 +56,14 @@ A web app for seamless rental property booking. Homeowners can register and list
 ## Home Rental Pages
 ### Billing Owner 
 
+<!-- LICENSE -->
+
+## License
+
+Distributed under the MIT License. See `LICENSE.txt` for more information.
+
+<p align="right">(<a href="#top">back to top</a>)</p>
+
 <!-- CONTACT -->
 ## Contributors
 - **Rakib Ahsan** - 1905024
