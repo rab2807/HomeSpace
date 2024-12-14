@@ -6,7 +6,7 @@
 ![logo-small](https://github.com/user-attachments/assets/762b1b1e-eecc-4556-b833-a33aff58b026)
 
 <h2 align="center">HomeRental</h2>
-  <h3 align="center">Home is where the heart is </h3>
+  <h3 align="center">Home is where the heart ❤️ is </h3>
 </div>
 
 <!--TABLE OF CONTENTS -->
